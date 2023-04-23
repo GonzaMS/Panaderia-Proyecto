@@ -1,5 +1,4 @@
 using Panaderia.Models;
-using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.EntityFrameworkCore;
 
 namespace Panaderia.Data;
