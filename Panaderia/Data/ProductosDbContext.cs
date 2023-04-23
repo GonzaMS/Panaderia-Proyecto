@@ -20,14 +20,14 @@ namespace Panaderia.Data
             .Property(p => p.str_nombre_producto)
             .HasColumnName("str_nombre_producto");
             modelBuilder.Entity<Productos_elaborados>()
-            .Property(p => p.fk_receta)
-            .HasColumnName("fk_receta");
+            .Property(p => p.fk_recetas)
+            .HasColumnName("fk_recetas");
 
-            // //Un producto elaborado tiene una receta (relacion)
-            // modelBuilder.Entity<Productos_elaborados>()
-            // .HasOne(p => p.Recetas)
-            // .WithOne(r => r.Productos_elaborados)
-            // .HasForeignKey<Productos_elaborados>(p => p.fk_receta);
+            //Un producto elaborado tiene una receta (relacion)
+            modelBuilder.Entity<Productos_elaborados>()
+            .HasOne(p => p.Recetas)
+            .WithOne(r => r.Productos_elaborados)
+            .HasForeignKey<Productos_elaborados>(p => p.fk_recetas);
         }
 
     }

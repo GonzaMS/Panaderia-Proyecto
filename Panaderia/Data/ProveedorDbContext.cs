@@ -34,6 +34,12 @@ public class ProveedorDbContext : DbContext
         modelBuilder.Entity<Proveedor>()
                     .Property(p => p.str_telefono_proveedor)
                     .HasColumnName("str_telefono_proveedor");
+
+        //Un proveedor tiene varias compras
+        modelBuilder.Entity<Proveedor>()
+                    .HasMany(p => p.Compras)
+                    .WithOne(c => c.Proveedor)
+                    .HasForeignKey(c => c.fk_proveedor);
     }
 
 }
