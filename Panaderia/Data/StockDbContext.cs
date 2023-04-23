@@ -37,5 +37,12 @@ public class StocksDbContext : DbContext
         modelBuilder.Entity<Productos_Elaborados_Stock>()
         .Property(p => p.int_cantidad);
 
+
+        //un detalle de compora tiene un stock  
+        modelBuilder.Entity<Stocks>()
+                        .HasMany(i => i.Detalles_de_compras)
+                        .WithOne(d => d.Stocks)
+                        .HasForeignKey(d => d.fk_ingrediente);
+
     }
 }

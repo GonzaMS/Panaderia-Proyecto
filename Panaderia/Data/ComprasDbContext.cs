@@ -7,6 +7,8 @@ namespace Panaderia.Data
     {
         public DbSet<Compras> Compras { get; set; }
 
+        public DbSet<Detalles_de_compras> Detalles_de_compras { get; set; }
+
         public ComprasDbContext(DbContextOptions<ComprasDbContext> options) : base(options)
         {
         }
@@ -34,6 +36,54 @@ namespace Panaderia.Data
             .HasOne(p => p.Proveedor)
             .WithMany(c => c.Compras)
             .HasForeignKey(c => c.fk_proveedor);
+
+            //Una compra tiene varios detalles de compra
+            modelBuilder.Entity<Compras>()
+            .HasMany(c => c.Detalles_de_compras)
+            .WithOne(d => d.Compras)
+            .HasForeignKey(d => d.fk_compra);
+
+
+            //Detalle de compras
+            modelBuilder.Entity<Detalles_de_compras>()
+            .HasKey(p => p.id_detalle_compra);
+            modelBuilder.Entity<Detalles_de_compras>()
+            .Property(p => p.fk_compra)
+            .HasColumnName("fk_compra");
+            modelBuilder.Entity<Detalles_de_compras>()
+            .Property(p => p.fk_ingrediente)
+            .HasColumnName("fk_ingrediente");
+            modelBuilder.Entity<Detalles_de_compras>()
+            .Property(p => p.fk_stock)
+            .HasColumnName("fk_stock");
+            modelBuilder.Entity<Detalles_de_compras>()
+            .Property(p => p.dc_precio_unidad)
+            .HasColumnName("dc_precio_unidad");
+            modelBuilder.Entity<Detalles_de_compras>()
+            .Property(p => p.int_cantidad)
+            .HasColumnName("int_cantidad");
+            modelBuilder.Entity<Detalles_de_compras>()
+            .Property(p => p.int_iva)
+            .HasColumnName("int_iva");
+
+            //Un detalle de compra tiene una compra 
+            modelBuilder.Entity<Detalles_de_compras>()
+            .HasOne(d => d.Compras)
+            .WithMany(c => c.Detalles_de_compras)
+            .HasForeignKey(d => d.fk_compra);
+
+            //Un detalle de compra tiene un ingrediente
+            modelBuilder.Entity<Detalles_de_compras>()
+            .HasOne(d => d.Ingredientes)
+            .WithMany(i => i.Detalles_de_compras)
+            .HasForeignKey(d => d.fk_ingrediente);
+
+            //Un detalle de compra tiene un stock
+            modelBuilder.Entity<Detalles_de_compras>()
+            .HasOne(d => d.Stocks)
+            .WithMany(s => s.Detalles_de_compras)
+            .HasForeignKey(d => d.fk_stock);
+
         }
 
 

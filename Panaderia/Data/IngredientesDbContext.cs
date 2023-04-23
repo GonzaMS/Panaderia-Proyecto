@@ -48,6 +48,12 @@ namespace Panaderia.Data
                         .HasMany(i => i.Detalles_Recetas)
                         .WithOne(d => d.Ingredientes)
                         .HasForeignKey(d => d.fk_ingrediente);
+
+            //Un ingrediente tiene varios detalles de compras (relacion)
+            modelBuilder.Entity<Ingredientes>()
+                        .HasMany(i => i.Detalles_de_compras)
+                        .WithOne(d => d.Ingredientes)
+                        .HasForeignKey(d => d.fk_ingrediente);
         }
     }
 }

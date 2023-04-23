@@ -13,5 +13,7 @@ namespace Panaderia.Models
         public string str_numero_factura { get; set; }
 
         public virtual Proveedor? Proveedor { get; set; }
+
+        public virtual ICollection<Detalles_de_compras>? Detalles_de_compras { get; set; }
     }
 }
