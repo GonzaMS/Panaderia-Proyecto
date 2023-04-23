@@ -9,6 +9,6 @@ namespace Panaderia.Models
         [Required]
         public string str_receta { get; set; }
         public virtual ICollection<Detalles_Recetas>? Detalles_Recetas { get; set; }
-        public virtual Productos_elaborados? Productos_elaborados { get; set; }
+        //public virtual Productos_elaborados? Productos_elaborados { get; set; }
     }
 }

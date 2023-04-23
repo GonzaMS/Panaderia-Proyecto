@@ -13,5 +13,6 @@ namespace Panaderia.Models
         public string str_ruc_proveedor { get; set; }
         public string str_correo_proveedor { get; set; }
         public string str_telefono_proveedor { get; set; }
+        //public virtual ICollection<Compras> Compras { get; set; }
     }
 }

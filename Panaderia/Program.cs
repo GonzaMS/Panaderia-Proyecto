@@ -77,6 +77,7 @@ namespace Panaderia.Main
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors()
             );
+            //Compras DbContext
 
             services.AddControllers();
         }

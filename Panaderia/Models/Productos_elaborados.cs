@@ -10,6 +10,6 @@ namespace Panaderia.Models
         public string str_nombre_producto { get; set; }
         public int fk_receta { get; set; }
 
-        public virtual Recetas? Recetas { get; set; }
+        //public virtual Recetas? Recetas { get; set; }
     }
 }

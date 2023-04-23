@@ -1,39 +1,34 @@
 using Panaderia.Models;
 using Microsoft.EntityFrameworkCore;
-
-
 namespace Panaderia.Data
 {
     public class ComprasDbContext : DbContext
     {
+
         public DbSet<Compras> Compras { get; set; }
 
         public ComprasDbContext(DbContextOptions<ComprasDbContext> options) : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure your entities and relationships here.sadf
+            //Compras
             modelBuilder.Entity<Compras>()
-                        .HasKey(c => c.id_compra);
-            //Obteniendo el nombre de ese proveedor
+            .HasKey(p => p.id_compra);
             modelBuilder.Entity<Compras>()
-                        .Property(c => c.dc_precio_total)
-                        .HasColumnName("dc_precio_total");
-            //Obteniendo la fecha de esa compra
+            .Property(p => p.fk_proveedor)
+            .HasColumnName("fk_proveedor");
             modelBuilder.Entity<Compras>()
-                        .Property(c => c.date_compra)
-                        .HasColumnName("date_compra");
-            //Obteniendo el numero de factura de esas compras
+            .Property(p => p.dc_precio_total)
+            .HasColumnName("dc_precio_total");
             modelBuilder.Entity<Compras>()
-                        .Property(c => c.str_numero_factura)
-                        .HasColumnName("str_numero_factura");
-
-            //una compra tiene un proveedor
+            .Property(p => p.date_compra)
+            .HasColumnName("date_compra");
             modelBuilder.Entity<Compras>()
-                        .HasOne(p => p.Proveedor)
-                        .WithMany(c => c.Compras)
-                        .HasForeignKey(c => c.fk_proveedor);
+            .Property(p => p.str_numero_factura)
+            .HasColumnName("str_numero_factura");
         }
+
     }
 }

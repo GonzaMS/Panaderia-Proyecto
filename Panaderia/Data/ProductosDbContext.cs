@@ -23,11 +23,11 @@ namespace Panaderia.Data
             .Property(p => p.fk_receta)
             .HasColumnName("fk_receta");
 
-            //Un producto elaborado tiene una receta (relacion)
-            modelBuilder.Entity<Productos_elaborados>()
-            .HasOne(p => p.Recetas)
-            .WithOne(r => r.Productos_elaborados)
-            .HasForeignKey<Productos_elaborados>(p => p.fk_receta);
+            // //Un producto elaborado tiene una receta (relacion)
+            // modelBuilder.Entity<Productos_elaborados>()
+            // .HasOne(p => p.Recetas)
+            // .WithOne(r => r.Productos_elaborados)
+            // .HasForeignKey<Productos_elaborados>(p => p.fk_receta);
         }
 
     }

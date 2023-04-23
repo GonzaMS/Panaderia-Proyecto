@@ -11,6 +11,6 @@ namespace Panaderia.Models
         public decimal dc_precio_total { get; set; }
         public System.DateTime date_compra { get; set; }
         public string str_numero_factura { get; set; }
-        public virtual Proveedor? Proveedor { get; set; }
+        //public virtual Proveedor? Proveedor { get; set; }
     }
 }
