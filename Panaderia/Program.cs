@@ -78,6 +78,13 @@ namespace Panaderia.Main
                     .EnableDetailedErrors()
             );
             //Compras DbContext
+            services.AddDbContext<ComprasDbContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
 
             services.AddControllers();
         }

@@ -1,10 +1,10 @@
 using Panaderia.Models;
 using Microsoft.EntityFrameworkCore;
+
 namespace Panaderia.Data
 {
     public class ComprasDbContext : DbContext
     {
-
         public DbSet<Compras> Compras { get; set; }
 
         public ComprasDbContext(DbContextOptions<ComprasDbContext> options) : base(options)
@@ -28,7 +28,14 @@ namespace Panaderia.Data
             modelBuilder.Entity<Compras>()
             .Property(p => p.str_numero_factura)
             .HasColumnName("str_numero_factura");
+
+            //Una compra tiene un proveedor
+            modelBuilder.Entity<Compras>()
+            .HasOne(p => p.Proveedor)
+            .WithMany(c => c.Compras)
+            .HasForeignKey(c => c.fk_proveedor);
         }
+
 
     }
 }
