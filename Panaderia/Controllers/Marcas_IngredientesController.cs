@@ -7,9 +7,9 @@ using Panaderia.Models;
 [Route("api/[controller]")]
 public class Marcas_IngredientesController : ControllerBase
 {
-    private readonly Marcas_IngredientesDbContext _context;
+    private readonly IngredientesDbContext _context;
 
-    public Marcas_IngredientesController(Marcas_IngredientesDbContext dbContext)
+    public Marcas_IngredientesController(IngredientesDbContext dbContext)
     {
         _context = dbContext;
     }
@@ -19,21 +19,7 @@ public class Marcas_IngredientesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Marcas_Ingredientes>>> GetMarcasIngredientes()
     {
-        var marcaIngrediente = await _context.Marcas_Ingredientes.Include(m => m.Ingredientes).ToListAsync();
-
-        var marcasDtoList = marcaIngrediente.Select(m => new Marcas_Ingredientes
-        {
-            id_marca_ingrediente = m.id_marca_ingrediente,
-            str_nombre_marca = m.str_nombre_marca,
-            Ingredientes = m.Ingredientes.Select(i => new Ingredientes
-            {
-                id_ingrediente = i.id_ingrediente,
-                fk_marca_ingrediente = i.fk_marca_ingrediente,
-                str_nombre_ingrediente = i.str_nombre_ingrediente
-            }).ToList()
-        }).ToList();
-
-        return Ok(marcasDtoList);
+        return await _context.Marcas_Ingredientes.ToListAsync();
     }
 
 
@@ -41,28 +27,14 @@ public class Marcas_IngredientesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Marcas_Ingredientes>> GetMarcasIngrediente(int id)
     {
-        var marcas_Ingredientes = await _context.Marcas_Ingredientes
-            .Include(m => m.Ingredientes)
-            .FirstOrDefaultAsync(m => m.id_marca_ingrediente == id);
+        var marcaIngrediente = await _context.Marcas_Ingredientes.FindAsync(id);
 
-        if (marcas_Ingredientes == null)
+        if (marcaIngrediente == null)
         {
             return NotFound();
         }
 
-        var marcasDto = new Marcas_Ingredientes
-        {
-            id_marca_ingrediente = marcas_Ingredientes.id_marca_ingrediente,
-            str_nombre_marca = marcas_Ingredientes.str_nombre_marca,
-            Ingredientes = marcas_Ingredientes.Ingredientes.Select(i => new Ingredientes
-            {
-                id_ingrediente = i.id_ingrediente,
-                fk_marca_ingrediente = i.fk_marca_ingrediente,
-                str_nombre_ingrediente = i.str_nombre_ingrediente
-            }).ToList()
-        };
-
-        return Ok(marcasDto);
+        return marcaIngrediente;
     }
 
 

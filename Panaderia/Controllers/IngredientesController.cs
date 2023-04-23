@@ -20,52 +20,21 @@ namespace Panaderia.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ingredientes>>> GetIngredientes()
         {
-            var ingredientes = await _context.Ingredientes
-            .Include(i => i.Marcas_Ingredientes)
-            .ToListAsync();
-
-            var ingredientesDtoList = ingredientes.Select(i => new Ingredientes
-            {
-                id_ingrediente = i.id_ingrediente,
-                fk_marca_ingrediente = i.fk_marca_ingrediente,
-                str_nombre_ingrediente = i.str_nombre_ingrediente,
-                Marcas_Ingredientes = new Marcas_Ingredientes
-                {
-                    id_marca_ingrediente = i.Marcas_Ingredientes.id_marca_ingrediente,
-                    str_nombre_marca = i.Marcas_Ingredientes.str_nombre_marca
-
-                }
-            }).ToList();
-
-            return Ok(ingredientesDtoList);
+            return await _context.Ingredientes.ToListAsync();
         }
 
         // GET: api/Ingredientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ingredientes>> GetIngredientes(int id)
         {
-            var ingredientes = await _context.Ingredientes
-                .Include(i => i.Marcas_Ingredientes)
-                .FirstOrDefaultAsync(i => i.id_ingrediente == id);
+            var ingredientes = await _context.Ingredientes.FindAsync(id);
 
             if (ingredientes == null)
             {
                 return NotFound();
             }
 
-            var ingredientesDto = new Ingredientes
-            {
-                id_ingrediente = ingredientes.id_ingrediente,
-                fk_marca_ingrediente = ingredientes.fk_marca_ingrediente,
-                str_nombre_ingrediente = ingredientes.str_nombre_ingrediente,
-                Marcas_Ingredientes = new Marcas_Ingredientes
-                {
-                    id_marca_ingrediente = ingredientes.Marcas_Ingredientes.id_marca_ingrediente,
-                    str_nombre_marca = ingredientes.Marcas_Ingredientes.str_nombre_marca
-                }
-            };
-
-            return Ok(ingredientesDto);
+            return ingredientes;
         }
 
 

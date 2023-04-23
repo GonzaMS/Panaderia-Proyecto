@@ -5,7 +5,6 @@ namespace Panaderia.Data;
 
 public class ProveedorDbContext : DbContext
 {
-
     public DbSet<Proveedor> Proveedores { get; set; }
     public ProveedorDbContext(DbContextOptions<ProveedorDbContext> options) : base(options)
     {
