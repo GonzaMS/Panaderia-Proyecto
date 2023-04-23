@@ -7,15 +7,11 @@ namespace Panaderia.Models
         [Key]
         //Autoincrementable
         public int id_proveedor { get; set; }
-        [MaxLength(50)]
+        [Required]
         public string str_nombre_proveedor { get; set; }
-        [MaxLength(50)]
         public string str_direccion_proveedor { get; set; }
-        [MaxLength(50)]
         public string str_ruc_proveedor { get; set; }
-        [MaxLength(50)]
         public string str_correo_proveedor { get; set; }
-        [MaxLength(50)]
         public string str_telefono_proveedor { get; set; }
     }
 }
