@@ -9,6 +9,7 @@ namespace Panaderia.Main
         {
             // Creamos el contexto de la base de datos
             CreateHostBuilder(args).Build().Run();
+
         }
 
         // Configuramos el host
@@ -25,14 +26,10 @@ namespace Panaderia.Main
             Configuration = configuration;
         }
 
-
-        // Configuramos el servicio
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             // MySQL Connection String
-            var connectionString = "server=localhost;user=root;password=12345;database=panaderia";
+            var connectionString = "server=localhost;user=gonza;password=12345678;database=panaderia";
 
             // Version de MySql
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
@@ -46,8 +43,28 @@ namespace Panaderia.Main
                     .EnableDetailedErrors()
             );
 
+            // MarcaIngredientes DbContext
+            services.AddDbContext<Marcas_IngredientesDbContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
+
+            // Ingredientes DbContext
+            services.AddDbContext<IngredientesDbContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
             services.AddControllers();
         }
+
+        // Configuramos el servicio
+        public IConfiguration Configuration { get; }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
