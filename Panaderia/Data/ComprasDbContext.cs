@@ -13,7 +13,7 @@ namespace Panaderia.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure your entities and relationships here.
+            // Configure your entities and relationships here.sadf
             modelBuilder.Entity<Compras>()
                         .HasKey(c => c.id_compra);
             //Obteniendo el nombre de ese proveedor
@@ -24,7 +24,7 @@ namespace Panaderia.Data
             modelBuilder.Entity<Compras>()
                         .Property(c => c.date_compra)
                         .HasColumnName("date_compra");
-            //Obteniendo el numero de factura de esa compra
+            //Obteniendo el numero de factura de esas compras
             modelBuilder.Entity<Compras>()
                         .Property(c => c.str_numero_factura)
                         .HasColumnName("str_numero_factura");

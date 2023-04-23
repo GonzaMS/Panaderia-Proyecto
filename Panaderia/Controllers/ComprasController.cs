@@ -70,7 +70,7 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // POST: api/Compras
+        // POST: api/Comprasss
         [HttpPost]
         public async Task<ActionResult<Compras>> PostCompras(Compras compras)
         {

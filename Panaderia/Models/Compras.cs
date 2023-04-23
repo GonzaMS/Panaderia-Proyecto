@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-
+//nombre de la tabla
 namespace Panaderia.Models
 {
     public class Compras
