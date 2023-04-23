@@ -35,6 +35,15 @@ namespace Panaderia.Controllers
             return detalles_Recetas;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Detalles_Recetas>> PostDetalles_Recetas(Detalles_Recetas detalles_Recetas)
+        {
+            _context.Detalles_Recetas.Add(detalles_Recetas);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetDetalles_Recetas", new { id = detalles_Recetas.id_detalle_receta }, detalles_Recetas);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDetalles_Recetas(int id, Detalles_Recetas detalles_Recetas)
         {
