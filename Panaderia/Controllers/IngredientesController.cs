@@ -69,7 +69,7 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // POST: api/Ingredientes
+        // POST: api/Ingredientes //Agregado
         [HttpPost]
         public async Task<ActionResult<Ingredientes>> PostIngredientes(Ingredientes ingredientes)
         {
