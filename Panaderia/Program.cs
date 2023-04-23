@@ -43,15 +43,6 @@ namespace Panaderia.Main
                     .EnableDetailedErrors()
             );
 
-            // MarcaIngredientes DbContext
-            services.AddDbContext<Marcas_IngredientesDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-
             // Ingredientes DbContext
             services.AddDbContext<IngredientesDbContext>(
                 dbContextOptions => dbContextOptions
@@ -60,6 +51,33 @@ namespace Panaderia.Main
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors()
             );
+            //Stock DbContext
+            services.AddDbContext<StocksDbContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
+
+            //Recetas DbContext
+            services.AddDbContext<RecetasDbContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
+
+            //Productos DbContext
+            services.AddDbContext<ProductosDbContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
+
             services.AddControllers();
         }
 

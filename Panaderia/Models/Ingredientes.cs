@@ -10,5 +10,6 @@ namespace Panaderia.Models
         public int fk_marca_ingrediente { get; set; }
         public string str_nombre_ingrediente { get; set; }
         public virtual Marcas_Ingredientes? Marcas_Ingredientes { get; set; }
+        public virtual ICollection<Detalles_Recetas>? Detalles_Recetas { get; set; }
     }
 }
