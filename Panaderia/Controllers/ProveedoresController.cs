@@ -1,8 +1,6 @@
 using Panaderia.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Pomelo.EntityFrameworkCore.MySql;
 using Panaderia.Data;
 
 namespace Panaderia.Controllers
