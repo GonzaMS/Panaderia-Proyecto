@@ -7,6 +7,8 @@ namespace Panaderia.Data
 
         public DbSet<Productos_elaborados> Productos_elaborados { get; set; }
 
+        public DbSet<Detalles_Productos> Detalles_Productos { get; set; }
+
         public ProductosDbContext(DbContextOptions<ProductosDbContext> options) : base(options)
         {
         }
@@ -42,6 +44,36 @@ namespace Panaderia.Data
             modelBuilder.Entity<Productos_elaborados>()
             .HasMany(p => p.Ordenes_produccion)
             .WithOne(p => p.Productos_elaborados)
+            .HasForeignKey(p => p.fk_producto_elaborado);
+            //un producto elaborado tiene muchos detalles de productos (relacion)
+            modelBuilder.Entity<Productos_elaborados>()
+            .HasMany(p => p.Detalles_Productos)
+            .WithOne(p => p.Productos_Elaborados)
+            .HasForeignKey(p => p.fk_producto_elaborado);
+
+
+
+
+            //Detalles de productos
+            modelBuilder.Entity<Detalles_Productos>()
+            .HasKey(p => p.id_detalle_producto);
+            modelBuilder.Entity<Detalles_Productos>()
+            .Property(p => p.fk_producto_elaborado)
+            .HasColumnName("fk_producto_elaborado");
+            modelBuilder.Entity<Detalles_Productos>()
+            .Property(p => p.date_elaboracion)
+            .HasColumnName("date_elaboracion");
+            modelBuilder.Entity<Detalles_Productos>()
+            .Property(p => p.date_vencimiento)
+            .HasColumnName("date_vencimiento");
+            modelBuilder.Entity<Detalles_Productos>()
+            .Property(p => p.dc_iva)
+            .HasColumnName("dc_iva");
+
+            //un producto elaborado tiene muchos detalles de productos (relacion)
+            modelBuilder.Entity<Detalles_Productos>()
+            .HasOne(p => p.Productos_Elaborados)
+            .WithMany(p => p.Detalles_Productos)
             .HasForeignKey(p => p.fk_producto_elaborado);
         }
     }
