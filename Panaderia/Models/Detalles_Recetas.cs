@@ -9,7 +9,7 @@ namespace Panaderia.Models
         [Required]
         public int fk_receta { get; set; }
         public int fk_ingrediente { get; set; }
-        public decimal dc_cantidad { get; set; }
+        public float fl_cantidad { get; set; }
         public virtual Recetas? Recetas { get; set; }
         public virtual Ingredientes? Ingredientes { get; set; }
     }

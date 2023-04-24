@@ -10,7 +10,7 @@ namespace Panaderia.Models
         [ForeignKey("Ingredientes")]
         public int fk_ingredientes { get; set; }
         [Required]
-        public decimal dc_cantidad { get; set; }
+        public float fl_cantidad { get; set; }
         public int fk_stock { get; set; }
         public virtual Stocks? Stocks { get; set; }
         public virtual Ingredientes? Ingredientes { get; set; }

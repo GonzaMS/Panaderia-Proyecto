@@ -34,8 +34,8 @@ public class StocksDbContext : DbContext
         .Property(p => p.fk_stock)
         .HasColumnName("fk_stock");
         modelBuilder.Entity<Productos_Elaborados_Stock>()
-        .Property(p => p.dc_cantidad)
-        .HasColumnName("dc_cantidad");
+        .Property(p => p.fl_cantidad)
+        .HasColumnName("fl_cantidad");
 
         //un detalle de compora tiene un stock  
         modelBuilder.Entity<Stocks>()

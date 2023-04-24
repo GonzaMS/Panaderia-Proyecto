@@ -22,8 +22,8 @@ namespace Panaderia.Data
             .Property(p => p.fk_proveedor)
             .HasColumnName("fk_proveedor");
             modelBuilder.Entity<Compras>()
-            .Property(p => p.dc_precio_total)
-            .HasColumnName("dc_precio_total");
+            .Property(p => p.fl_precio_total)
+            .HasColumnName("fl_precio_total");
             modelBuilder.Entity<Compras>()
             .Property(p => p.date_compra)
             .HasColumnName("date_compra");
@@ -45,8 +45,8 @@ namespace Panaderia.Data
             .Property(p => p.fk_stock)
             .HasColumnName("fk_stock");
             modelBuilder.Entity<Detalles_de_compras>()
-            .Property(p => p.dc_precio_unidad)
-            .HasColumnName("dc_precio_unidad");
+            .Property(p => p.fl_precio_unidad)
+            .HasColumnName("fl_precio_unidad");
             modelBuilder.Entity<Detalles_de_compras>()
             .Property(p => p.int_cantidad)
             .HasColumnName("int_cantidad");

@@ -11,7 +11,7 @@ namespace Panaderia.Models
         [ForeignKey("Productos_elaborados")]
         public int fk_producto_elaborado { get; set; }
         public int fk_stock { get; set; }
-        public decimal dc_cantidad { get; set; }
+        public float fl_cantidad { get; set; }
         public virtual Stocks? Stocks { get; set; }
         public virtual Productos_elaborados? Productos_elaborados { get; set; }
 
