@@ -42,7 +42,7 @@ namespace Panaderia.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTipos_Movimientos(int id, Tipos_movimientos tipos_Movimientos)
         {
-            if (id != tipos_Movimientos.id_tipo)
+            if (id != tipos_Movimientos.id_tipo_movimiento)
             {
                 return BadRequest();
             }
@@ -75,7 +75,7 @@ namespace Panaderia.Controllers
             _context.Tipos_Movimientos.Add(tipos_Movimientos);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTipos_Movimientos", new { id = tipos_Movimientos.id_tipo }, tipos_Movimientos);
+            return CreatedAtAction("GetTipos_Movimientos", new { id = tipos_Movimientos.id_tipo_movimiento }, tipos_Movimientos);
         }
 
         // DELETE: api/TiposMovimientos/5
@@ -96,7 +96,7 @@ namespace Panaderia.Controllers
 
         private bool Tipos_MovimientosExists(int id)
         {
-            return _context.Tipos_Movimientos.Any(e => e.id_tipo == id);
+            return _context.Tipos_Movimientos.Any(e => e.id_tipo_movimiento == id);
         }
     }
 }

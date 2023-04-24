@@ -37,7 +37,7 @@ namespace Panaderia.Data
 
             //tipos_movimientos
             modelBuilder.Entity<Tipos_movimientos>()
-                .HasKey(tm => tm.id_tipo);
+                .HasKey(tm => tm.id_tipo_movimiento);
             modelBuilder.Entity<Tipos_movimientos>()
                 .Property(tm => tm.int_movimiento)
                 .HasColumnName("int_movimiento");
