@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Panaderia.Models
 {
-    public class Proveedor
+    public class Proveedores
     {
         [Key]
         //Autoincrementable

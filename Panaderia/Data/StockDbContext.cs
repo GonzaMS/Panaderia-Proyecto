@@ -6,6 +6,7 @@ public class StocksDbContext : DbContext
 {
     public DbSet<Stocks> Stocks { get; set; }
     public DbSet<Productos_Elaborados_Stock> Productos_Elaborados_Stock { get; set; }
+    public DbSet<Ingredientes_stock> Ingredientes_stock { get; set; }
     public StocksDbContext(DbContextOptions<StocksDbContext> options) : base(options)
     {
     }
@@ -20,23 +21,21 @@ public class StocksDbContext : DbContext
         .HasColumnName("str_nombre_stock");
         //Obteniendo la direccion de ese stock
         modelBuilder.Entity<Stocks>()
-        .Property(p => p.str_direccion);
-
+        .Property(p => p.str_direccion)
+        .HasColumnName("str_direccion");
 
         //Productos_Elaborados_Stock
         modelBuilder.Entity<Productos_Elaborados_Stock>()
         .HasKey(p => p.id_producto_stock);
-        //Obteniendo el id del producto elaborado
         modelBuilder.Entity<Productos_Elaborados_Stock>()
         .Property(p => p.fk_producto_elaborado)
         .HasColumnName("fk_producto_elaborado");
-        //Obteniendo el id del stock
         modelBuilder.Entity<Productos_Elaborados_Stock>()
-        .Property(p => p.fk_stock);
-        //Obteniendo la cantidad de ese producto en ese stock
+        .Property(p => p.fk_stock)
+        .HasColumnName("fk_stock");
         modelBuilder.Entity<Productos_Elaborados_Stock>()
-        .Property(p => p.int_cantidad);
-
+        .Property(p => p.dc_cantidad)
+        .HasColumnName("dc_cantidad");
 
         //un detalle de compora tiene un stock  
         modelBuilder.Entity<Stocks>()
@@ -44,5 +43,27 @@ public class StocksDbContext : DbContext
                         .WithOne(d => d.Stocks)
                         .HasForeignKey(d => d.fk_ingrediente);
 
+        //El stock productos_elaborados_sotck tiene un stock
+        modelBuilder.Entity<Stocks>()
+                        .HasMany(s => s.Productos_Elaborados_Stock)
+                        .WithOne(p => p.Stocks)
+                        .HasForeignKey(p => p.fk_stock);
+        //El stock de productos_elaborados_stock tiene un producto elaborado
+        modelBuilder.Entity<Productos_elaborados>()
+                        .HasOne(p => p.Productos_Elaborados_Stock)
+                        .WithOne(s => s.Productos_elaborados)
+                        .HasForeignKey<Productos_Elaborados_Stock>(s => s.fk_producto_elaborado);
+
+        //Un stock tiene varios ingredientes_stocks
+        modelBuilder.Entity<Stocks>()
+                        .HasMany(s => s.Ingredientes_stock)
+                        .WithOne(i => i.Stocks)
+                        .HasForeignKey(i => i.fk_stock);
+
+        //Un stock ingredientes_stocks tiene un ingrediente
+        modelBuilder.Entity<Ingredientes>()
+                        .HasOne(i => i.Ingredientes_stock)
+                        .WithOne(s => s.Ingredientes)
+                        .HasForeignKey<Ingredientes_stock>(s => s.fk_ingredientes);
     }
 }

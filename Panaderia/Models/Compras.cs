@@ -12,7 +12,7 @@ namespace Panaderia.Models
         public System.DateTime date_compra { get; set; }
         public string str_numero_factura { get; set; }
 
-        public virtual Proveedor? Proveedor { get; set; }
+        public virtual Proveedores? Proveedores { get; set; }
 
         public virtual ICollection<Detalles_de_compras>? Detalles_de_compras { get; set; }
     }

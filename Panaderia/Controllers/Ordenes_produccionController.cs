@@ -1,0 +1,101 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Panaderia.Data;
+using Panaderia.Models;
+
+namespace Panaderia.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class Ordenes_produccionController : ControllerBase
+    {
+        private readonly OrdenesDbContext _context;
+
+        public Ordenes_produccionController(OrdenesDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Ordenes_produccion
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Ordenes_produccion>>> GetOrdenes_Produccion()
+        {
+            return await _context.Ordenes_Produccion.ToListAsync();
+        }
+
+        // GET: api/Ordenes_produccion/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Ordenes_produccion>> GetOrdenes_produccion(int id)
+        {
+            var ordenes_produccion = await _context.Ordenes_Produccion.FindAsync(id);
+
+            if (ordenes_produccion == null)
+            {
+                return NotFound();
+            }
+
+            return ordenes_produccion;
+        }
+
+        // PUT: api/Ordenes_produccion/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutOrdenes_produccion(int id, Ordenes_produccion ordenes_produccion)
+        {
+            if (id != ordenes_produccion.id_orden)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(ordenes_produccion).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!Ordenes_produccionExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Ordenes_produccion>> PostOrdenes_produccion(Ordenes_produccion ordenes_produccion)
+        {
+            _context.Ordenes_Produccion.Add(ordenes_produccion);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetOrdenes_produccion", new { id = ordenes_produccion.id_orden }, ordenes_produccion);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrdenes_produccion(int id)
+        {
+            var ordenes_produccion = await _context.Ordenes_Produccion.FindAsync(id);
+            if (ordenes_produccion == null)
+            {
+                return NotFound();
+            }
+
+            _context.Ordenes_Produccion.Remove(ordenes_produccion);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool Ordenes_produccionExists(int id)
+        {
+            return _context.Ordenes_Produccion.Any(e => e.id_orden == id);
+        }
+
+    }
+}

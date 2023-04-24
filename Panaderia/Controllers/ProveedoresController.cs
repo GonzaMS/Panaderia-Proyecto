@@ -18,14 +18,14 @@ namespace Panaderia.Controllers
 
         // GET: api/Proveedores
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Proveedor>>> GetProveedores()
+        public async Task<ActionResult<IEnumerable<Proveedores>>> GetProveedores()
         {
             return await _context.Proveedores.ToListAsync();
         }
 
         // GET: api/Proveedores/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Proveedor>> GetProveedor(int id)
+        public async Task<ActionResult<Proveedores>> GetProveedor(int id)
         {
             var proveedor = await _context.Proveedores.FindAsync(id);
 
@@ -39,7 +39,7 @@ namespace Panaderia.Controllers
 
         // PUT: api/Proveedores/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProveedor(int id, Proveedor proveedor)
+        public async Task<IActionResult> PutProveedor(int id, Proveedores proveedor)
         {
             if (id != proveedor.id_proveedor)
             {
@@ -69,7 +69,7 @@ namespace Panaderia.Controllers
 
         // POST: api/Proveedores
         [HttpPost]
-        public async Task<ActionResult<Proveedor>> PostProveedor(Proveedor proveedor)
+        public async Task<ActionResult<Proveedores>> PostProveedor(Proveedores proveedor)
         {
             _context.Proveedores.Add(proveedor);
             await _context.SaveChangesAsync();

@@ -21,12 +21,6 @@ namespace Panaderia.Data
             .Property(p => p.str_receta)
             .HasColumnName("str_receta");
 
-            //Una receta tiene varios detalles de recetas (relacion)
-            modelBuilder.Entity<Recetas>()
-            .HasMany(r => r.Detalles_Recetas)
-            .WithOne(d => d.Recetas)
-            .HasForeignKey(d => d.fk_receta);
-
             //Detalles de recetas
             modelBuilder.Entity<Detalles_Recetas>()
             .HasKey(p => p.id_detalle_receta);
@@ -37,10 +31,19 @@ namespace Panaderia.Data
             .Property(p => p.fk_ingrediente)
             .HasColumnName("fk_ingrediente");
 
+
+            //Relaciones entre tablas
+
             //Un detalle de receta tiene una receta (relacion)
             modelBuilder.Entity<Detalles_Recetas>()
             .HasOne(d => d.Recetas)
             .WithMany(r => r.Detalles_Recetas)
+            .HasForeignKey(d => d.fk_receta);
+
+            //Una receta tiene varios detalles de recetas (relacion)
+            modelBuilder.Entity<Recetas>()
+            .HasMany(r => r.Detalles_Recetas)
+            .WithOne(d => d.Recetas)
             .HasForeignKey(d => d.fk_receta);
 
             //Un detalle de receta tiene un ingrediente (relacion)
@@ -49,14 +52,11 @@ namespace Panaderia.Data
             .WithMany(i => i.Detalles_Recetas)
             .HasForeignKey(d => d.fk_ingrediente);
 
-            //Productos elaborados
-
             //Una receta tiene un producto elaborado (relacion)
             modelBuilder.Entity<Recetas>()
             .HasOne(r => r.Productos_elaborados)
             .WithOne(p => p.Recetas)
             .HasForeignKey<Productos_elaborados>(p => p.fk_recetas);
-
         }
     }
 }
