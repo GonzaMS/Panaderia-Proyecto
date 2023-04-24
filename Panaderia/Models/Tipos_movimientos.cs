@@ -9,7 +9,6 @@ namespace Panaderia.Models
         [Required]
         public int int_movimiento { get; set; }
         public string str_tipo { get; set; }
-        
-        public virtual ICollection<Movimientos_stock>? Movimientos_Stocks { get; set; }
+        public virtual ICollection<Movimiento_stock>? Movimiento_stock { get; set; }
     }
 }

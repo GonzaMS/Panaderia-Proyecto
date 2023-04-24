@@ -7,6 +7,7 @@ namespace Panaderia.Models
     {
         [Key]
         public int id_producto_stock { get; set; }
+        [Required]
         [ForeignKey("Productos_elaborados")]
         public int fk_producto_elaborado { get; set; }
         public int fk_stock { get; set; }

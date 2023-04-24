@@ -37,8 +37,16 @@ namespace Panaderia.Controllers
             return ordenes_produccion;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Ordenes_produccion>> PostOrdenes_produccion(Ordenes_produccion ordenes_produccion)
+        {
+            _context.Ordenes_Produccion.Add(ordenes_produccion);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetOrdenes_produccion", new { id = ordenes_produccion.id_orden }, ordenes_produccion);
+        }
+
         // PUT: api/Ordenes_produccion/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrdenes_produccion(int id, Ordenes_produccion ordenes_produccion)
         {
@@ -66,15 +74,6 @@ namespace Panaderia.Controllers
             }
 
             return NoContent();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Ordenes_produccion>> PostOrdenes_produccion(Ordenes_produccion ordenes_produccion)
-        {
-            _context.Ordenes_Produccion.Add(ordenes_produccion);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetOrdenes_produccion", new { id = ordenes_produccion.id_orden }, ordenes_produccion);
         }
 
         [HttpDelete("{id}")]

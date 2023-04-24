@@ -65,5 +65,11 @@ public class StocksDbContext : DbContext
                         .HasOne(i => i.Ingredientes_stock)
                         .WithOne(s => s.Ingredientes)
                         .HasForeignKey<Ingredientes_stock>(s => s.fk_ingredientes);
+
+        //Un stock tiene varios movimientos de stock
+        modelBuilder.Entity<Stocks>()
+                        .HasMany(s => s.Movimiento_stock)
+                        .WithOne(m => m.Stocks)
+                        .HasForeignKey(m => m.fk_stock);
     }
 }

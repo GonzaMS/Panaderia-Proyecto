@@ -3,99 +3,102 @@ using Microsoft.EntityFrameworkCore;
 using Panaderia.Data;
 using Panaderia.Models;
 
-[ApiController]
-[Route("api/[controller]")]
-public class Marcas_IngredientesController : ControllerBase
+namespace Panaderia.Controllers
 {
-    private readonly IngredientesDbContext _context;
 
-    public Marcas_IngredientesController(IngredientesDbContext dbContext)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class Marcas_IngredientesController : ControllerBase
     {
-        _context = dbContext;
-    }
+        private readonly IngredientesDbContext _context;
 
-    // GET: api/MarcasIngredientes
-    // GET: api/MarcasIngredientes
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Marcas_Ingredientes>>> GetMarcasIngredientes()
-    {
-        return await _context.Marcas_Ingredientes.ToListAsync();
-    }
-
-
-    // GET: api/MarcasIngredientes/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Marcas_Ingredientes>> GetMarcasIngrediente(int id)
-    {
-        var marcaIngrediente = await _context.Marcas_Ingredientes.FindAsync(id);
-
-        if (marcaIngrediente == null)
+        public Marcas_IngredientesController(IngredientesDbContext dbContext)
         {
-            return NotFound();
+            _context = dbContext;
         }
 
-        return marcaIngrediente;
-    }
-
-
-    // POST: api/MarcasIngredientes
-    [HttpPost]
-    public async Task<ActionResult<Marcas_Ingredientes>> PostMarcaIngrediente(Marcas_Ingredientes marcaIngrediente)
-    {
-        _context.Marcas_Ingredientes.Add(marcaIngrediente);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetMarcasIngrediente), new { id = marcaIngrediente.id_marca_ingrediente }, marcaIngrediente);
-    }
-
-    // PUT: api/MarcasIngredientes/5
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutMarcaIngrediente(int id, Marcas_Ingredientes marcaIngrediente)
-    {
-        if (id != marcaIngrediente.id_marca_ingrediente)
+        // GET: api/MarcasIngredientes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Marcas_Ingredientes>>> GetMarcasIngredientes()
         {
-            return BadRequest();
+            return await _context.Marcas_Ingredientes.ToListAsync();
         }
 
-        _context.Entry(marcaIngrediente).State = EntityState.Modified;
 
-        try
+        // GET: api/MarcasIngredientes/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Marcas_Ingredientes>> GetMarcasIngrediente(int id)
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!MarcaIngredienteExists(id))
+            var marcaIngrediente = await _context.Marcas_Ingredientes.FindAsync(id);
+
+            if (marcaIngrediente == null)
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+
+            return marcaIngrediente;
         }
 
-        return NoContent();
-    }
 
-    // DELETE: api/MarcasIngredientes/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteMarcaIngrediente(int id)
-    {
-        var marcaIngrediente = await _context.Marcas_Ingredientes.FindAsync(id);
-        if (marcaIngrediente == null)
+        // POST: api/MarcasIngredientes
+        [HttpPost]
+        public async Task<ActionResult<Marcas_Ingredientes>> PostMarcaIngrediente(Marcas_Ingredientes marcaIngrediente)
         {
-            return NotFound();
+            _context.Marcas_Ingredientes.Add(marcaIngrediente);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetMarcasIngrediente), new { id = marcaIngrediente.id_marca_ingrediente }, marcaIngrediente);
         }
 
-        _context.Marcas_Ingredientes.Remove(marcaIngrediente);
-        await _context.SaveChangesAsync();
+        // PUT: api/MarcasIngredientes/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutMarcaIngrediente(int id, Marcas_Ingredientes marcaIngrediente)
+        {
+            if (id != marcaIngrediente.id_marca_ingrediente)
+            {
+                return BadRequest();
+            }
 
-        return NoContent();
-    }
+            _context.Entry(marcaIngrediente).State = EntityState.Modified;
 
-    private bool MarcaIngredienteExists(int id)
-    {
-        return _context.Marcas_Ingredientes.Any(e => e.id_marca_ingrediente == id);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MarcaIngredienteExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // DELETE: api/MarcasIngredientes/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMarcaIngrediente(int id)
+        {
+            var marcaIngrediente = await _context.Marcas_Ingredientes.FindAsync(id);
+            if (marcaIngrediente == null)
+            {
+                return NotFound();
+            }
+
+            _context.Marcas_Ingredientes.Remove(marcaIngrediente);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool MarcaIngredienteExists(int id)
+        {
+            return _context.Marcas_Ingredientes.Any(e => e.id_marca_ingrediente == id);
+        }
     }
 }

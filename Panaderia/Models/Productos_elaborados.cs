@@ -15,8 +15,6 @@ namespace Panaderia.Models
         public virtual Productos_Elaborados_Stock? Productos_Elaborados_Stock { get; set; }
         public virtual ICollection<Ordenes_produccion>? Ordenes_produccion { get; set; }
         public virtual ICollection<Detalles_Productos>? Detalles_Productos { get; set; }
-
-        public virtual ICollection<Movimientos_stock>? Movimientos_Stock { get; set; }
-   
+        public virtual ICollection<Movimiento_stock>? Movimiento_stock { get; set; }
     }
 }

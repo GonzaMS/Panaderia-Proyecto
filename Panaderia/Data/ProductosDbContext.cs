@@ -70,10 +70,16 @@ namespace Panaderia.Data
             .Property(p => p.dc_iva)
             .HasColumnName("dc_iva");
 
-            //un producto elaborado tiene muchos detalles de productos (relacion)
+            //Un producto elaborado tiene muchos detalles de productos (relacion)
             modelBuilder.Entity<Detalles_Productos>()
             .HasOne(p => p.Productos_Elaborados)
             .WithMany(p => p.Detalles_Productos)
+            .HasForeignKey(p => p.fk_producto_elaborado);
+
+            //Un producto elaborado tiene varios movimientos
+            modelBuilder.Entity<Productos_elaborados>()
+            .HasMany(p => p.Movimiento_stock)
+            .WithOne(p => p.Productos_elaborados)
             .HasForeignKey(p => p.fk_producto_elaborado);
         }
     }

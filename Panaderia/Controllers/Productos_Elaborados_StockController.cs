@@ -37,6 +37,16 @@ namespace Panaderia.Controllers
             return productos_Elaborados_Stock;
         }
 
+        // POST: api/Productos_Elaborados_Stock
+        [HttpPost]
+        public async Task<ActionResult<Productos_Elaborados_Stock>> PostProductos_Elaborados_Stock(Productos_Elaborados_Stock productos_Elaborados_Stock)
+        {
+            _context.Productos_Elaborados_Stock.Add(productos_Elaborados_Stock);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetProductos_Elaborados_Stock", new { id = productos_Elaborados_Stock.id_producto_stock }, productos_Elaborados_Stock);
+        }
+
         // PUT: api/Productos_Elaborados_Stock/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProductos_Elaborados_Stock(int id, Productos_Elaborados_Stock productos_Elaborados_Stock)
@@ -65,16 +75,6 @@ namespace Panaderia.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Productos_Elaborados_Stock
-        [HttpPost]
-        public async Task<ActionResult<Productos_Elaborados_Stock>> PostProductos_Elaborados_Stock(Productos_Elaborados_Stock productos_Elaborados_Stock)
-        {
-            _context.Productos_Elaborados_Stock.Add(productos_Elaborados_Stock);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProductos_Elaborados_Stock", new { id = productos_Elaborados_Stock.id_producto_stock }, productos_Elaborados_Stock);
         }
 
         // DELETE: api/Productos_Elaborados_Stock/5

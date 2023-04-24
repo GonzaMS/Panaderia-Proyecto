@@ -36,6 +36,15 @@ namespace Panaderia.Controllers
             return compras;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Compras>> PostCompras(Compras compras)
+        {
+            _context.Compras.Add(compras);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCompras", new { id = compras.id_compra }, compras);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCompras(int id, Compras compras)
         {
@@ -63,15 +72,6 @@ namespace Panaderia.Controllers
             }
 
             return NoContent();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Compras>> PostCompras(Compras compras)
-        {
-            _context.Compras.Add(compras);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCompras", new { id = compras.id_compra }, compras);
         }
 
         [HttpDelete("{id}")]

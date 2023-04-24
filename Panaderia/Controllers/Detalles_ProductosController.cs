@@ -77,7 +77,7 @@ namespace Panaderia.Controllers
         public async Task<ActionResult<Detalles_Recetas>> DeleteDetalles_Recetas(int id)
         {
             var detalles_Recetas = await _context.Detalles_Recetas.FindAsync(id);
-            if (detalles_Recetas == null)
+            if (Detalles_RecetasExists == null)
             {
                 return NotFound();
             }
