@@ -85,6 +85,14 @@ namespace Panaderia.Main
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors()
             );
+            //OrdenesDbContext
+            services.AddDbContext<OrdenesDbContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
 
             services.AddControllers();
         }

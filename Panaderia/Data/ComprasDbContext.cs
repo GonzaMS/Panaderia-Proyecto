@@ -31,18 +31,6 @@ namespace Panaderia.Data
             .Property(p => p.str_numero_factura)
             .HasColumnName("str_numero_factura");
 
-            //Una compra tiene un proveedor
-            modelBuilder.Entity<Compras>()
-            .HasOne(p => p.Proveedor)
-            .WithMany(c => c.Compras)
-            .HasForeignKey(c => c.fk_proveedor);
-
-            //Una compra tiene varios detalles de compra
-            modelBuilder.Entity<Compras>()
-            .HasMany(c => c.Detalles_de_compras)
-            .WithOne(d => d.Compras)
-            .HasForeignKey(d => d.fk_compra);
-
 
             //Detalle de compras
             modelBuilder.Entity<Detalles_de_compras>()
@@ -66,6 +54,21 @@ namespace Panaderia.Data
             .Property(p => p.int_iva)
             .HasColumnName("int_iva");
 
+
+            //Relaciones
+
+            //Una compra tiene un proveedor
+            modelBuilder.Entity<Compras>()
+            .HasOne(p => p.Proveedores)
+            .WithMany(c => c.Compras)
+            .HasForeignKey(c => c.fk_proveedor);
+
+            //Una compra tiene varios detalles de compra
+            modelBuilder.Entity<Compras>()
+            .HasMany(c => c.Detalles_de_compras)
+            .WithOne(d => d.Compras)
+            .HasForeignKey(d => d.fk_compra);
+
             //Un detalle de compra tiene una compra 
             modelBuilder.Entity<Detalles_de_compras>()
             .HasOne(d => d.Compras)
@@ -84,8 +87,11 @@ namespace Panaderia.Data
             .WithMany(s => s.Detalles_de_compras)
             .HasForeignKey(d => d.fk_stock);
 
+            //Un ingrediente tiene un solo stock ingredientes_stocks
+            modelBuilder.Entity<Ingredientes>()
+            .HasOne(i => i.Ingredientes_stock)
+            .WithOne(s => s.Ingredientes)
+            .HasForeignKey<Ingredientes_stock>(s => s.fk_ingredientes);
         }
-
-
     }
 }

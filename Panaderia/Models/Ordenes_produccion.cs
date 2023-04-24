@@ -3,13 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Panaderia.Models
 {
-    public class Recetas
+    public class Ordenes_produccion
     {
         [Key]
-        public int id_receta { get; set; }
+        public int id_orden { get; set; }
         [Required]
-        public string str_receta { get; set; }
-        public virtual ICollection<Detalles_Recetas>? Detalles_Recetas { get; set; }
+        public int int_cantidad { get; set; }
+        public int fk_producto_elaborado { get; set; }
+        public Boolean bool_estado_orden { get; set; }
         public virtual Productos_elaborados? Productos_elaborados { get; set; }
     }
 }
+

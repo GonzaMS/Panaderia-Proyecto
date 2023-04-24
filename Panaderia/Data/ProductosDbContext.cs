@@ -23,12 +23,26 @@ namespace Panaderia.Data
             .Property(p => p.fk_recetas)
             .HasColumnName("fk_recetas");
 
+
+            //Relaciones entre tablas
+
             //Un producto elaborado tiene una receta (relacion)
             modelBuilder.Entity<Productos_elaborados>()
-            .HasOne(p => p.Recetas)
-            .WithOne(r => r.Productos_elaborados)
+            .HasOne(r => r.Recetas)
+            .WithOne(p => p.Productos_elaborados)
             .HasForeignKey<Productos_elaborados>(p => p.fk_recetas);
-        }
 
+            //Un producto elaborado tiene un producto elaborado stock (relacion)
+            modelBuilder.Entity<Productos_elaborados>()
+            .HasOne(p => p.Productos_Elaborados_Stock)
+            .WithOne(p => p.Productos_elaborados)
+            .HasForeignKey<Productos_Elaborados_Stock>(p => p.fk_producto_elaborado);
+
+            //Un producto elaborado tiene muchas ordenes de produccion (relacion)
+            modelBuilder.Entity<Productos_elaborados>()
+            .HasMany(p => p.Ordenes_produccion)
+            .WithOne(p => p.Productos_elaborados)
+            .HasForeignKey(p => p.fk_producto_elaborado);
+        }
     }
 }
