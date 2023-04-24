@@ -37,6 +37,16 @@ namespace Panaderia.Controllers
             return ingredientes;
         }
 
+        // POST: api/Ingredientes //Agregado
+        [HttpPost]
+        public async Task<ActionResult<Ingredientes>> PostIngredientes(Ingredientes ingredientes)
+        {
+            _context.Ingredientes.Add(ingredientes);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetIngredientes", new { id = ingredientes.id_ingrediente }, ingredientes);
+        }
+
 
         // PUT: api/Ingredientes/5
         [HttpPut("{id}")]
@@ -67,16 +77,6 @@ namespace Panaderia.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Ingredientes //Agregado
-        [HttpPost]
-        public async Task<ActionResult<Ingredientes>> PostIngredientes(Ingredientes ingredientes)
-        {
-            _context.Ingredientes.Add(ingredientes);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetIngredientes", new { id = ingredientes.id_ingrediente }, ingredientes);
         }
 
         // DELETE: api/Ingredientes/5

@@ -37,6 +37,16 @@ namespace Panaderia.Controllers
             return proveedor;
         }
 
+        // POST: api/Proveedores
+        [HttpPost]
+        public async Task<ActionResult<Proveedores>> PostProveedor(Proveedores proveedor)
+        {
+            _context.Proveedores.Add(proveedor);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetProveedor", new { id = proveedor.id_proveedor }, proveedor);
+        }
+
         // PUT: api/Proveedores/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProveedor(int id, Proveedores proveedor)
@@ -67,15 +77,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // POST: api/Proveedores
-        [HttpPost]
-        public async Task<ActionResult<Proveedores>> PostProveedor(Proveedores proveedor)
-        {
-            _context.Proveedores.Add(proveedor);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProveedor", new { id = proveedor.id_proveedor }, proveedor);
-        }
 
         // DELETE: api/Proveedores/5
         [HttpDelete("{id}")]

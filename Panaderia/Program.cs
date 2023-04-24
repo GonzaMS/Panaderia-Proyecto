@@ -29,7 +29,7 @@ namespace Panaderia.Main
         public void ConfigureServices(IServiceCollection services)
         {
             // MySQL Connection String
-            var connectionString = "server=localhost;user=root;password=12345;database=panaderia";
+            var connectionString = "server=localhost;user=gonza;password=12345678;database=panaderia";
 
             // Version de MySql
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));

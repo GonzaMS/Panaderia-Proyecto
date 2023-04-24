@@ -3,51 +3,60 @@ using Microsoft.EntityFrameworkCore;
 using Panaderia.Data;
 using Panaderia.Models;
 
-
 namespace Panaderia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Tipos_MovimientoController : ControllerBase
+    public class Tipos_movimientosController : ControllerBase
     {
         private readonly MovimientosDbContext _context;
 
-        public Tipos_MovimientoController(MovimientosDbContext context)
+        public Tipos_movimientosController(MovimientosDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Tipos_Movimientos
+        // GET: api/Tipos_movimientos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tipos_movimientos>>> GetTipos_Movimientos()
+        public async Task<ActionResult<IEnumerable<Tipos_movimientos>>> GetTipos_movimientos()
         {
-            return await _context.Tipos_Movimientos.ToListAsync();
+            return await _context.Tipos_movimientos.ToListAsync();
         }
 
-        // GET: api/TiposMovimientos/5
+        // GET: api/Tipos_movimientos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tipos_movimientos>> GetTipos_Movimientos(int id)
+        public async Task<ActionResult<Tipos_movimientos>> GetTipos_movimientos(int id)
         {
-            var tipos_Movimientos = await _context.Tipos_Movimientos.FindAsync(id);
+            var tipos_movimientos = await _context.Tipos_movimientos.FindAsync(id);
 
-            if (tipos_Movimientos == null)
+            if (tipos_movimientos == null)
             {
                 return NotFound();
             }
 
-            return tipos_Movimientos;
+            return tipos_movimientos;
         }
 
-        // PUT: api/TiposMovimientos/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTipos_Movimientos(int id, Tipos_movimientos tipos_Movimientos)
+        // POST: api/Tipos_movimientos
+        [HttpPost]
+        public async Task<ActionResult<Tipos_movimientos>> PostTipos_movimientos(Tipos_movimientos tipos_movimientos)
         {
-            if (id != tipos_Movimientos.id_tipo_movimiento)
+            _context.Tipos_movimientos.Add(tipos_movimientos);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTipos_movimientos", new { id = tipos_movimientos.id_tipo_movimiento }, tipos_movimientos);
+        }
+
+        // PUT: api/Tipos_movimientos/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTipos_movimientos(int id, Tipos_movimientos tipos_movimientos)
+        {
+            if (id != tipos_movimientos.id_tipo_movimiento)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tipos_Movimientos).State = EntityState.Modified;
+            _context.Entry(tipos_movimientos).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +64,7 @@ namespace Panaderia.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Tipos_MovimientosExists(id))
+                if (!Tipos_movimientosExists(id))
                 {
                     return NotFound();
                 }
@@ -68,35 +77,25 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // POST: api/TiposMovimientos
-        [HttpPost]
-        public async Task<ActionResult<Tipos_movimientos>> PostTipos_Movimientos(Tipos_movimientos tipos_Movimientos)
-        {
-            _context.Tipos_Movimientos.Add(tipos_Movimientos);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTipos_Movimientos", new { id = tipos_Movimientos.id_tipo_movimiento }, tipos_Movimientos);
-        }
-
-        // DELETE: api/TiposMovimientos/5
+        // DELETE: api/Tipos_movimientos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTipos_Movimientos(int id)
+        public async Task<ActionResult<Tipos_movimientos>> DeleteTipos_movimientos(int id)
         {
-            var tipos_Movimientos = await _context.Tipos_Movimientos.FindAsync(id);
-            if (tipos_Movimientos == null)
+            var tipos_movimientos = await _context.Tipos_movimientos.FindAsync(id);
+            if (tipos_movimientos == null)
             {
                 return NotFound();
             }
 
-            _context.Tipos_Movimientos.Remove(tipos_Movimientos);
+            _context.Tipos_movimientos.Remove(tipos_movimientos);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return tipos_movimientos;
         }
 
-        private bool Tipos_MovimientosExists(int id)
+        private bool Tipos_movimientosExists(int id)
         {
-            return _context.Tipos_Movimientos.Any(e => e.id_tipo_movimiento == id);
+            return _context.Tipos_movimientos.Any(e => e.id_tipo_movimiento == id);
         }
     }
 }

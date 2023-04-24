@@ -1,14 +1,12 @@
 using Panaderia.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Panaderia.Data
 {
     public class MovimientosDbContext : DbContext
-        {
-        public DbSet<Movimientos_stock> Movimientos_Stocks { get; set; }
-    
-        public DbSet<Tipos_movimientos> Tipos_Movimientos { get; set; }
+    {
+        public DbSet<Tipos_movimientos> Tipos_movimientos { get; set; }
+        public DbSet<Movimiento_stock> Movimiento_stock { get; set; }
 
         public MovimientosDbContext(DbContextOptions<MovimientosDbContext> options) : base(options)
         {
@@ -16,56 +14,66 @@ namespace Panaderia.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Movimientos_stock
-            modelBuilder.Entity<Movimientos_stock>()
-            .HasKey(m => m.id_movimiento);
-            modelBuilder.Entity<Movimientos_stock>()
-                .Property(m => m.int_cantidad)
-                .HasColumnName("int_cantidad");
-            modelBuilder.Entity<Movimientos_stock>()
-                .Property(m => m.date_fecha_ingreso)
-                .HasColumnName("date_fecha_ingresa");
-            modelBuilder.Entity<Movimientos_stock>()
-                .Property(m => m.fk_producto_elaborado)
-                .HasColumnName("fk_producto_elaborado");
-            modelBuilder.Entity<Movimientos_stock>()
-                .Property(m => m.fk_stock)
-                .HasColumnName("fk_stock");
-            modelBuilder.Entity<Movimientos_stock>()
-                .Property(m => m.fk_tipo_movimiento)
-                .HasColumnName("fk_tipo_movimiento");
-
-            //tipos_movimientos
+            //Tipos de movimientos
             modelBuilder.Entity<Tipos_movimientos>()
-                .HasKey(tm => tm.id_tipo_movimiento);
+                        .HasKey(t => t.id_tipo_movimiento);
             modelBuilder.Entity<Tipos_movimientos>()
-                .Property(tm => tm.int_movimiento)
-                .HasColumnName("int_movimiento");
+                        .Property(t => t.int_movimiento)
+                        .HasColumnName("int_movimiento");
             modelBuilder.Entity<Tipos_movimientos>()
-                .Property(tm => tm.str_tipo)
-                .HasColumnName("str_tipo");
-            
-            
-            // Configuración de las relaciones entre las tablas
-            modelBuilder.Entity<Movimientos_stock>()
-                .HasOne(ms => ms.Stocks)
-                .WithMany(s => s.Movimientos_Stocks)
-                .HasForeignKey(ms => ms.fk_stock);
+                        .Property(t => t.str_tipo)
+                        .HasColumnName("str_tipo");
 
-            modelBuilder.Entity<Movimientos_stock>()
-                .HasOne(ms => ms.Productos_Elaborados)
-                .WithMany(pe => pe.Movimientos_Stock)
-                .HasForeignKey(ms => ms.fk_producto_elaborado);
+            //Movimiento Stock
+            modelBuilder.Entity<Movimiento_stock>()
+                        .HasKey(m => m.id_transferencia_stock);
+            modelBuilder.Entity<Movimiento_stock>()
+                        .Property(m => m.fk_producto_elaborado)
+                        .HasColumnName("fk_producto_elaborado");
+            modelBuilder.Entity<Movimiento_stock>()
+                        .Property(m => m.fk_stock)
+                        .HasColumnName("fk_stock");
+            modelBuilder.Entity<Movimiento_stock>()
+                        .Property(m => m.fk_tipo_movimiento)
+                        .HasColumnName("fk_tipo_movimiento");
+            modelBuilder.Entity<Movimiento_stock>()
+                        .Property(m => m.int_cantidad)
+                        .HasColumnName("int_cantidad");
+            modelBuilder.Entity<Movimiento_stock>()
+                        .Property(m => m.date_fecha_ingreso)
+                        .HasColumnName("date_fecha_ingreso");
 
-            modelBuilder.Entity<Movimientos_stock>()
-                .HasOne(ms => ms.Tipos_Movimientos)
-                .WithMany(tm => tm.Movimientos_Stocks)
-                .HasForeignKey(ms => ms.fk_tipo_movimiento);
 
+            //Relaciones de entre las tablas
+            //Un movimiento de stock puede tener un tipo de movimiento
+            modelBuilder.Entity<Movimiento_stock>()
+                        .HasOne(m => m.Tipos_movimientos)
+                        .WithMany(t => t.Movimiento_stock)
+                        .HasForeignKey(m => m.fk_tipo_movimiento);
+
+            //Un movimiento de stock puede tener un producto elaborado
+            modelBuilder.Entity<Movimiento_stock>()
+                        .HasOne(m => m.Productos_elaborados)
+                        .WithMany(p => p.Movimiento_stock)
+                        .HasForeignKey(m => m.fk_producto_elaborado);
+
+            //Un movimiento de stock puede tener un stock
+            modelBuilder.Entity<Movimiento_stock>()
+                        .HasOne(m => m.Stocks)
+                        .WithMany(s => s.Movimiento_stock)
+                        .HasForeignKey(m => m.fk_stock);
+
+            //Tipos de movimientos
             modelBuilder.Entity<Tipos_movimientos>()
-                .HasMany(tm => tm.Movimientos_Stocks)
-                .WithOne(m => m.Tipos_Movimientos)
-                .HasForeignKey(m => m.fk_tipo_movimiento);
+                        .HasData(
+                            new Tipos_movimientos { id_tipo_movimiento = 1, int_movimiento = 1, str_tipo = "Entrada" },
+                            new Tipos_movimientos { id_tipo_movimiento = 2, int_movimiento = 2, str_tipo = "Salida" }
+                        );
+            //Un tipos_movimientos puede tener muchos movimientos_stock
+            modelBuilder.Entity<Tipos_movimientos>()
+                        .HasMany(t => t.Movimiento_stock)
+                        .WithOne(m => m.Tipos_movimientos)
+                        .HasForeignKey(m => m.fk_tipo_movimiento);
         }
     }
 }

@@ -41,6 +41,17 @@ namespace Panaderia.Controllers
             return recetas;
         }
 
+
+        // POST: api/Recetas
+        [HttpPost]
+        public async Task<ActionResult<Recetas>> PostRecetas(Recetas recetas)
+        {
+            _context.Recetas.Add(recetas);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRecetas", new { id = recetas.id_receta }, recetas);
+        }
+
         // PUT: api/Recetas/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRecetas(int id, Recetas recetas)
@@ -69,16 +80,6 @@ namespace Panaderia.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Recetas
-        [HttpPost]
-        public async Task<ActionResult<Recetas>> PostRecetas(Recetas recetas)
-        {
-            _context.Recetas.Add(recetas);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRecetas", new { id = recetas.id_receta }, recetas);
         }
 
         // DELETE: api/Recetas/5
