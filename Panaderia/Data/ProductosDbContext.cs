@@ -67,8 +67,8 @@ namespace Panaderia.Data
             .Property(p => p.date_vencimiento)
             .HasColumnName("date_vencimiento");
             modelBuilder.Entity<Detalles_Productos>()
-            .Property(p => p.dc_iva)
-            .HasColumnName("dc_iva");
+            .Property(p => p.fl_iva)
+            .HasColumnName("fl_iva");
 
             //Un producto elaborado tiene muchos detalles de productos (relacion)
             modelBuilder.Entity<Detalles_Productos>()
