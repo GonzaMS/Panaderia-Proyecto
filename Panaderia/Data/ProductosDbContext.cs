@@ -1,4 +1,5 @@
 using Panaderia.Models;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 namespace Panaderia.Data
 {
@@ -8,6 +9,8 @@ namespace Panaderia.Data
         public DbSet<Productos_elaborados> Productos_elaborados { get; set; }
 
         public DbSet<Detalles_Productos> Detalles_Productos { get; set; }
+
+
 
         public ProductosDbContext(DbContextOptions<ProductosDbContext> options) : base(options)
         {

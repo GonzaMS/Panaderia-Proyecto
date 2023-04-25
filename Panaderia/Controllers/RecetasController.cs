@@ -97,6 +97,26 @@ namespace Panaderia.Controllers
 
             return recetas;
         }
+        [HttpGet("{id}/detalles_recetas")]
+        public async Task<ActionResult<IEnumerable<Detalles_Recetas>>> GetDetallesRecetas(int id)
+        {
+            var detallesRecetas = await _context.Detalles_Recetas
+                .Where(d => d.fk_receta == id)
+                .Include(d => d.Ingredientes)
+                .Select(d => new Detalles_Recetas
+                {
+                    Ingredientes = new Ingredientes { str_nombre_ingrediente = d.Ingredientes.str_nombre_ingrediente },
+                    fl_cantidad = d.fl_cantidad
+                })
+                .ToListAsync();
+
+            if (detallesRecetas == null)
+            {
+                return NotFound();
+            }
+
+            return detallesRecetas;
+        }
 
         private bool RecetasExists(int id)
         {
