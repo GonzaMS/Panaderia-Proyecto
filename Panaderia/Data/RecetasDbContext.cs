@@ -1,5 +1,7 @@
 using Panaderia.Models;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+
 
 namespace Panaderia.Data
 {
@@ -20,6 +22,9 @@ namespace Panaderia.Data
             modelBuilder.Entity<Recetas>()
             .Property(p => p.str_receta)
             .HasColumnName("str_receta");
+            modelBuilder.Entity<Recetas>()
+            .Property(p => p.str_preparacion)
+            .HasColumnName("str_preparacion");
 
             //Detalles de recetas
             modelBuilder.Entity<Detalles_Recetas>()

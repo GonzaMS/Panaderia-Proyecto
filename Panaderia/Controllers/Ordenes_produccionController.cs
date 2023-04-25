@@ -55,7 +55,14 @@ namespace Panaderia.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(ordenes_produccion).State = EntityState.Modified;
+            var ord = await _context.Ordenes_Produccion.FindAsync(id);
+            if (ord == null)
+            {
+                return NotFound();
+            }
+
+            ord.bool_estado_orden = ordenes_produccion.bool_estado_orden;
+            _context.Entry(ord).State = EntityState.Modified;
 
             try
             {
@@ -75,6 +82,7 @@ namespace Panaderia.Controllers
 
             return NoContent();
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrdenes_produccion(int id)

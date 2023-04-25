@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Panaderia.Data;
 using Panaderia.Models;
 
@@ -47,16 +48,16 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetProductos_elaborados", new { id = productos_elaborados.id_producto_elaborado }, productos_elaborados);
         }
 
-        // PUT: api/Productos_elaborados/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductos_elaborados(int id, Productos_elaborados productos_elaborados)
+        //Api put
+        [HttpPut("api/Productos_elaborados/{id}")]
+        public async Task<IActionResult> PutProductosElaborados(int id, Productos_elaborados producto)
         {
-            if (id != productos_elaborados.id_producto_elaborado)
+            if (id != producto.id_producto_elaborado)
             {
                 return BadRequest();
             }
 
-            _context.Entry(productos_elaborados).State = EntityState.Modified;
+            _context.Entry(producto).State = EntityState.Modified;
 
             try
             {
@@ -74,8 +75,11 @@ namespace Panaderia.Controllers
                 }
             }
 
-            return Ok(productos_elaborados);
+            return NoContent();
         }
+
+
+
 
         // DELETE: api/Productos_elaborados/5
         [HttpDelete("{id}")]
