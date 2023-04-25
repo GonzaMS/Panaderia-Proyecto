@@ -153,4 +153,3 @@ class AgregarProveedor extends Component {
         );
     }
 }
-
