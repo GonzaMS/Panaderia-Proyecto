@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Panaderia.Data;
+using Panaderia.Context;
 
 namespace Panaderia.Main
 {
     public class Program
     {
+        //Metodo Main
         public static void Main(string[] args)
         {
             // Creamos el contexto de la base de datos
@@ -20,92 +22,15 @@ namespace Panaderia.Main
                     webBuilder.UseStartup<Program>();
                 });
 
-        // Configuramos el servicio
-        public Program(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
+        // Configuramos el servicio de la base de datos
         public void ConfigureServices(IServiceCollection services)
         {
             // MySQL Connection String
             var connectionString = "server=localhost;user=gonza;password=12345678;database=panaderia";
 
-            // Version de MySql
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
-
-            // Proveedor DbContext
-            services.AddDbContext<ProveedorDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-
-            // Ingredientes DbContext
-            services.AddDbContext<IngredientesDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-            //Stock DbContext
-            services.AddDbContext<StocksDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-
-            //Recetas DbContext
-            services.AddDbContext<RecetasDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-
-            //Productos DbContext
-            services.AddDbContext<ProductosDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-            //Compras DbContext
-            services.AddDbContext<ComprasDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-            //OrdenesDbContext
-            services.AddDbContext<OrdenesDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-            //MovimientosDbContext
-            services.AddDbContext<MovimientosDbContext>(
-                dbContextOptions => dbContextOptions
-                    .UseMySql(connectionString, serverVersion)
-                    .LogTo(Console.WriteLine, LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors()
-            );
-            services.AddControllers();
+            // call the ConfigurePanaderiaServices method to configure the DbContexts
+            services.ConfigurePanaderiaServices(connectionString);
         }
-
-        // Configuramos el servicio
-        public IConfiguration Configuration { get; }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
