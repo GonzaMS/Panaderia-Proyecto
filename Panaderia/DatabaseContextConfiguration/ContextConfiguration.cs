@@ -76,6 +76,14 @@ public static class ServiceExtensions
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
+        //ClientesDbContext
+        services.AddDbContext<ClientesDbContext>(
+            dbContextOptions => dbContextOptions
+                .UseMySql(connectionString, serverVersion)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
+        );
         services.AddControllers();
     }
 }
