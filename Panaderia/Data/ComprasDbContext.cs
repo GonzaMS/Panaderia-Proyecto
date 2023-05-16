@@ -51,8 +51,8 @@ namespace Panaderia.Data
             .Property(p => p.int_cantidad)
             .HasColumnName("int_cantidad");
             modelBuilder.Entity<Detalles_de_compras>()
-            .Property(p => p.int_iva)
-            .HasColumnName("int_iva");
+            .Property(p => p.fl_iva)
+            .HasColumnName("fl_iva");
 
 
             //Relaciones
