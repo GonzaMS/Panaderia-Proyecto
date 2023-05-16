@@ -1,6 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using Panaderia.Data;
+using MySqlConnector;
 using Panaderia.Context;
+using Panaderia.DatabaseTriggers;
 
 namespace Panaderia.Main
 {
@@ -28,8 +28,22 @@ namespace Panaderia.Main
             // MySQL Connection String
             var connectionString = "server=localhost;user=gonza;password=12345678;database=panaderia";
 
-            // call the ConfigurePanaderiaServices method to configure the DbContexts
+            // Creamos la conexion a la base de datos
+            var connection = new MySqlConnection(connectionString);
+
+            // Configuramos el servicio de la base de datos
             services.ConfigurePanaderiaServices(connectionString);
+
+            //Creamos los triggerss
+            var insertDetalles_de_Compras = new Triggers(connection);
+            if (insertDetalles_de_Compras.TriggerExists("TR_Insert_Compras") == false) insertDetalles_de_Compras.CreateTriggerInsertCompras();
+
+            var fechaTrigger = new Triggers(connection);
+            if (fechaTrigger.TriggerExists("TR_Date_Compras") == false) fechaTrigger.DateOnInsertCompras();
+
+            var UpdateTotalPrice = new Triggers(connection);
+            if (UpdateTotalPrice.TriggerExists("TR_Update_Total_Price") == false) UpdateTotalPrice.UpdateTotalPrice();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
