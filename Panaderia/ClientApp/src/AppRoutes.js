@@ -7,24 +7,24 @@ import { OrdenesProduccion } from "./components/OrdenesProduccion";
 const AppRoutes = [
   {
     index: true,
-    element: <Home />
+    element: <Home />,
   },
   {
-    path: '/proveedores',
-    element: <Proveedores />
+    path: "/proveedores",
+    element: <Proveedores />,
   },
   {
-    path: '/recetas',
-    element: <Recetas />
+    path: "/recetas",
+    element: <Recetas />,
   },
   {
-    path: '/ProductosElaborados',
-    element: <ProductosElaborados />
+    path: "/ProductosElaborados",
+    element: <ProductosElaborados />,
   },
   {
-    path: '/OrdenesProduccion',
-    element: <OrdenesProduccion />
-  }
+    path: "/OrdenesProduccion",
+    element: <OrdenesProduccion />,
+  },
 ];
 
 export default AppRoutes;

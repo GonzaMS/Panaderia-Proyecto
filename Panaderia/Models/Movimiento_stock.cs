@@ -7,7 +7,7 @@ namespace Panaderia.Models
         [Key]
         public int id_transferencia_stock { get; set; }
         [Required]
-        public int fk_producto_elaborado { get; set; }
+        public int? fk_producto_elaborado { get; set; }
         [Required]
         public int fk_stock { get; set; }
         [Required]
