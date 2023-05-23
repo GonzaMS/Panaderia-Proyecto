@@ -45,7 +45,7 @@ public static class ServiceExtensions
         );
 
         //Productos DbContext
-        services.AddDbContext<ProductosDbContext>(
+        services.AddDbContext<ProductosyMovimientosDbContext>(
             dbContextOptions => dbContextOptions
                 .UseMySql(connectionString, serverVersion)
                 .LogTo(Console.WriteLine, LogLevel.Information)
@@ -68,14 +68,14 @@ public static class ServiceExtensions
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
-        //MovimientosDbContext
-        services.AddDbContext<MovimientosDbContext>(
-            dbContextOptions => dbContextOptions
-                .UseMySql(connectionString, serverVersion)
-                .LogTo(Console.WriteLine, LogLevel.Information)
-                .EnableSensitiveDataLogging()
-                .EnableDetailedErrors()
-        );
+        // MovimientosDbContext
+        // services.AddDbContext<MovimientosDbContext>(
+        //     dbContextOptions => dbContextOptions
+        //         .UseMySql(connectionString, serverVersion)
+        //         .LogTo(Console.WriteLine, LogLevel.Information)
+        //         .EnableSensitiveDataLogging()
+        //         .EnableDetailedErrors()
+        // );
         //ClientesDbContext
         services.AddDbContext<ClientesDbContext>(
             dbContextOptions => dbContextOptions

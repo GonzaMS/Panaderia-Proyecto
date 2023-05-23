@@ -7,52 +7,52 @@ namespace Panaderia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Detalles_RecetasController : ControllerBase
+    public class Detalles_ProductosController : ControllerBase
     {
-        private readonly RecetasDbContext _context;
+        private readonly ProductosyMovimientosDbContext _context;
 
-        public Detalles_RecetasController(RecetasDbContext context)
+        public Detalles_ProductosController(ProductosyMovimientosDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Detalles_Recetas>>> GetDetalles_Recetas()
+        public async Task<ActionResult<IEnumerable<Detalles_Productos>>> GetDetalles_Productos()
         {
-            return await _context.Detalles_Recetas.ToListAsync();
+            return await _context.Detalles_Productos.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Detalles_Recetas>> GetDetalles_Recetas(int id)
+        public async Task<ActionResult<Detalles_Productos>> GetDetalles_Productos(int id)
         {
-            var detalles_Recetas = await _context.Detalles_Recetas.FindAsync(id);
+            var detalles_Productos = await _context.Detalles_Productos.FindAsync(id);
 
-            if (detalles_Recetas == null)
+            if (detalles_Productos == null)
             {
                 return NotFound();
             }
 
-            return detalles_Recetas;
+            return detalles_Productos;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Detalles_Recetas>> PostDetalles_Recetas(Detalles_Recetas detalles_Recetas)
+        public async Task<ActionResult<Detalles_Productos>> PostDetalles_Productos(Detalles_Productos detalles_Productos)
         {
-            _context.Detalles_Recetas.Add(detalles_Recetas);
+            _context.Detalles_Productos.Add(detalles_Productos);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDetalles_Recetas", new { id = detalles_Recetas.id_detalle_receta }, detalles_Recetas);
+            return CreatedAtAction("GetDetalles_Productos", new { id = detalles_Productos.id_detalle_producto }, detalles_Productos);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDetalles_Recetas(int id, Detalles_Recetas detalles_Recetas)
+        public async Task<IActionResult> PutDetalles_Productos(int id, Detalles_Productos detalles_Productos)
         {
-            if (id != detalles_Recetas.id_detalle_receta)
+            if (id != detalles_Productos.id_detalle_producto)
             {
                 return BadRequest();
             }
 
-            _context.Entry(detalles_Recetas).State = EntityState.Modified;
+            _context.Entry(detalles_Productos).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Panaderia.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Detalles_RecetasExists(id))
+                if (!Detalles_ProductosExists(id))
                 {
                     return NotFound();
                 }
@@ -74,23 +74,23 @@ namespace Panaderia.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Detalles_Recetas>> DeleteDetalles_Recetas(int id)
+        public async Task<ActionResult<Detalles_Productos>> DeleteDetalles_Productos(int id)
         {
-            var detalles_Recetas = await _context.Detalles_Recetas.FindAsync(id);
-            if (Detalles_RecetasExists == null)
+            var detalles_Productos = await _context.Detalles_Productos.FindAsync(id);
+            if (detalles_Productos == null)
             {
                 return NotFound();
             }
 
-            _context.Detalles_Recetas.Remove(detalles_Recetas);
+            _context.Detalles_Productos.Remove(detalles_Productos);
             await _context.SaveChangesAsync();
 
-            return detalles_Recetas;
+            return detalles_Productos;
         }
 
-        private bool Detalles_RecetasExists(int id)
+        private bool Detalles_ProductosExists(int id)
         {
-            return _context.Detalles_Recetas.Any(e => e.id_detalle_receta == id);
+            return _context.Detalles_Productos.Any(e => e.id_detalle_producto == id);
         }
     }
 }

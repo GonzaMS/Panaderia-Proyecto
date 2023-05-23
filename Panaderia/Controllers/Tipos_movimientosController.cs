@@ -9,9 +9,9 @@ namespace Panaderia.Controllers
     [ApiController]
     public class Tipos_movimientosController : ControllerBase
     {
-        private readonly MovimientosDbContext _context;
+        private readonly ProductosyMovimientosDbContext _context;
 
-        public Tipos_movimientosController(MovimientosDbContext context)
+        public Tipos_movimientosController(ProductosyMovimientosDbContext context)
         {
             _context = context;
         }

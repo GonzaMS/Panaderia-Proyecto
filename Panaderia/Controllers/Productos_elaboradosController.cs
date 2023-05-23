@@ -10,9 +10,9 @@ namespace Panaderia.Controllers
     [ApiController]
     public class Productos_elaboradosController : ControllerBase
     {
-        private readonly ProductosDbContext _context;
+        private readonly ProductosyMovimientosDbContext _context;
 
-        public Productos_elaboradosController(ProductosDbContext context)
+        public Productos_elaboradosController(ProductosyMovimientosDbContext context)
         {
             _context = context;
         }
@@ -49,7 +49,7 @@ namespace Panaderia.Controllers
         }
 
         //Api put
-        [HttpPut("api/Productos_elaborados/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutProductosElaborados(int id, Productos_elaborados producto)
         {
             if (id != producto.id_producto_elaborado)
@@ -78,9 +78,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-
-
-
         // DELETE: api/Productos_elaborados/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Productos_elaborados>> DeleteProductos_elaborados(int id)
@@ -91,11 +88,33 @@ namespace Panaderia.Controllers
                 return NotFound();
             }
 
+            // Delete related records from detalles_productos table
+            var detallesToDelete = _context.Detalles_Productos.Where(d => d.fk_producto_elaborado == id).ToList();
+            _context.Detalles_Productos.RemoveRange(detallesToDelete);
+            await _context.SaveChangesAsync();
+
             _context.Productos_elaborados.Remove(productos_elaborados);
             await _context.SaveChangesAsync();
 
             return productos_elaborados;
         }
+        //Buscar un producto elaborado por nombre
+        [HttpGet("Buscar/{nombre}")]
+        public async Task<ActionResult<IEnumerable<Productos_elaborados>>> GetProductos_elaborados(string nombre)
+        {
+            var productos_elaborados = await _context.Productos_elaborados
+                .Where(p => p.str_nombre_producto.Contains(nombre))
+                .ToListAsync();
+
+            if (productos_elaborados == null)
+            {
+                return NotFound();
+            }
+
+            return productos_elaborados;
+        }
+
+
 
         private bool Productos_elaboradosExists(int id)
         {

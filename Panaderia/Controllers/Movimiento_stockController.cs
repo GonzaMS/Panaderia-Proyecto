@@ -10,9 +10,9 @@ namespace Panaderia.Controllers
     public class Movimiento_stockController : ControllerBase
     {
 
-        private readonly MovimientosDbContext _context;
+        private readonly ProductosyMovimientosDbContext _context;
 
-        public Movimiento_stockController(MovimientosDbContext dbContext)
+        public Movimiento_stockController(ProductosyMovimientosDbContext dbContext)
         {
             _context = dbContext;
         }
