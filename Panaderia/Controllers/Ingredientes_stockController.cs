@@ -8,11 +8,11 @@ namespace Panaderia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Ingredientes_stockController : ControllerBase
+    public class Ingredientes_StockController : ControllerBase
     {
         private readonly StocksDbContext _context;
 
-        public Ingredientes_stockController(StocksDbContext context)
+        public Ingredientes_StockController(StocksDbContext context)
         {
             _context = context;
         }

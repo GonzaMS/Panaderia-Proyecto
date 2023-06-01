@@ -7,11 +7,11 @@ namespace Panaderia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Ordenes_produccionController : ControllerBase
+    public class Ordenes_ProduccionController : ControllerBase
     {
         private readonly OrdenesDbContext _context;
 
-        public Ordenes_produccionController(OrdenesDbContext context)
+        public Ordenes_ProduccionController(OrdenesDbContext context)
         {
             _context = context;
         }

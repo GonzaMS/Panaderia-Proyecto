@@ -7,12 +7,12 @@ namespace Panaderia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Movimiento_stockController : ControllerBase
+    public class Movimiento_StockController : ControllerBase
     {
 
         private readonly ProductosyMovimientosDbContext _context;
 
-        public Movimiento_stockController(ProductosyMovimientosDbContext dbContext)
+        public Movimiento_StockController(ProductosyMovimientosDbContext dbContext)
         {
             _context = dbContext;
         }
