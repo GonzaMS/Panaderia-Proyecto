@@ -68,14 +68,14 @@ namespace Panaderia.Data
 
             //un detalle_caja tiene un cajero
             modelBuilder.Entity<Cajeros>()
-                        .HasMany<Detalles_cajas>(d => d.Detalles_cajas)
+                        .HasMany<Detalles_cajas>(d => d.Detalles_Cajas)
                         .WithOne(c => c.Cajeros)
                         .HasForeignKey(d => d.fk_cajero);
 
             //un cajero tiene varias detalles_cajas
             modelBuilder.Entity<Detalles_cajas>()
                         .HasOne<Cajeros>(c => c.Cajeros)
-                        .WithMany(d => d.Detalles_cajas)
+                        .WithMany(d => d.Detalles_Cajas)
                         .HasForeignKey(c => c.fk_cajero);
 
         }
