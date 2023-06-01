@@ -8,6 +8,6 @@ namespace Panaderia.Models
         public int id_cajero { get; set; }
         [Required]
         public string str_nombre_cajero { get; set; }
-        public virtual ICollection<Detalles_cajas>? Detalles_Cajas { get; set; }
+        public virtual ICollection<Detalles_cajas>? Detalles_cajas { get; set; }
     }
 }
