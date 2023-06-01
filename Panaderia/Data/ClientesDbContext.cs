@@ -23,8 +23,8 @@ namespace Panaderia.Data
                         .HasColumnName("str_nombre_cliente");
             //Obteniendo el ruc de ese cliente
             modelBuilder.Entity<Clientes>()
-                        .Property(c => c.str_ruc_client)
-                        .HasColumnName("str_ruc_client");
+                        .Property(c => c.str_ruc_cliente)
+                        .HasColumnName("str_ruc_cliente");
             //Obteniendo el ci de ese cliente
             modelBuilder.Entity<Clientes>()
                         .Property(c => c.str_ci_cliente)
