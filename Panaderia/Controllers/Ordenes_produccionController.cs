@@ -16,14 +16,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Ordenes_produccion
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ordenes_produccion>>> GetOrdenes_Produccion()
         {
             return await _context.Ordenes_Produccion.ToListAsync();
         }
 
-        // GET: api/Ordenes_produccion/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ordenes_produccion>> GetOrdenes_produccion(int id)
         {
@@ -46,7 +44,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetOrdenes_produccion", new { id = ordenes_produccion.id_orden }, ordenes_produccion);
         }
 
-        // PUT: api/Ordenes_produccion/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrdenes_produccion(int id, Ordenes_produccion ordenes_produccion)
         {

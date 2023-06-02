@@ -15,39 +15,38 @@ namespace Panaderia.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // cajas
+            // Caja
             modelBuilder.Entity<Cajas>()
                         .HasKey(c => c.id_cajas);
-            //Obteniendo el numero de caja
             modelBuilder.Entity<Cajas>()
                         .Property(c => c.int_numero_caja)
                         .HasColumnName("int_numero_caja");
 
-
-            // cajeros
+            // Cajeros
             modelBuilder.Entity<Cajeros>()
                         .HasKey(c => c.id_cajero);
-            //Obteniendo el nombre del cajero
             modelBuilder.Entity<Cajeros>()
                         .Property(c => c.str_nombre_cajero)
                         .HasColumnName("str_nombre_cajero");
 
-            //detalles_cajas
+            //Detalles_cajas
             modelBuilder.Entity<Detalles_cajas>()
                         .HasKey(d => d.id_detalle_caja);
-            //Obteniendo el monto de la caja
+            modelBuilder.Entity<Detalles_cajas>()
+                        .Property(d => d.fk_caja)
+                        .HasColumnName("fk_caja");
             modelBuilder.Entity<Detalles_cajas>()
                         .Property(d => d.fl_monto_caja)
                         .HasColumnName("fl_monto_caja");
-            //Obteniendo la fecha del dia
             modelBuilder.Entity<Detalles_cajas>()
                         .Property(d => d.date_fecha_del_dia)
                         .HasColumnName("date_fecha_del_dia");
-            //Obteniendo la hora de entrada
+            modelBuilder.Entity<Detalles_cajas>()
+                        .Property(d => d.fk_cajero)
+                        .HasColumnName("fk_cajero");
             modelBuilder.Entity<Detalles_cajas>()
                         .Property(d => d.date_hora_entrada)
                         .HasColumnName("date_hora_entrada");
-            //Obteniendo la hora de salida
             modelBuilder.Entity<Detalles_cajas>()
                         .Property(d => d.date_hora_salida)
                         .HasColumnName("date_hora_salida");
@@ -75,7 +74,13 @@ namespace Panaderia.Data
             //un cajero tiene varias detalles_cajas
             modelBuilder.Entity<Detalles_cajas>()
                         .HasOne<Cajeros>(c => c.Cajeros)
-                        .WithMany(d => d.Detalles_Cajas)
+                        .WithMany(d => d.Detalles_cajas)
+                        .HasForeignKey(c => c.fk_cajero);
+
+            //Un cajero tiene varios arqueos
+            modelBuilder.Entity<Arqueos>()
+                        .HasOne<Cajeros>(c => c.Cajero)
+                        .WithMany(a => a.Arqueos)
                         .HasForeignKey(c => c.fk_cajero);
 
         }

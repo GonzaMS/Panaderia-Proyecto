@@ -10,9 +10,9 @@ namespace Panaderia.Controllers
 
     public class BilletesController : ControllerBase
     {
-        private readonly CobrosDbContext _context;
+        private readonly ArqueosDbContext _context;
 
-        public BilletesController(CobrosDbContext context)
+        public BilletesController(ArqueosDbContext context)
         {
             _context = context;
         }

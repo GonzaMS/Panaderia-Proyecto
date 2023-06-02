@@ -16,14 +16,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Productos_Elaborados_Stock
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Productos_Elaborados_Stock>>> GetProductos_Elaborados_Stock()
         {
             return await _context.Productos_Elaborados_Stock.ToListAsync();
         }
 
-        // GET: api/Productos_Elaborados_Stock/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Productos_Elaborados_Stock>> GetProductos_Elaborados_Stock(int id)
         {
@@ -37,7 +35,6 @@ namespace Panaderia.Controllers
             return productos_Elaborados_Stock;
         }
 
-        // POST: api/Productos_Elaborados_Stock
         [HttpPost]
         public async Task<ActionResult<Productos_Elaborados_Stock>> PostProductos_Elaborados_Stock(Productos_Elaborados_Stock productos_Elaborados_Stock)
         {
@@ -47,7 +44,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetProductos_Elaborados_Stock", new { id = productos_Elaborados_Stock.id_producto_stock }, productos_Elaborados_Stock);
         }
 
-        // PUT: api/Productos_Elaborados_Stock/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProductos_Elaborados_Stock(int id, Productos_Elaborados_Stock productos_Elaborados_Stock)
         {
@@ -77,7 +73,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Productos_Elaborados_Stock/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Productos_Elaborados_Stock>> DeleteProductos_Elaborados_Stock(int id)
         {

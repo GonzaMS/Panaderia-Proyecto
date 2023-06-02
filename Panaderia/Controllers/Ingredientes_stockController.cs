@@ -17,14 +17,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Ingredientes_stock
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ingredientes_stock>>> GetIngredientes_stock()
         {
             return await _context.Ingredientes_stock.ToListAsync();
         }
 
-        // GET: api/Ingredientes_stock/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ingredientes_stock>> GetIngredientes_stock(int id)
         {
@@ -37,7 +35,7 @@ namespace Panaderia.Controllers
 
             return ingredientes_stock;
         }
-        // POST: api/Ingredientes_stock
+
         [HttpPost]
         public async Task<ActionResult<Ingredientes_stock>> PostIngredientes_stock(Ingredientes_stock ingredientes_stock)
         {
@@ -47,8 +45,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetIngredientes_stock", new { id = ingredientes_stock.id_ingrediente_stock }, ingredientes_stock);
         }
 
-
-        // PUT: api/Ingredientes_stock/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutIngredientes_stock(int id, Ingredientes_stock ingredientes_stock)
         {

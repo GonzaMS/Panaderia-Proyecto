@@ -15,11 +15,9 @@ namespace Panaderia.Models
         [Required]
         public System.DateTime date_hora_entrada { get; set; }
         public System.DateTime date_hora_salida { get; set; }
-
-
         public virtual Cajas? Cajas { get; set; }
         public virtual Cajeros? Cajeros { get; set; }
-
         public virtual Arqueos? Arqueos { get; set; }
+        public virtual Movimientos? Movimientos { get; set; }
     }
 }

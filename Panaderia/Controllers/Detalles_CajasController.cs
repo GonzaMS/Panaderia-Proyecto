@@ -16,14 +16,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Detalles_Cajas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Detalles_cajas>>> Detalles_cajas()
         {
             return await _context.Detalles_Cajas.ToListAsync();
         }
 
-        // GET: api/Detalles_cajas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Detalles_cajas>> GetDetalles_cajas(int id)
         {
@@ -37,7 +35,6 @@ namespace Panaderia.Controllers
             return detalles_cajas;
         }
 
-        // POST: api/Detalles_cajas //Agregado
         [HttpPost]
         public async Task<ActionResult<Detalles_cajas>> PostDetalles_cajas(Detalles_cajas detalles_cajas)
         {
@@ -47,8 +44,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetDetalles_cajas", new { id = detalles_cajas.id_detalle_caja }, detalles_cajas);
         }
 
-
-        // PUT: api/Detalles_cajas/5
         [HttpPut("{id}")]
 
         public async Task<IActionResult> PutDetalles_cajas(int id, Detalles_cajas detalles_cajas)
@@ -79,7 +74,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Detalles_cajas/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Detalles_cajas>> DeleteDetalles_cajas(int id)
         {

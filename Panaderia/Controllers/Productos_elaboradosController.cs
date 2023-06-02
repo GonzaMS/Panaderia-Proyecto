@@ -17,14 +17,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Productos_elaborados
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Productos_elaborados>>> GetProductos_elaborados()
         {
             return await _context.Productos_elaborados.ToListAsync();
         }
 
-        // GET: api/Productos_elaborados/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Productos_elaborados>> GetProductos_elaborados(int id)
         {
@@ -38,7 +36,6 @@ namespace Panaderia.Controllers
             return productos_elaborados;
         }
 
-        // POST: api/Productos_elaborados
         [HttpPost]
         public async Task<ActionResult<Productos_elaborados>> PostProductos_elaborados(Productos_elaborados productos_elaborados)
         {
@@ -78,7 +75,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Productos_elaborados/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Productos_elaborados>> DeleteProductos_elaborados(int id)
         {
@@ -98,6 +94,7 @@ namespace Panaderia.Controllers
 
             return productos_elaborados;
         }
+
         //Buscar un producto elaborado por nombre
         [HttpGet("Buscar/{nombre}")]
         public async Task<ActionResult<IEnumerable<Productos_elaborados>>> GetProductos_elaborados(string nombre)
@@ -113,8 +110,6 @@ namespace Panaderia.Controllers
 
             return productos_elaborados;
         }
-
-
 
         private bool Productos_elaboradosExists(int id)
         {

@@ -16,14 +16,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Ingredientes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ingredientes>>> GetIngredientes()
         {
             return await _context.Ingredientes.ToListAsync();
         }
 
-        // GET: api/Ingredientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ingredientes>> GetIngredientes(int id)
         {
@@ -37,7 +35,6 @@ namespace Panaderia.Controllers
             return ingredientes;
         }
 
-        // POST: api/Ingredientes //Agregado
         [HttpPost]
         public async Task<ActionResult<Ingredientes>> PostIngredientes(Ingredientes ingredientes)
         {
@@ -47,8 +44,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetIngredientes", new { id = ingredientes.id_ingrediente }, ingredientes);
         }
 
-
-        // PUT: api/Ingredientes/5
         [HttpPut("{id}")]
 
         public async Task<IActionResult> PutIngredientes(int id, Ingredientes ingredientes)
@@ -79,7 +74,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Ingredientes/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Ingredientes>> DeleteIngredientes(int id)
         {
@@ -94,7 +88,7 @@ namespace Panaderia.Controllers
 
             return ingredientes;
         }
-
+        
         private bool IngredientesExists(int id)
         {
             return _context.Ingredientes.Any(e => e.id_ingrediente == id);

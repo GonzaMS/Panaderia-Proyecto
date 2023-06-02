@@ -7,8 +7,8 @@ namespace Panaderia.Data
     {
 
         public DbSet<Formas_pagos> Formas_Pagos { get; set; }
-        public DbSet<Billetes> Billetes { get; set; }
-        public DbSet<Detalles_efectivos> Detalles_Efectivos { get; set; }
+        public DbSet<Cobros> Cobros { get; set; }
+        public DbSet<Movimientos> Movimientos { get; set; }
 
         public CobrosDbContext(DbContextOptions<CobrosDbContext> options) : base(options)
         {
@@ -23,27 +23,69 @@ namespace Panaderia.Data
             .Property(p => p.str_formas)
             .HasColumnName("str_formas");
 
-            //Billetes
-            modelBuilder.Entity<Billetes>()
-            .HasKey(p => p.id_billte);
-            modelBuilder.Entity<Billetes>()
-            .Property(p => p.str_numero_divisa)
-            .HasColumnName("str_numero_divisa");
-            modelBuilder.Entity<Billetes>()
-            .Property(p => p.str_tamanho_efectivo);
+            //Cobros
+            modelBuilder.Entity<Cobros>()
+            .HasKey(p => p.id_cobro);
+            modelBuilder.Entity<Cobros>()
+            .Property(p => p.fk_forma_pago)
+            .HasColumnName("fk_forma_pago");
+            modelBuilder.Entity<Cobros>()
+            .Property(p => p.fl_monto_pago)
+            .HasColumnName("fl_monto_pago");
+            modelBuilder.Entity<Cobros>()
+            .Property(p => p.str_titular)
+            .HasColumnName("str_titular");
+            modelBuilder.Entity<Cobros>()
+            .Property(p => p.str_numero_celular)
+            .HasColumnName("str_numero_celular");
+            modelBuilder.Entity<Cobros>()
+            .Property(p => p.int_num_cuenta_corriente)
+            .HasColumnName("int_num_cuenta_corriente");
+            modelBuilder.Entity<Cobros>()
+            .Property(p => p.fk_movimiento)
+            .HasColumnName("fk_movimiento");
+            modelBuilder.Entity<Cobros>()
+            .Property(p => p.fk_factura)
+            .HasColumnName("fk_factura");
 
+            //Movimientos
+            modelBuilder.Entity<Movimientos>()
+            .HasKey(p => p.id_movimiento);
+            modelBuilder.Entity<Movimientos>()
+            .Property(p => p.int_entrada_salida)
+            .HasColumnName("int_entrada_salida");
+            modelBuilder.Entity<Movimientos>()
+            .Property(p => p.fk_detalle_caja)
+            .HasColumnName("fk_detalle_caja");
 
-            //Un detalle_efectivo tiene un billete
-            modelBuilder.Entity<Detalles_efectivos>()
-            .HasOne<Billetes>(s => s.Billetes)
-            .WithMany(g => g.Detalles_efectivos)
-            .HasForeignKey(s => s.fk_billte);
+            //Relaciones entre tablas
 
-            //Un billete tiene muchos detalles_efectivos
-            modelBuilder.Entity<Billetes>()
-            .HasMany<Detalles_efectivos>(g => g.Detalles_efectivos)
-            .WithOne(s => s.Billetes)
-            .HasForeignKey(s => s.fk_billte);
+            //Una forma de pago tiene muchos cobros
+            modelBuilder.Entity<Formas_pagos>()
+                        .HasMany<Cobros>(g => g.Cobros)
+                        .WithOne(s => s.Formas_pagos)
+                        .HasForeignKey(s => s.fk_forma_pago);
+
+            //Un cobro tiene una forma de pago
+            modelBuilder.Entity<Cobros>()
+                        .HasOne<Formas_pagos>(s => s.Formas_pagos)
+                        .WithMany(g => g.Cobros)
+                        .HasForeignKey(s => s.fk_forma_pago);
+
+            //Un movimiento tiene muchos cobros
+            modelBuilder.Entity<Movimientos>()
+                        .HasMany<Cobros>(g => g.Cobros)
+                        .WithOne(s => s.Movimientos)
+                        .HasForeignKey(s => s.fk_movimiento);
+
+            //Un cobro tiene un movimiento
+            modelBuilder.Entity<Cobros>()
+                        .HasOne<Movimientos>(s => s.Movimientos)
+                        .WithMany(g => g.Cobros)
+                        .HasForeignKey(s => s.fk_movimiento);
+
+            //Un movimiento tiene muchos detalles_cajas
+
 
 
         }

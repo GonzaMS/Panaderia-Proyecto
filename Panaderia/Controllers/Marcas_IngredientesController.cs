@@ -17,15 +17,12 @@ namespace Panaderia.Controllers
             _context = dbContext;
         }
 
-        // GET: api/MarcasIngredientes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Marcas_Ingredientes>>> GetMarcasIngredientes()
         {
             return await _context.Marcas_Ingredientes.ToListAsync();
         }
 
-
-        // GET: api/MarcasIngredientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Marcas_Ingredientes>> GetMarcasIngrediente(int id)
         {
@@ -39,8 +36,6 @@ namespace Panaderia.Controllers
             return marcaIngrediente;
         }
 
-
-        // POST: api/MarcasIngredientes
         [HttpPost]
         public async Task<ActionResult<Marcas_Ingredientes>> PostMarcaIngrediente(Marcas_Ingredientes marcaIngrediente)
         {
@@ -50,7 +45,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction(nameof(GetMarcasIngrediente), new { id = marcaIngrediente.id_marca_ingrediente }, marcaIngrediente);
         }
 
-        // PUT: api/MarcasIngredientes/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMarcaIngrediente(int id, Marcas_Ingredientes marcaIngrediente)
         {
@@ -80,7 +74,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/MarcasIngredientes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMarcaIngrediente(int id)
         {

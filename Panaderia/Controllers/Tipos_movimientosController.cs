@@ -16,14 +16,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Tipos_movimientos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tipos_movimientos>>> GetTipos_movimientos()
         {
             return await _context.Tipos_movimientos.ToListAsync();
         }
 
-        // GET: api/Tipos_movimientos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Tipos_movimientos>> GetTipos_movimientos(int id)
         {
@@ -37,7 +35,6 @@ namespace Panaderia.Controllers
             return tipos_movimientos;
         }
 
-        // POST: api/Tipos_movimientos
         [HttpPost]
         public async Task<ActionResult<Tipos_movimientos>> PostTipos_movimientos(Tipos_movimientos tipos_movimientos)
         {
@@ -47,7 +44,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetTipos_movimientos", new { id = tipos_movimientos.id_tipo_movimiento }, tipos_movimientos);
         }
 
-        // PUT: api/Tipos_movimientos/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTipos_movimientos(int id, Tipos_movimientos tipos_movimientos)
         {
@@ -77,7 +73,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Tipos_movimientos/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tipos_movimientos>> DeleteTipos_movimientos(int id)
         {

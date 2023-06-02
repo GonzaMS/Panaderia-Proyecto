@@ -23,7 +23,6 @@ namespace Panaderia.Controllers
             return await _context.Proveedores.ToListAsync();
         }
 
-        // GET: api/Proveedores/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Proveedores>> GetProveedor(int id)
         {
@@ -37,7 +36,6 @@ namespace Panaderia.Controllers
             return proveedor;
         }
 
-        // POST: api/Proveedores
         [HttpPost]
         public async Task<ActionResult<Proveedores>> PostProveedor(Proveedores proveedor)
         {
@@ -47,7 +45,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetProveedor", new { id = proveedor.id_proveedor }, proveedor);
         }
 
-        // PUT: api/Proveedores/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProveedor(int id, Proveedores proveedor)
         {
@@ -77,8 +74,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-
-        // DELETE: api/Proveedores/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProveedor(int id)
         {

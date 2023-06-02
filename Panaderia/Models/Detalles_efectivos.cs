@@ -13,6 +13,7 @@ namespace Panaderia.Models
         public int fk_detalle_arqueo { get; set; }
         public int int_total_billete { get; set; }
         public virtual Billetes? Billetes { get; set; }
+        public virtual Detalles_arqueos? Detalles_arqueos { get; set; }
 
     }
 }

@@ -10,9 +10,9 @@ namespace Panaderia.Controllers
 
     public class Detalles_EfectivosController : ControllerBase
     {
-        private readonly CobrosDbContext _context;
+        private readonly ArqueosDbContext _context;
 
-        public Detalles_EfectivosController(CobrosDbContext context)
+        public Detalles_EfectivosController(ArqueosDbContext context)
         {
             _context = context;
         }

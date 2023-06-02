@@ -17,15 +17,12 @@ namespace Panaderia.Controllers
             _context = dbContext;
         }
 
-        // GET: api/Movimiento_stock
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movimiento_stock>>> GetMovimiento_stock()
         {
             return await _context.Movimiento_stock.ToListAsync();
         }
 
-
-        // GET: api/MarcasIngredientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Movimiento_stock>> GetMovimiento_stock(int id)
         {
@@ -39,8 +36,6 @@ namespace Panaderia.Controllers
             return Movimiento_stock;
         }
 
-
-        // POST: api/Movimiento_stock
         [HttpPost]
         public async Task<ActionResult<Movimiento_stock>> PostMovimiento_stock(Movimiento_stock Movimiento_stock)
         {
@@ -50,7 +45,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction(nameof(GetMovimiento_stock), new { id = Movimiento_stock.id_transferencia_stock }, Movimiento_stock);
         }
 
-        // PUT: api/Movimiento_stock/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMovimiento_stock(int id, Movimiento_stock Movimiento_stock)
         {
@@ -80,7 +74,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Movimiento_stock/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovimiento_stock(int id)
         {

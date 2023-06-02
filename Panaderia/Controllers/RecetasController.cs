@@ -17,7 +17,6 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Recetas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Recetas>>> GetRecetas()
         {
@@ -27,7 +26,6 @@ namespace Panaderia.Controllers
 
         }
 
-        // GET: api/Recetas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Recetas>> GetRecetas(int id)
         {
@@ -41,8 +39,6 @@ namespace Panaderia.Controllers
             return recetas;
         }
 
-
-        // POST: api/Recetas
         [HttpPost]
         public async Task<ActionResult<Recetas>> PostRecetas(Recetas recetas)
         {
@@ -52,7 +48,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetRecetas", new { id = recetas.id_receta }, recetas);
         }
 
-        // PUT: api/Recetas/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRecetas(int id, Recetas recetas)
         {
@@ -82,7 +77,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Recetas/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Recetas>> DeleteRecetas(int id)
         {
@@ -97,6 +91,7 @@ namespace Panaderia.Controllers
 
             return recetas;
         }
+
         [HttpGet("{id}/detalles_recetas")]
         public async Task<ActionResult<IEnumerable<Detalles_Recetas>>> GetDetallesRecetas(int id)
         {

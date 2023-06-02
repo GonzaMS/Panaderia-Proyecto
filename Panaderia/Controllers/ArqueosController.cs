@@ -16,14 +16,12 @@ namespace Panaderia.Controllers
             _context = context;
         }
 
-        // GET: api/Arqueos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Arqueos>>> GetArqueos()
         {
             return await _context.Arqueos.ToListAsync();
         }
 
-        // GET: api/Ingredientes/13
         [HttpGet("{id}")]
         public async Task<ActionResult<Arqueos>> GetArqueos(int id)
         {
@@ -37,7 +35,6 @@ namespace Panaderia.Controllers
             return arqueos;
         }
 
-        // POST: api/Aruqueos //Agregado
         [HttpPost]
         public async Task<ActionResult<Arqueos>> PostArqueos(Arqueos arqueos)
         {
@@ -47,8 +44,6 @@ namespace Panaderia.Controllers
             return CreatedAtAction("GetArqueos", new { id = arqueos.id_arqueo }, arqueos);
         }
 
-
-        // PUT: api/Arqueos/12
         [HttpPut("{id}")]
 
         public async Task<IActionResult> PutArqueos(int id, Arqueos arqueos)
@@ -79,7 +74,6 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Arqueos/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Arqueos>> DeleteArqueos(int id)
         {
