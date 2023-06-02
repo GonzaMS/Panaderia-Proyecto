@@ -19,5 +19,7 @@ namespace Panaderia.Models
 
         public virtual Cajas? Cajas { get; set; }
         public virtual Cajeros? Cajeros { get; set; }
+
+        public virtual Arqueos? Arqueos { get; set; }
     }
 }

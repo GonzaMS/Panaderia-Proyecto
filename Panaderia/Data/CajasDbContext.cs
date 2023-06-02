@@ -53,7 +53,7 @@ namespace Panaderia.Data
                         .HasColumnName("date_hora_salida");
 
 
-            //Relaciones entre tablas
+            //Relaciones entre tablass
 
             //una caja tiene varias detalles_cajas
             modelBuilder.Entity<Detalles_cajas>()
@@ -68,7 +68,7 @@ namespace Panaderia.Data
 
             //un detalle_caja tiene un cajero
             modelBuilder.Entity<Cajeros>()
-                        .HasMany<Detalles_cajas>(d => d.Detalles_Cajas)
+                        .HasMany<Detalles_cajas>(d => d.Detalles_cajas)
                         .WithOne(c => c.Cajeros)
                         .HasForeignKey(d => d.fk_cajero);
 

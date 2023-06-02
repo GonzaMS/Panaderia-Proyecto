@@ -9,5 +9,6 @@ namespace Panaderia.Models
         [Required]
         public int fk_arqueo { get; set; }
         public float fl_total { get; set; }
+        public virtual Arqueos? Arqueos { get; set; }
     }
 }
