@@ -8,11 +8,11 @@ namespace Panaderia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Productos_elaboradosController : ControllerBase
+    public class Productos_ElaboradosController : ControllerBase
     {
         private readonly ProductosyMovimientosDbContext _context;
 
-        public Productos_elaboradosController(ProductosyMovimientosDbContext context)
+        public Productos_ElaboradosController(ProductosyMovimientosDbContext context)
         {
             _context = context;
         }
@@ -89,8 +89,8 @@ namespace Panaderia.Controllers
             }
 
             // Delete related records from detalles_productos table
-            var detallesToDelete = _context.Detalles_Productos.Where(d => d.fk_producto_elaborado == id).ToList();
-            _context.Detalles_Productos.RemoveRange(detallesToDelete);
+            var detallesToDelete = _context.Detalles_productos.Where(d => d.fk_producto_elaborado == id).ToList();
+            _context.Detalles_productos.RemoveRange(detallesToDelete);
             await _context.SaveChangesAsync();
 
             _context.Productos_elaborados.Remove(productos_elaborados);

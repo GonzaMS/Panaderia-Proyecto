@@ -8,7 +8,7 @@ namespace Panaderia.Data
 
         public DbSet<Productos_elaborados> Productos_elaborados { get; set; }
 
-        public DbSet<Detalles_Productos> Detalles_Productos { get; set; }
+        public DbSet<Detalles_Productos> Detalles_productos { get; set; }
         public DbSet<Movimiento_stock> Movimiento_stock { get; set; }
         public DbSet<Tipos_movimientos> Tipos_movimientos { get; set; }
 
