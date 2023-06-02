@@ -79,7 +79,7 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Detalles_arqueos/5
+        // DELETE: api/Detalles_arqueos/12
         [HttpDelete("{id}")]
         public async Task<ActionResult<Detalles_arqueos>> DeleteDetalles_arqueos(int id)
         {

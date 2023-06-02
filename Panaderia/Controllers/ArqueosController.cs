@@ -48,7 +48,7 @@ namespace Panaderia.Controllers
         }
 
 
-        // PUT: api/Arqueos/5
+        // PUT: api/Arqueos/12
         [HttpPut("{id}")]
 
         public async Task<IActionResult> PutArqueos(int id, Arqueos arqueos)

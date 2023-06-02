@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Panaderia.Models
 {
-    //
+    //api
     public class Detalles_arqueos
     {
         [Key]

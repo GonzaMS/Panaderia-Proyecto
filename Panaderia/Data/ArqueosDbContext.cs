@@ -1,7 +1,7 @@
 using Panaderia.Models;
 using Microsoft.EntityFrameworkCore;
 
-
+//api
 namespace Panaderia.Data
 {
     public class ArqueosDbContext : DbContext
