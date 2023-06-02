@@ -23,7 +23,7 @@ namespace Panaderia.Controllers
             return await _context.Arqueos.ToListAsync();
         }
 
-        // GET: api/Ingredientes/5
+        // GET: api/Ingredientes/13
         [HttpGet("{id}")]
         public async Task<ActionResult<Arqueos>> GetArqueos(int id)
         {
