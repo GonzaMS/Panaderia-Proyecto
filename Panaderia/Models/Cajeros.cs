@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-
+//
 namespace Panaderia.Models
 {
     public class Cajeros

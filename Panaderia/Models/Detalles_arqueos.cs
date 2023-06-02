@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Panaderia.Models
 {
+    //
     public class Detalles_arqueos
     {
         [Key]
