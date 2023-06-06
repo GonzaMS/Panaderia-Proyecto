@@ -5,9 +5,9 @@ namespace Panaderia.Models
     public class Detalles_efectivos
     {
         [Key]
-        public int id_detalle_efectivos { get; set; }
+        public int id_detalles_efectivos { get; set; }
         [Required]
-        public int fk_billte { get; set; }
+        public int fk_billete { get; set; }
         public int int_cantidad_billete { get; set; }
         [Required]
         public int fk_detalle_arqueo { get; set; }

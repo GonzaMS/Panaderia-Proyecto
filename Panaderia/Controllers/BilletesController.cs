@@ -39,7 +39,7 @@ namespace Panaderia.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBilletes(int id, Billetes billetes)
         {
-            if (id != billetes.id_billte)
+            if (id != billetes.id_billete)
             {
                 return BadRequest();
             }
@@ -71,7 +71,7 @@ namespace Panaderia.Controllers
             _context.Billetes.Add(billetes);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBilletes", new { id = billetes.id_billte }, billetes);
+            return CreatedAtAction("GetBilletes", new { id = billetes.id_billete }, billetes);
         }
 
         [HttpDelete("{id}")]
@@ -91,7 +91,7 @@ namespace Panaderia.Controllers
 
         private bool BilletesExists(int id)
         {
-            return _context.Billetes.Any(e => e.id_billte == id);
+            return _context.Billetes.Any(e => e.id_billete == id);
         }
 
     }

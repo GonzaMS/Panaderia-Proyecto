@@ -52,6 +52,7 @@ public static class ServiceExtensions
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
+
         //Compras DbContext
         services.AddDbContext<ComprasDbContext>(
             dbContextOptions => dbContextOptions
@@ -60,6 +61,7 @@ public static class ServiceExtensions
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
+
         //OrdenesDbContext
         services.AddDbContext<OrdenesDbContext>(
             dbContextOptions => dbContextOptions
@@ -68,6 +70,7 @@ public static class ServiceExtensions
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
+
         // MovimientosDbContext
         // services.AddDbContext<MovimientosDbContext>(
         //     dbContextOptions => dbContextOptions
@@ -77,6 +80,7 @@ public static class ServiceExtensions
         //         .EnableDetailedErrors()
         // );
         //ClientesDbContext
+
         services.AddDbContext<ClientesDbContext>(
             dbContextOptions => dbContextOptions
                 .UseMySql(connectionString, serverVersion)
@@ -84,6 +88,36 @@ public static class ServiceExtensions
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
         );
+
+        //CobrosDbContext
+        services.AddDbContext<CobrosDbContext>(
+            dbContextOptions => dbContextOptions
+                .UseMySql(connectionString, serverVersion)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
+        );
+
+        //CajasDbContext
+        services.AddDbContext<CajasDbContext>(
+            dbContextOptions => dbContextOptions
+                .UseMySql(connectionString, serverVersion)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableDetailedErrors()
+                .EnableSensitiveDataLogging()
+        );
+
+        //ArqueosDbContext
+        services.AddDbContext<ArqueosDbContext>(
+            dbContextOptions => dbContextOptions
+                .UseMySql(connectionString, serverVersion)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableDetailedErrors()
+                .EnableSensitiveDataLogging()
+        );
+
+
+
         services.AddControllers();
     }
 }

@@ -1,8 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Panaderia.Models
 {
     public class Billetes
     {
-        public int id_billte { get; set; }
+        [Key]
+        public int id_billete { get; set; }
         public String str_numero_divisa { get; set; }
         public String str_tamanho_efectivo { get; set; }
 

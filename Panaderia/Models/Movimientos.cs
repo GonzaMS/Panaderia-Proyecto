@@ -11,7 +11,6 @@ namespace Panaderia.Models
         [Required]
         public int fk_detalle_caja { get; set; }
         public virtual ICollection<Cobros>? Cobros { get; set; }
-        public virtual ICollection<Detalles_cajas>? Detalles_cajas { get; set; }
     }
 }
 

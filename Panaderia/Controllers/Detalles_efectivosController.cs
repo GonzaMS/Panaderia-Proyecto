@@ -39,7 +39,7 @@ namespace Panaderia.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDetalles_Efectivos(int id, Detalles_efectivos detalles_efectivos)
         {
-            if (id != detalles_efectivos.id_detalle_efectivos)
+            if (id != detalles_efectivos.id_detalles_efectivos)
             {
                 return BadRequest();
             }
@@ -71,7 +71,7 @@ namespace Panaderia.Controllers
             _context.Detalles_Efectivos.Add(detalles_efectivos);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDetalles_Efectivos", new { id = detalles_efectivos.id_detalle_efectivos }, detalles_efectivos);
+            return CreatedAtAction("GetDetalles_Efectivos", new { id = detalles_efectivos.id_detalles_efectivos }, detalles_efectivos);
         }
 
         [HttpDelete("{id}")]
@@ -91,7 +91,7 @@ namespace Panaderia.Controllers
 
         private bool Detalles_EfectivosExists(int id)
         {
-            return _context.Detalles_Efectivos.Any(e => e.id_detalle_efectivos == id);
+            return _context.Detalles_Efectivos.Any(e => e.id_detalles_efectivos == id);
         }
 
     }

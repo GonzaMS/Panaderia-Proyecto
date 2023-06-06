@@ -18,7 +18,7 @@ namespace Panaderia.Data
         {
             //Billetes
             modelBuilder.Entity<Billetes>()
-                        .HasKey(p => p.id_billte);
+                        .HasKey(p => p.id_billete);
             modelBuilder.Entity<Billetes>()
                         .Property(p => p.str_numero_divisa)
                         .HasColumnName("str_numero_divisa");
@@ -28,10 +28,10 @@ namespace Panaderia.Data
 
             //Detalles efectivos
             modelBuilder.Entity<Detalles_efectivos>()
-                        .HasKey(p => p.id_detalle_efectivos);
+                        .HasKey(p => p.id_detalles_efectivos);
             modelBuilder.Entity<Detalles_efectivos>()
-                        .Property(p => p.fk_billte)
-                        .HasColumnName("fk_billte");
+                        .Property(p => p.fk_billete)
+                        .HasColumnName("fk_billete");
             modelBuilder.Entity<Detalles_efectivos>()
                         .Property(p => p.int_cantidad_billete)
                         .HasColumnName("int_cantidad_billete");
@@ -71,13 +71,13 @@ namespace Panaderia.Data
             modelBuilder.Entity<Detalles_efectivos>()
                         .HasOne<Billetes>(b => b.Billetes)
                         .WithMany(d => d.Detalles_efectivos)
-                        .HasForeignKey(b => b.fk_billte);
+                        .HasForeignKey(b => b.fk_billete);
 
             //un detalle_efectivo tiene un billete
             modelBuilder.Entity<Billetes>()
                         .HasMany<Detalles_efectivos>(d => d.Detalles_efectivos)
                         .WithOne(b => b.Billetes)
-                        .HasForeignKey(d => d.fk_billte);
+                        .HasForeignKey(d => d.fk_billete);
 
             //un detalle_arqueos tiene varios detalles_efectivos
             modelBuilder.Entity<Detalles_efectivos>()
