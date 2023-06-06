@@ -18,6 +18,7 @@ export class ProductosElaborados extends Component {
     productosElaborados: [],
     recetas: [],
     detallesRecetas: [],
+    ingredientes: [],
     modalOpen: false, // state to control modal visibility
     modalAddOpen: false, // state to control add modal visibility
     selectedReceta: null, // state to store the selected receta
@@ -60,6 +61,17 @@ export class ProductosElaborados extends Component {
       .catch((error) => {
         console.error("Error al obtener los detalles de las recetas:", error);
       });
+
+    axios
+      .get("https://localhost:7089/api/ingredientes")
+      .then((response) => {
+        const ingredientes = response.data;
+        this.setState({ ingredientes });
+      })
+      .catch((error) => {
+        console.error("Error al obtener los ingredientes:", error);
+      });
+
   }
 
   toggleModal = () => {
@@ -74,20 +86,22 @@ export class ProductosElaborados extends Component {
       editModalOpen: false,
     }));
   };
-  
+
   verReceta = (recetaId) => {
     axios
       .get(`https://localhost:7089/api/recetas/${recetaId}`)
       .then((response) => {
         const selectedReceta = response.data;
+        const detallesReceta = this.obtenerDetallesReceta(recetaId); // Obtener los detalles de la receta
+        selectedReceta.detalles = detallesReceta; // Agregar los detalles al objeto de la receta
         this.setState({ selectedReceta });
+        console.log(detallesReceta);
         this.toggleModal();
       })
       .catch((error) => {
         console.error("Error al obtener los detalles de la receta:", error);
       });
   };
-  
 
   handleProductNameChange = (event) => {
     this.setState({ newProductName: event.target.value });
@@ -96,7 +110,7 @@ export class ProductosElaborados extends Component {
   handleRecetaChange = (event) => {
     this.setState({ selectedRecetaId: event.target.value });
   };
-  
+
   addProductoElaborado = () => {
     const { newProductName, selectedRecetaId } = this.state;
     const newProduct = {
@@ -146,15 +160,38 @@ export class ProductosElaborados extends Component {
     }
   };
 
+  //Obtener todos los detalles de una receta, dado su ID lo guardo en un array y obtenemos el nombre del ingrediente y la cantidad
+  obtenerDetallesReceta = (recetaId) => {
+    const { detallesRecetas, ingredientes } = this.state;
+    const detalles = [];
+    detallesRecetas.forEach((detalle) => {
+      console.log("detalle.fk_receta:", detalle.fk_receta);
+      console.log("recetaId:", recetaId);
+      if (detalle.fk_receta === recetaId) {
+        const ingrediente = ingredientes.find(
+          (ingrediente) => ingrediente.id_ingrediente === detalle.fk_ingrediente
+        );
+        console.log("ingrediente:", ingrediente);
+        detalles.push({
+          ingrediente: ingrediente.str_nombre_ingrediente,
+          cantidad: detalle.fl_cantidad,
+        });
+      }
+    });
+    console.log("detalles:", detalles);
+    return detalles;
+  };
+  
+
   render() {
     const {
-    productosElaborados,
-    recetas,
-    modalOpen,
-    selectedReceta,
-    modalAddOpen,
-    newProductName,
-    selectedRecetaId,
+      productosElaborados,
+      recetas,
+      modalOpen,
+      selectedReceta,
+      modalAddOpen,
+      newProductName,
+      selectedRecetaId,
     } = this.state;
 
     return (
@@ -250,10 +287,19 @@ export class ProductosElaborados extends Component {
               <>
                 <h5>{selectedReceta.str_nombre_receta}</h5>
                 <p>{selectedReceta.str_preparacion}</p>
+                <h6>Ingredientes:</h6>
+                <ul>
+                  {selectedReceta.detalles.map((detalle) => (
+                    <li key={detalle.ingrediente}>
+                      {detalle.ingrediente}: {detalle.cantidad}
+                    </li>
+                  ))}
+                </ul>
               </>
             )}
           </ModalBody>
         </Modal>
+
         {/* Add Modal */}
         <Modal isOpen={modalAddOpen} toggle={this.toggleAddModal}>
           <ModalHeader toggle={this.toggleAddModal}>

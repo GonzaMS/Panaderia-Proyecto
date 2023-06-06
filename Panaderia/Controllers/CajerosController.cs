@@ -89,6 +89,22 @@ namespace Panaderia.Controllers
             return cajeros;
         }
 
+        //Buscar un cajero por nombre
+        [HttpGet("Buscar/{nombre}")]
+        public async Task<ActionResult<IEnumerable<Cajeros>>> GetCajeros(string nombre)
+        {
+            var cajeros = await _context.Cajeros
+                .Where(p => p.str_nombre_cajero.Contains(nombre))
+                .ToListAsync();
+
+            if (cajeros == null)
+            {
+                return NotFound();
+            }
+
+            return cajeros;
+        }
+
         private bool CajerosExists(int id)
         {
             return _context.Cajeros.Any(e => e.id_cajero == id);

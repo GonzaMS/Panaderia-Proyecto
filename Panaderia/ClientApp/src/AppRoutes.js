@@ -3,6 +3,7 @@ import { Proveedores } from "./components/Proveedores";
 import { Recetas } from "./components/Recetas";
 import { ProductosElaborados } from "./components/ProductosElaborados";
 import { OrdenesProduccion } from "./components/OrdenesProduccion";
+import { Cajeros } from "./components/Cajeros";
 
 const AppRoutes = [
   {
@@ -24,6 +25,10 @@ const AppRoutes = [
   {
     path: "/OrdenesProduccion",
     element: <OrdenesProduccion />,
+  },
+  {
+    path: "/cajeros",
+    element: <Cajeros />,
   },
 ];
 
