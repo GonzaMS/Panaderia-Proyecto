@@ -83,6 +83,19 @@ namespace Panaderia.Data
                         .WithMany(a => a.Arqueos)
                         .HasForeignKey(c => c.fk_cajero);
 
+            //Un detalles cajas tiene un arqueo
+            modelBuilder.Entity<Arqueos>()
+                        .HasOne<Detalles_cajas>(d => d.Detalles_cajas)
+                        .WithOne(a => a.Arqueos)
+                        .HasForeignKey<Detalles_cajas>(d => d.id_detalle_caja);
+
+            //Un detallles cajas tiene varios movimientos
+            modelBuilder.Entity<Movimientos>()
+                        .HasOne<Detalles_cajas>(d => d.Detalles_cajas)
+                        .WithMany(m => m.Movimientos)
+                        .HasForeignKey(d => d.fk_detalle_caja);
+
+
         }
     }
 }

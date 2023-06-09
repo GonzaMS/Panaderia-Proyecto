@@ -1,5 +1,4 @@
 using Panaderia.Models;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 namespace Panaderia.Data
 {
@@ -7,8 +6,8 @@ namespace Panaderia.Data
     {
 
         public DbSet<Productos_elaborados> Productos_elaborados { get; set; }
-
         public DbSet<Detalles_Productos> Detalles_productos { get; set; }
+
         public DbSet<Movimiento_stock> Movimiento_stock { get; set; }
         public DbSet<Tipos_movimientos> Tipos_movimientos { get; set; }
 
@@ -21,70 +20,76 @@ namespace Panaderia.Data
         {
             //Productos elaborados
             modelBuilder.Entity<Productos_elaborados>()
-            .HasKey(p => p.id_producto_elaborado);
+                        .HasKey(p => p.id_producto_elaborado);
             modelBuilder.Entity<Productos_elaborados>()
-            .Property(p => p.str_nombre_producto)
-            .HasColumnName("str_nombre_producto");
+                        .Property(p => p.str_nombre_producto)
+                        .HasColumnName("str_nombre_producto");
             modelBuilder.Entity<Productos_elaborados>()
-            .Property(p => p.fk_recetas)
-            .HasColumnName("fk_recetas");
+                        .Property(p => p.fk_recetas)
+                        .HasColumnName("fk_recetas");
 
 
             //Relaciones entre tablas
 
             //Un producto elaborado tiene una receta (relacion)
             modelBuilder.Entity<Productos_elaborados>()
-            .HasOne(r => r.Recetas)
-            .WithOne(p => p.Productos_elaborados)
-            .HasForeignKey<Productos_elaborados>(p => p.fk_recetas);
+                        .HasOne(r => r.Recetas)
+                        .WithOne(p => p.Productos_elaborados)
+                        .HasForeignKey<Productos_elaborados>(p => p.fk_recetas);
 
             //Un producto elaborado tiene un producto elaborado stock (relacion)
             modelBuilder.Entity<Productos_elaborados>()
-            .HasOne(p => p.Productos_Elaborados_Stock)
-            .WithOne(p => p.Productos_elaborados)
-            .HasForeignKey<Productos_Elaborados_Stock>(p => p.fk_producto_elaborado);
+                        .HasOne(p => p.Productos_Elaborados_Stock)
+                        .WithOne(p => p.Productos_elaborados)
+                        .HasForeignKey<Productos_Elaborados_Stock>(p => p.fk_producto_elaborado);
 
             //Un producto elaborado tiene muchas ordenes de produccion (relacion)
             modelBuilder.Entity<Productos_elaborados>()
-            .HasMany(p => p.Ordenes_produccion)
-            .WithOne(p => p.Productos_elaborados)
-            .HasForeignKey(p => p.fk_producto_elaborado);
+                        .HasMany(p => p.Ordenes_produccion)
+                        .WithOne(p => p.Productos_elaborados)
+                        .HasForeignKey(p => p.fk_producto_elaborado);
             //un producto elaborado tiene muchos detalles de productos (relacion)
             modelBuilder.Entity<Productos_elaborados>()
-            .HasMany(p => p.Detalles_Productos)
-            .WithOne(p => p.Productos_Elaborados)
-            .HasForeignKey(p => p.fk_producto_elaborado);
+                        .HasMany(p => p.Detalles_Productos)
+                        .WithOne(p => p.Productos_Elaborados)
+                        .HasForeignKey(p => p.fk_producto_elaborado);
 
 
 
 
             //Detalles de productos
             modelBuilder.Entity<Detalles_Productos>()
-            .HasKey(p => p.id_detalle_producto);
+                        .HasKey(p => p.id_detalle_producto);
             modelBuilder.Entity<Detalles_Productos>()
-            .Property(p => p.fk_producto_elaborado)
-            .HasColumnName("fk_producto_elaborado");
+                        .Property(p => p.fk_producto_elaborado)
+                        .HasColumnName("fk_producto_elaborado");
             modelBuilder.Entity<Detalles_Productos>()
-            .Property(p => p.date_elaboracion)
-            .HasColumnName("date_elaboracion");
+                        .Property(p => p.date_elaboracion)
+                        .HasColumnName("date_elaboracion");
             modelBuilder.Entity<Detalles_Productos>()
-            .Property(p => p.date_vencimiento)
-            .HasColumnName("date_vencimiento");
+                        .Property(p => p.date_vencimiento)
+                        .HasColumnName("date_vencimiento");
             modelBuilder.Entity<Detalles_Productos>()
-            .Property(p => p.fl_iva)
-            .HasColumnName("fl_iva");
+                        .Property(p => p.fl_iva)
+                        .HasColumnName("fl_iva");
 
             //Un producto elaborado tiene muchos detalles de productos (relacion)
             modelBuilder.Entity<Detalles_Productos>()
-            .HasOne(p => p.Productos_Elaborados)
-            .WithMany(p => p.Detalles_Productos)
-            .HasForeignKey(p => p.fk_producto_elaborado);
+                        .HasOne(p => p.Productos_Elaborados)
+                        .WithMany(p => p.Detalles_Productos)
+                        .HasForeignKey(p => p.fk_producto_elaborado);
 
             //Un producto elaborado tiene varios movimientos
             modelBuilder.Entity<Productos_elaborados>()
-            .HasMany(p => p.Movimiento_stock)
-            .WithOne(p => p.Productos_elaborados)
-            .HasForeignKey(p => p.fk_producto_elaborado);
+                        .HasMany(p => p.Movimiento_stock)
+                        .WithOne(p => p.Productos_elaborados)
+                        .HasForeignKey(p => p.fk_producto_elaborado);
+
+            //Un producto elaborado tiene varios detalles de facturas
+            modelBuilder.Entity<Productos_elaborados>()
+                        .HasMany(p => p.Detalles_Facturas)
+                        .WithOne(p => p.Productos_elaborados)
+                        .HasForeignKey(p => p.fk_producto);
 
             //Tipos de movimientos
             modelBuilder.Entity<Tipos_movimientos>()

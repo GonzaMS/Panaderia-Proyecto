@@ -10,12 +10,17 @@ namespace Panaderia.Models
         public int fk_caja { get; set; }
         [Required]
         public string fl_monto_caja { get; set; }
+        [Required]
         public System.DateTime date_fecha_del_dia { get; set; }
+        [Required]
         public int fk_cajero { get; set; }
         [Required]
         public System.DateTime date_hora_entrada { get; set; }
+        [Required]
         public System.DateTime date_hora_salida { get; set; }
         public virtual Cajas? Cajas { get; set; }
         public virtual Cajeros? Cajeros { get; set; }
+        public virtual Arqueos? Arqueos { get; set; }
+        public virtual ICollection<Movimientos>? Movimientos { get; set; }
     }
 }

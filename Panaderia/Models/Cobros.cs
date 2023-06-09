@@ -18,5 +18,6 @@ namespace Panaderia.Models
         public int fk_factura { get; set; }
         public virtual Formas_pagos? Formas_pagos { get; set; }
         public virtual Movimientos? Movimientos { get; set; }
+        public virtual Facturas? Facturas { get; set; }
     }
 }

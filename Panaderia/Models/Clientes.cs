@@ -10,5 +10,6 @@ namespace Panaderia.Models
         public string str_nombre_cliente { get; set; }
         public string str_ruc_cliente { get; set; }
         public string str_ci_cliente { get; set; }
+        public virtual ICollection<Facturas>? Facturas { get; set; }
     }
 }

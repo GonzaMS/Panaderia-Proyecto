@@ -18,45 +18,45 @@ namespace Panaderia.Data
         {
             //Formas de pago
             modelBuilder.Entity<Formas_pagos>()
-            .HasKey(p => p.id_forma_pago);
+                        .HasKey(p => p.id_forma_pago);
             modelBuilder.Entity<Formas_pagos>()
-            .Property(p => p.str_formas)
-            .HasColumnName("str_formas");
+                        .Property(p => p.str_formas)
+                        .HasColumnName("str_formas");
 
             //Cobros
             modelBuilder.Entity<Cobros>()
-            .HasKey(p => p.id_cobro);
+                        .HasKey(p => p.id_cobro);
             modelBuilder.Entity<Cobros>()
-            .Property(p => p.fk_forma_pago)
-            .HasColumnName("fk_forma_pago");
+                        .Property(p => p.fk_forma_pago)
+                        .HasColumnName("fk_forma_pago");
             modelBuilder.Entity<Cobros>()
-            .Property(p => p.fl_monto_pago)
-            .HasColumnName("fl_monto_pago");
+                        .Property(p => p.fl_monto_pago)
+                        .HasColumnName("fl_monto_pago");
             modelBuilder.Entity<Cobros>()
-            .Property(p => p.str_titular)
-            .HasColumnName("str_titular");
+                        .Property(p => p.str_titular)
+                        .HasColumnName("str_titular");
             modelBuilder.Entity<Cobros>()
-            .Property(p => p.str_numero_celular)
-            .HasColumnName("str_numero_celular");
+                        .Property(p => p.str_numero_celular)
+                        .HasColumnName("str_numero_celular");
             modelBuilder.Entity<Cobros>()
-            .Property(p => p.int_num_cuenta_corriente)
-            .HasColumnName("int_num_cuenta_corriente");
+                        .Property(p => p.int_num_cuenta_corriente)
+                        .HasColumnName("int_num_cuenta_corriente");
             modelBuilder.Entity<Cobros>()
-            .Property(p => p.fk_movimiento)
-            .HasColumnName("fk_movimiento");
+                        .Property(p => p.fk_movimiento)
+                        .HasColumnName("fk_movimiento");
             modelBuilder.Entity<Cobros>()
-            .Property(p => p.fk_factura)
-            .HasColumnName("fk_factura");
+                        .Property(p => p.fk_factura)
+                        .HasColumnName("fk_factura");
 
             //Movimientos
             modelBuilder.Entity<Movimientos>()
-            .HasKey(p => p.id_movimiento);
+                        .HasKey(p => p.id_movimiento);
             modelBuilder.Entity<Movimientos>()
-            .Property(p => p.int_entrada_salida)
-            .HasColumnName("int_entrada_salida");
+                        .Property(p => p.int_entrada_salida)
+                        .HasColumnName("int_entrada_salida");
             modelBuilder.Entity<Movimientos>()
-            .Property(p => p.fk_detalle_caja)
-            .HasColumnName("fk_detalle_caja");
+                        .Property(p => p.fk_detalle_caja)
+                        .HasColumnName("fk_detalle_caja");
 
             //Relaciones entre tablas
 
@@ -84,10 +84,17 @@ namespace Panaderia.Data
                         .WithMany(g => g.Cobros)
                         .HasForeignKey(s => s.fk_movimiento);
 
-            //Un movimiento tiene muchos detalles_cajas
+            //Un cobro tiene una factura
+            modelBuilder.Entity<Cobros>()
+                        .HasOne<Facturas>(s => s.Facturas)
+                        .WithMany(g => g.Cobros)
+                        .HasForeignKey(s => s.fk_factura);
 
-
-
+            //Un movimiento tiene un detalles cajas
+            modelBuilder.Entity<Movimientos>()
+                        .HasOne<Detalles_cajas>(s => s.Detalles_cajas)
+                        .WithMany(g => g.Movimientos)
+                        .HasForeignKey(s => s.fk_detalle_caja);
         }
 
     }

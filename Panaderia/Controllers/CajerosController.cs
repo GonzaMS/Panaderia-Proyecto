@@ -36,7 +36,7 @@ namespace Panaderia.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Cajeros>> PostIngredientes(Cajeros cajeros)
+        public async Task<ActionResult<Cajeros>> PostCajeros(Cajeros cajeros)
         {
             _context.Cajeros.Add(cajeros);
             await _context.SaveChangesAsync();

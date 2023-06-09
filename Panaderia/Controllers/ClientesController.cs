@@ -10,9 +10,9 @@ namespace Panaderia.Controllers
 
     public class ClientesController : ControllerBase
     {
-        private readonly ClientesDbContext _context;
+        private readonly FacturasDbContext _context;
 
-        public ClientesController(ClientesDbContext context)
+        public ClientesController(FacturasDbContext context)
         {
             _context = context;
         }

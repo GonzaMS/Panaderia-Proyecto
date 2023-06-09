@@ -11,7 +11,6 @@ namespace Panaderia.Models
         public System.DateTime date_elaboracion { get; set; }
         public System.DateTime date_vencimiento { get; set; }
         public float fl_iva { get; set; }
-
         public virtual Productos_elaborados? Productos_Elaborados { get; set; }
     }
 }

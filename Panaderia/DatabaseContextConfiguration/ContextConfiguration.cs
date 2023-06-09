@@ -81,7 +81,7 @@ public static class ServiceExtensions
         // );
         //ClientesDbContext
 
-        services.AddDbContext<ClientesDbContext>(
+        services.AddDbContext<FacturasDbContext>(
             dbContextOptions => dbContextOptions
                 .UseMySql(connectionString, serverVersion)
                 .LogTo(Console.WriteLine, LogLevel.Information)
