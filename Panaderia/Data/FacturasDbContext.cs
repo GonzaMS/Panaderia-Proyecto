@@ -51,9 +51,6 @@ namespace Panaderia.Data
                         .Property(d => d.int_cantidad)
                         .HasColumnName("int_cantidad");
             modelBuilder.Entity<Detalles_Facturas>()
-                        .Property(d => d.fl_precio_unitario)
-                        .HasColumnName("fl_precio_unitario");
-            modelBuilder.Entity<Detalles_Facturas>()
                         .Property(d => d.fl_iva)
                         .HasColumnName("fl_iva");
             modelBuilder.Entity<Detalles_Facturas>()

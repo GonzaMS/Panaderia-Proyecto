@@ -25,6 +25,9 @@ namespace Panaderia.Data
                         .Property(p => p.str_nombre_producto)
                         .HasColumnName("str_nombre_producto");
             modelBuilder.Entity<Productos_elaborados>()
+                        .Property(p => p.fl_precio_unitario)
+                        .HasColumnName("fl_precio_unitario");
+            modelBuilder.Entity<Productos_elaborados>()
                         .Property(p => p.fk_recetas)
                         .HasColumnName("fk_recetas");
 

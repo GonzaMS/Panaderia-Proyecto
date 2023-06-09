@@ -9,8 +9,6 @@ namespace Panaderia.Models
         [Required]
         public int int_cantidad { get; set; }
         [Required]
-        public float fl_precio_unitario { get; set; }
-        [Required]
         public float fl_iva { get; set; }
         [Required]
         public int fk_factura { get; set; }
