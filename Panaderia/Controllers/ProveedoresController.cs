@@ -89,6 +89,22 @@ namespace Panaderia.Controllers
             return NoContent();
         }
 
+        //Buscar un proveedor por nombre
+        [HttpGet("Buscar/{nombre}")]
+        public async Task<ActionResult<IEnumerable<Proveedores>>> GetProveedores(string nombre)
+        {
+            var proveedores = await _context.Proveedores
+                .Where(p => p.str_nombre_proveedor.Contains(nombre))
+                .ToListAsync();
+
+            if (proveedores == null)
+            {
+                return NotFound();
+            }
+
+            return proveedores;
+        }
+
         private bool ProveedorExists(int id)
         {
             return _context.Proveedores.Any(e => e.id_proveedor == id);

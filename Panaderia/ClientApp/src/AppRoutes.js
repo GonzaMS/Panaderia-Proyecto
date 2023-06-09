@@ -1,6 +1,5 @@
 import { Home } from "./components/Home";
 import { Proveedores } from "./components/Proveedores";
-import { Recetas } from "./components/Recetas";
 import { ProductosElaborados } from "./components/ProductosElaborados";
 import { OrdenesProduccion } from "./components/OrdenesProduccion";
 import { Cajeros } from "./components/Cajeros";
@@ -11,12 +10,8 @@ const AppRoutes = [
     element: <Home />,
   },
   {
-    path: "/proveedores",
+    path: "/Proveedores",
     element: <Proveedores />,
-  },
-  {
-    path: "/recetas",
-    element: <Recetas />,
   },
   {
     path: "/ProductosElaborados",
@@ -27,7 +22,7 @@ const AppRoutes = [
     element: <OrdenesProduccion />,
   },
   {
-    path: "/cajeros",
+    path: "/Cajeros",
     element: <Cajeros />,
   },
 ];

@@ -5,11 +5,11 @@ export class OrdenesProduccion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ordenes: [],
-      productos_elaborados: [],
-      cantidad: "",
-      producto_elaborado: "",
-      filtroEstado: "",
+      ordenes: [], // Lista de órdenes de producción
+      productos_elaborados: [], // Lista de productos elaborados
+      cantidad: "", // Cantidad de producto a elaborar
+      producto_elaborado: "", // ID del producto elaborado
+      filtroEstado: "", // Estado de la orden de producción
     };
     this.handleUpdateOrden = this.handleUpdateOrden.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -19,31 +19,37 @@ export class OrdenesProduccion extends Component {
 
   componentDidMount() {
     this.fetchData();
-    this.fetchProductosElaborados();
   }
 
-  async fetchData() {
-    try {
-      const response = await axios.get(
-        "https://localhost:7089/api/ordenes_produccion"
-      );
-      const data = response.data;
-      this.setState({ ordenes: data });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  fetchData() {
+    try{
+      axios
+        .get("https://localhost:7089/api/ordenes_produccion")
+        .then((response) => {
+          const data = response.data;
+          this.setState({ ordenes: data });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error);
+        });
 
-  async fetchProductosElaborados() {
-    try {
-      const response = await axios.get(
-        "https://localhost:7089/api/productos_elaborados"
-      );
-      const data = response.data;
-      this.setState({ productos_elaborados: data });
-    } catch (error) {
+      axios
+      .get("https://localhost:7089/api/productos_elaborados")
+      .then((response) => {
+        const data = response.data;
+        this.setState({ productos_elaborados: data });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+
+    }catch(error){
+      alert(error); 
       console.log(error);
     }
+
   }
 
   async handleUpdateOrden(id, newState) {
@@ -64,6 +70,7 @@ export class OrdenesProduccion extends Component {
       );
       this.fetchData();
     } catch (error) {
+      alert(error)
       console.log(error);
     }
   }
@@ -88,20 +95,20 @@ export class OrdenesProduccion extends Component {
       this.setState({ cantidad: "", producto_elaborado: "" });
       this.fetchData();
     } catch (error) {
+      alert(error)
       console.log(error);
     }
   }
 
   handleInputChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleFiltroEstadoChange(event) {
-    const { value } = event.target;
-    this.setState({ filtroEstado: value });
+    this.setState({ filtroEstado: event.target.value })
   }
 
+  // Obtener el nombre del producto elaborado según su ID
   getNombreProductoElaborado(id) {
     const { productos_elaborados } = this.state;
     const producto = productos_elaborados.find(
@@ -110,6 +117,7 @@ export class OrdenesProduccion extends Component {
     return producto ? producto.str_nombre_producto : "";
   }
 
+  // Filtrar las órdenes de producción según el estado seleccionado
   filtrarPorEstado(ordenes, filtroEstado) {
     if (filtroEstado === "") {
       return ordenes;

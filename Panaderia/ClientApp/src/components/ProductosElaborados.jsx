@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import {
-  Table,
-  Container,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  FormGroup,
-  Label,
-  Input,
-  Button,
+  Table,Container,Modal,ModalHeader,ModalBody,ModalFooter,FormGroup,Label,Input,Button,
 } from "reactstrap";
 
 export class ProductosElaborados extends Component {
@@ -19,12 +10,13 @@ export class ProductosElaborados extends Component {
     recetas: [],
     detallesRecetas: [],
     ingredientes: [],
-    modalOpen: false, // state to control modal visibility
-    modalAddOpen: false, // state to control add modal visibility
-    selectedReceta: null, // state to store the selected receta
-    editProductId: null, // state to store the ID of the product being edited
-    newProductName: "", // state to store the new product name
-    selectedRecetaId: "", // state to store the selected receta ID
+    modalOpen: false, // Estado para controlar la visibilidad del modal
+    modalAddOpen: false, // Estado para controlar la visibilidad del modal de agregar
+    selectedReceta: null, // Estado para almacenar la receta seleccionada
+    editProductId: null, // Estado para almacenar el ID del producto a editar
+    newProductName: "", // Estado para almacenar el nombre del nuevo producto
+    selectedRecetaId: "", // Estado para almacenar el ID de la receta seleccionada
+    productoPrecio: "", // Estado para almacenar el precio del producto
   };
 
   componentDidMount() {
@@ -32,6 +24,8 @@ export class ProductosElaborados extends Component {
   }
 
   fetchData() {
+    try{
+
     axios
       .get("https://localhost:7089/api/productos_elaborados")
       .then((response) => {
@@ -39,6 +33,7 @@ export class ProductosElaborados extends Component {
         this.setState({ productosElaborados });
       })
       .catch((error) => {
+        alert("Error al obtener los productos elaborados")
         console.error("Error al obtener los productos elaborados:", error);
       });
 
@@ -49,6 +44,7 @@ export class ProductosElaborados extends Component {
         this.setState({ recetas });
       })
       .catch((error) => {
+        alert("Error al obtener las recetas")
         console.error("Error al obtener las recetas:", error);
       });
 
@@ -59,6 +55,7 @@ export class ProductosElaborados extends Component {
         this.setState({ detallesRecetas });
       })
       .catch((error) => {
+        alert("Error al obtener los detalles de las recetas")
         console.error("Error al obtener los detalles de las recetas:", error);
       });
 
@@ -69,8 +66,13 @@ export class ProductosElaborados extends Component {
         this.setState({ ingredientes });
       })
       .catch((error) => {
+        alert("Error al obtener los ingredientes")
         console.error("Error al obtener los ingredientes:", error);
       });
+    }catch(error){
+      alert("Error al obtener los datos")
+      console.error("Error al obtener los datos:", error);
+    }
 
   }
 
@@ -87,6 +89,18 @@ export class ProductosElaborados extends Component {
     }));
   };
 
+  handleProductNameChange = (event) => {
+    this.setState({ newProductName: event.target.value });
+  };
+
+  handleProductPrice =(event) => {
+    this.setState({productoPrecio: event.target.value})
+  }
+
+  handleRecetaChange = (event) => {
+    this.setState({ selectedRecetaId: event.target.value });
+  };
+
   verReceta = (recetaId) => {
     axios
       .get(`https://localhost:7089/api/recetas/${recetaId}`)
@@ -99,23 +113,19 @@ export class ProductosElaborados extends Component {
         this.toggleModal();
       })
       .catch((error) => {
-        console.error("Error al obtener los detalles de la receta:", error);
+        alert("Error al obtener la receta");
+        console.error("Error al obtener la receta:", error);
       });
   };
 
-  handleProductNameChange = (event) => {
-    this.setState({ newProductName: event.target.value });
-  };
 
-  handleRecetaChange = (event) => {
-    this.setState({ selectedRecetaId: event.target.value });
-  };
-
+  //Funcion para agregar un producto elaborado
   addProductoElaborado = () => {
-    const { newProductName, selectedRecetaId } = this.state;
+    const { newProductName, selectedRecetaId, productoPrecio } = this.state;
     const newProduct = {
       str_nombre_producto: newProductName,
       fk_recetas: parseInt(selectedRecetaId),
+      fl_precio_unitario: parseFloat(productoPrecio),
     };
 
     axios
@@ -123,13 +133,15 @@ export class ProductosElaborados extends Component {
       .then(() => {
         this.toggleAddModal();
         this.fetchData();
-        this.setState({ newProductName: "", selectedRecetaId: "" });
+        this.setState({ newProductName: "", selectedRecetaId: "" , productoPrecio: ""});
       })
       .catch((error) => {
+        alert("Error al agregar el producto elaborado");
         console.error("Error al agregar el producto elaborado:", error);
       });
   };
 
+  //Funcion para eliminar un producto elaborado
   deleteProductoElaborado = (productId) => {
     axios
       .delete(`https://localhost:7089/api/productos_elaborados/${productId}`)
@@ -138,10 +150,13 @@ export class ProductosElaborados extends Component {
         this.setState({ editModalOpen: false });
       })
       .catch((error) => {
+        alert("Error al eliminar el producto elaborado");
         console.error("Error al eliminar el producto elaborado:", error);
       });
   };
 
+  
+  //Funcion para filtrar por nombre de producto
   filtrarPorProducto = (nombreProducto) => {
     if (nombreProducto.trim() === "") {
       this.fetchData();
@@ -155,6 +170,7 @@ export class ProductosElaborados extends Component {
           this.setState({ productosElaborados });
         })
         .catch((error) => {
+          alert("Error al obtener los productos elaborados");
           console.error("Error al obtener los productos elaborados:", error);
         });
     }
@@ -181,7 +197,6 @@ export class ProductosElaborados extends Component {
     console.log("detalles:", detalles);
     return detalles;
   };
-  
 
   render() {
     const {
@@ -192,6 +207,7 @@ export class ProductosElaborados extends Component {
       modalAddOpen,
       newProductName,
       selectedRecetaId,
+      productoPrecio
     } = this.state;
 
     return (
@@ -244,6 +260,7 @@ export class ProductosElaborados extends Component {
             <thead>
               <tr>
                 <th>Nombre</th>
+                <th>Precio Unitario</th>
                 <th>Ver Receta</th>
                 <th>Acciones</th>
               </tr>
@@ -252,6 +269,7 @@ export class ProductosElaborados extends Component {
               {productosElaborados.map((producto) => (
                 <tr key={producto.id_producto_elaborado}>
                   <td>{producto.str_nombre_producto}</td>
+                  <td>{producto.fl_precio_unitario}</td>
                   <td>
                     <button
                       type="button"
@@ -312,7 +330,7 @@ export class ProductosElaborados extends Component {
                 type="text"
                 id="newProductName"
                 value={newProductName}
-                onChange={this.handleProductNameChange} // Add onChange handler
+                onChange={this.handleProductNameChange}
               />
             </FormGroup>
             <FormGroup>
@@ -321,7 +339,7 @@ export class ProductosElaborados extends Component {
                 type="select"
                 id="selectReceta"
                 value={selectedRecetaId}
-                onChange={this.handleRecetaChange} // Add onChange handler
+                onChange={this.handleRecetaChange}
               >
                 <option value="">Seleccione una receta</option>
                 {recetas.map((receta) => (
@@ -331,6 +349,16 @@ export class ProductosElaborados extends Component {
                 ))}
               </Input>
             </FormGroup>
+            <FormGroup>
+          <Label for="productPrice">Precio del Producto</Label>
+          <Input
+            type="number"
+            name="productPrice"
+            id="productPrice"
+            value={productoPrecio}
+            onChange={this.handleProductPrice}
+          />
+        </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button
