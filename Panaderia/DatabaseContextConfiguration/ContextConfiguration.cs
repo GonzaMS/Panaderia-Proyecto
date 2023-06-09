@@ -71,16 +71,6 @@ public static class ServiceExtensions
                 .EnableDetailedErrors()
         );
 
-        // MovimientosDbContext
-        // services.AddDbContext<MovimientosDbContext>(
-        //     dbContextOptions => dbContextOptions
-        //         .UseMySql(connectionString, serverVersion)
-        //         .LogTo(Console.WriteLine, LogLevel.Information)
-        //         .EnableSensitiveDataLogging()
-        //         .EnableDetailedErrors()
-        // );
-        //ClientesDbContext
-
         services.AddDbContext<FacturasDbContext>(
             dbContextOptions => dbContextOptions
                 .UseMySql(connectionString, serverVersion)
