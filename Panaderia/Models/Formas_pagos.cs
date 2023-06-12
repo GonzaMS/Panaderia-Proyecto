@@ -7,7 +7,8 @@ namespace Panaderia.Models
         [Key]
         public int id_forma_pago { get; set; }
         [Required]
-        public String str_formas { get; set; }
+        public string? str_formas { get; set; }
+
         public virtual ICollection<Cobros>? Cobros { get; set; }
     }
 }

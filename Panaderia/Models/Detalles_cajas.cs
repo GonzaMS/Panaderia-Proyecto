@@ -9,7 +9,7 @@ namespace Panaderia.Models
         [Required]
         public int fk_caja { get; set; }
         [Required]
-        public string fl_monto_caja { get; set; }
+        public string? fl_monto_caja { get; set; }
         [Required]
         public System.DateTime date_fecha_del_dia { get; set; }
         [Required]
@@ -18,6 +18,7 @@ namespace Panaderia.Models
         public System.DateTime date_hora_entrada { get; set; }
         [Required]
         public System.DateTime date_hora_salida { get; set; }
+
         public virtual Cajas? Cajas { get; set; }
         public virtual Cajeros? Cajeros { get; set; }
         public virtual Arqueos? Arqueos { get; set; }

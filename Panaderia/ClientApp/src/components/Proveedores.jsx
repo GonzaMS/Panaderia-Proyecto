@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import {
-    Table,Container,Modal,ModalHeader,ModalBody,ModalFooter,FormGroup,Label,Input,Button,
+    Table,Container,Modal,ModalHeader,ModalBody,ModalFooter,FormGroup
   } from "reactstrap";
-import './Proveedores.css';
+import '../css/Proveedores.css';
 
 export class Proveedores extends Component {
     state = {

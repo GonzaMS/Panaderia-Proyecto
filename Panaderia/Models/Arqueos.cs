@@ -14,7 +14,8 @@ namespace Panaderia.Models
         [Required]
         public int fk_cajero { get; set; }
         [Required]
-        public string str_descripcion { get; set; }
+        public string? str_descripcion { get; set; }
+
         public virtual ICollection<Detalles_arqueos>? Detalles_arqueos { get; set; }
         public virtual Cajeros? Cajero { get; set; }
         public virtual Detalles_cajas? Detalles_cajas { get; set; }

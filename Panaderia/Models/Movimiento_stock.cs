@@ -14,7 +14,9 @@ namespace Panaderia.Models
         public int fk_tipo_movimiento { get; set; }
         [Required]
         public int int_cantidad { get; set; }
+        [Required]
         public System.DateTime date_fecha_ingreso { get; set; }
+
         public virtual Productos_elaborados? Productos_elaborados { get; set; }
         public virtual Stocks? Stocks { get; set; }
         public virtual Tipos_movimientos? Tipos_movimientos { get; set; }

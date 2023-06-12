@@ -14,6 +14,7 @@ namespace Panaderia.Models
         public int fk_factura { get; set; }
         [Required]
         public int fk_producto { get; set; }
+
         public virtual Facturas? Facturas { get; set; }
         public virtual Productos_elaborados? Productos_elaborados { get; set; }
 

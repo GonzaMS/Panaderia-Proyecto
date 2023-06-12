@@ -6,8 +6,10 @@ namespace Panaderia.Models
     {
         [Key]
         public int id_billete { get; set; }
-        public String str_numero_divisa { get; set; }
-        public String str_tamanho_efectivo { get; set; }
+        [Required]
+        public String? str_numero_divisa { get; set; }
+        [Required]
+        public String? str_tamanho_efectivo { get; set; }
 
         public virtual ICollection<Detalles_efectivos>? Detalles_efectivos { get; set; }
     }

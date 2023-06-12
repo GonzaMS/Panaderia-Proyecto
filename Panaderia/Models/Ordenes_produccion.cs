@@ -12,6 +12,7 @@ namespace Panaderia.Models
         public int fk_producto_elaborado { get; set; }
         [Required]
         public Boolean bool_estado_orden { get; set; }
+
         public virtual Productos_elaborados? Productos_elaborados { get; set; }
     }
 }

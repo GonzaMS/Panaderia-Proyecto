@@ -14,7 +14,7 @@ namespace Panaderia.Models
         public int fk_stock { get; set; }
         [Required]
         public float fl_cantidad { get; set; }
-        [Required]
+
         public virtual Stocks? Stocks { get; set; }
         public virtual Productos_elaborados? Productos_elaborados { get; set; }
 

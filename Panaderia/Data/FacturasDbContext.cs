@@ -73,6 +73,12 @@ namespace Panaderia.Data
             modelBuilder.Entity<Clientes>()
                         .Property(c => c.str_ci_cliente)
                         .HasColumnName("str_ci_cliente");
+            modelBuilder.Entity<Clientes>()
+                        .Property(c => c.str_telefono_cliente)
+                        .HasColumnName("str_telefono_cliente");
+            modelBuilder.Entity<Clientes>()
+                        .Property(c => c.str_direccion_cliente)
+                        .HasColumnName("str_direccion_cliente");
 
 
             //Relaciones entre tablas
