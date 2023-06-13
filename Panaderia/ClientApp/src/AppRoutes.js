@@ -1,4 +1,3 @@
-//import { Home } from "./components/Home";
 import { Proveedores } from "./components/Proveedores";
 import { ProductosElaborados } from "./components/ProductosElaborados";
 import { OrdenesProduccion } from "./components/OrdenesProduccion";
@@ -7,8 +6,8 @@ import { Recetas } from "./components/Recetas";
 import { Clientes } from "./components/Clientes";
 import { Compras } from "./components/Compras";
 import { Ventas } from "./components/Ventas";
-import { FacturaVenta } from "./components/FacturaVenta";
 import { FacturaCompra } from "./components/FacturaCompra";
+//import { Home } from "./components/Home";
 
 const AppRoutes = [
   //{

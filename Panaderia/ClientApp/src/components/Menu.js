@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import React, { useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
 import logImage from "../img/logo.png";
 import "../css/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,8 +15,6 @@ import {
 } from "react-icons/bs";
 
 export const Menu = () => {
-  const { theme, handleTheme } = useContext(ThemeContext);
-
   return (
     <div
       style={{ boxShadow: "3px 3px 6px rgba(0,0,0,1.5)" }}

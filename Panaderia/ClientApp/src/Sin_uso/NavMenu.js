@@ -1,3 +1,4 @@
+//Sin uso
 import React, { Component } from "react";
 import {
   Collapse,
