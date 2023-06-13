@@ -6,6 +6,9 @@ import { Cajeros } from "./components/Cajeros";
 import { Recetas } from "./components/Recetas";
 import { Clientes } from "./components/Clientes";
 import { Compras } from "./components/Compras";
+import { Ventas } from "./components/Ventas";
+import { FacturaVenta } from "./components/FacturaVenta";
+import { FacturaCompra } from "./components/FacturaCompra";
 
 const AppRoutes = [
   //{
@@ -39,6 +42,14 @@ const AppRoutes = [
   {
     path: "/Compras",
     element: <Compras />,
+  },
+  {
+    path: "/Ventas",
+    element: <Ventas />,
+  },
+  {
+    path: "/FacturaCompra",
+    element: <FacturaCompra />,
   },
 ];
 

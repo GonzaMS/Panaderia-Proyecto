@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from "react";
-import "../css/Components.css"
+import "../css/custom.css"
 
 import {
     Table,

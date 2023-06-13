@@ -3,7 +3,7 @@ import axios from "axios";
 import {
     Table,Container,Modal,ModalHeader,ModalBody,ModalFooter,FormGroup
   } from "reactstrap";
-import '../css/Proveedores.css';
+import '../css/custom.css';
 
 export class Proveedores extends Component {
     state = {

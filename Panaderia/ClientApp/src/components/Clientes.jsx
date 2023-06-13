@@ -1,4 +1,4 @@
-import "../css/Components.css";
+import "../css/custom.css";
 import React, { Component } from "react";
 import axios from "axios";
 

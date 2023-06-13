@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "../css/custom.css";
 import {
   Table,Container,Modal,ModalHeader,ModalBody,ModalFooter,FormGroup,Label,Input,Button,
 } from "reactstrap";
@@ -297,6 +298,7 @@ export class ProductosElaborados extends Component {
             </tbody>
           </Table>
         </Container>
+        
         {/* Modal */}
         <Modal isOpen={modalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Receta</ModalHeader>

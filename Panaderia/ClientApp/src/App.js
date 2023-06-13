@@ -3,8 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
 import { Layout } from "./components/Layout";
 import { ThemeProvider } from "./context/ThemeContext";
-import "./custom.css";
+import "./css/styles.css";
 import { Menu } from "./components/Menu";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class App extends Component {
   static displayName = App.name;

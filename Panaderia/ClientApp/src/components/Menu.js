@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import React, { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import logImage from "../img/logo.png";
-import "../css/Menu.css";
+import "../css/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import {
   BsInboxesFill,
   BsFillCartFill,

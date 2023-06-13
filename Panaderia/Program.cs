@@ -41,8 +41,8 @@ namespace Panaderia.Main
             var fechaTrigger = new Triggers(connection);
             if (fechaTrigger.TriggerExists("TR_Date_Compras") == false) fechaTrigger.DateOnInsertCompras();
 
-            var UpdateTotalPrice = new Triggers(connection);
-            if (UpdateTotalPrice.TriggerExists("TR_Update_Total_Price") == false) UpdateTotalPrice.UpdateTotalPrice();
+            // var UpdateTotalPrice = new Triggers(connection);
+            // if (UpdateTotalPrice.TriggerExists("TR_Update_Total_Price") == false) UpdateTotalPrice.UpdateTotalPrice();
 
         }
 

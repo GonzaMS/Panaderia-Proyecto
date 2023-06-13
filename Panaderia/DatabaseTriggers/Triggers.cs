@@ -24,6 +24,7 @@ public class Triggers
         ", commandType: CommandType.Text);
     }
 
+    /*
     public void UpdateTotalPrice()
     {
         _connection.Execute(@"
@@ -41,19 +42,20 @@ public class Triggers
         END;
     ", commandType: CommandType.Text);
     }
-
+*/
 
     public void DateOnInsertCompras()
     {
         _connection.Execute(@"
-            CREATE TRIGGER TR_Date_Compras
-            BEFORE INSERT ON Compras
-            FOR EACH ROW
-            BEGIN
-                SET NEW.date_compra = CURDATE();
-            END;
-        ", commandType: CommandType.Text);
+        CREATE TRIGGER TR_Date_Compras
+        BEFORE INSERT ON Compras
+        FOR EACH ROW
+        BEGIN
+            SET NEW.date_compra = DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+        END;
+    ", commandType: CommandType.Text);
     }
+
 
     public Boolean TriggerExists(string triggerName)
     {

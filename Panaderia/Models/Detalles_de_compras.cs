@@ -17,7 +17,7 @@ namespace Panaderia.Models
         [Required]
         public int int_cantidad { get; set; }
         [Required]
-        public int fl_iva { get; set; }
+        public float fl_iva { get; set; }
 
         public virtual Compras? Compras { get; set; }
         public virtual Ingredientes? Ingredientes { get; set; }

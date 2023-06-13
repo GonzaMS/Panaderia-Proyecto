@@ -89,6 +89,20 @@ namespace Panaderia.Controllers
             return compras;
         }
 
+        //Buscar por fecha
+        [HttpGet("fecha/{fecha}")]
+        public async Task<ActionResult<IEnumerable<Compras>>> GetComprasFecha(DateTime fecha)
+        {
+            var compras = await _context.Compras.Where(p => p.date_compra == fecha).ToListAsync();
+
+            if (compras == null)
+            {
+                return NotFound();
+            }
+
+            return compras;
+        }
+
         private bool ComprasExists(int id)
         {
             return _context.Compras.Any(e => e.id_compra == id);

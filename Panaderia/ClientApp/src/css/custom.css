@@ -283,6 +283,12 @@ p2 {
 }
 
 
+.facturaAgg {
+    margin-left: 950px;
+    margin-top: 30px;
+}
+
+
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -342,4 +348,47 @@ p2 {
 
 .cantidadP-label {
     margin-left: 200px;
+}
+
+.fecha-actual {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+
+.form-group.row .form-control {
+    width: 200%;
+    margin-left: 55px;
+    margin-top: 20px;
+}
+
+.form-group label {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.form-group .custom-input {
+    width: 235px;
+    margin-left: 100px;
+}
+
+.nameCliente {
+    margin-left: 160px;
+}
+
+.client-input {
+    margin-left: 230px;
+    margin-top: -30px;
+    width: 300px !important;
+}
+
+/* Estilos para el input del proveedor */
+.proveedor-input {
+    margin-top: 15px;
+    margin-right: -40px;
+    width: 300px;
+    /* Ajusta el ancho aquí según tus preferencias */
 }
