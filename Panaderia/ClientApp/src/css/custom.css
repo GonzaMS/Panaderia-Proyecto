@@ -1,11 +1,10 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 100%;
     height: 950px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: white;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 1.5);
 }
 
 .loader {
@@ -391,4 +390,34 @@ p2 {
     margin-right: -40px;
     width: 300px;
     /* Ajusta el ancho aquí según tus preferencias */
+}
+
+
+/*Ordenes Produccion*/
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
 }

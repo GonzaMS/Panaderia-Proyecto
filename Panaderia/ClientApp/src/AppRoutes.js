@@ -7,6 +7,7 @@ import { Clientes } from "./components/Clientes";
 import { Compras } from "./components/Compras";
 import { Ventas } from "./components/Ventas";
 import { FacturaCompra } from "./components/FacturaCompra";
+import { StockIngrediente } from "./components/StockIngrediente";
 //import { Home } from "./components/Home";
 
 const AppRoutes = [
@@ -19,6 +20,18 @@ const AppRoutes = [
     element: <Proveedores />,
   },
   {
+    path: "/Cajeros",
+    element: <Cajeros />,
+  },
+  {
+    path: "/Clientes",
+    element: <Clientes />,
+  },
+  {
+    path: "/Recetas",
+    element: <Recetas />,
+  },
+  {
     path: "/ProductosElaborados",
     element: <ProductosElaborados />,
   },
@@ -27,28 +40,20 @@ const AppRoutes = [
     element: <OrdenesProduccion />,
   },
   {
-    path: "/Cajeros",
-    element: <Cajeros />,
-  },
-  {
-    path: "/Recetas",
-    element: <Recetas />,
-  },
-  {
-    path: "/Clientes",
-    element: <Clientes />,
-  },
-  {
     path: "/Compras",
     element: <Compras />,
+  },
+  {
+    path: "/FacturaCompra",
+    element: <FacturaCompra />,
   },
   {
     path: "/Ventas",
     element: <Ventas />,
   },
   {
-    path: "/FacturaCompra",
-    element: <FacturaCompra />,
+    path: "/StockIngrediente",
+    element: <StockIngrediente />,
   },
 ];
 

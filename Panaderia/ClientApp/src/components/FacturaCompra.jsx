@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../css/custom.css";
-import axios from 'axios';
+import axios from "axios";
 
 export const FacturaCompra = () => {
-  const [cliente, setCliente] = useState('');
-  const [ruc, setRuc] = useState('');
-  const [ci, setCI] = useState('');
-  const [idCliente, setIdCliente] = useState('');
-  const [proveedorSeleccionado, setProveedorSeleccionado] = useState('');
-  const [productoSeleccionado, setProductoSeleccionado] = useState('');
-  const [cantidad, setCantidad] = useState('');
-  const [precioUnitario, setPrecioUnitario] = useState('');
-  const [impuesto, setImpuesto] = useState('');
+  const [cliente, setCliente] = useState("");
+  const [ruc, setRuc] = useState("");
+  const [ci, setCI] = useState("");
+  const [idCliente, setIdCliente] = useState("");
+  const [proveedorSeleccionado, setProveedorSeleccionado] = useState("");
+  const [productoSeleccionado, setProductoSeleccionado] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [precioUnitario, setPrecioUnitario] = useState("");
+  const [impuesto, setImpuesto] = useState("");
 
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [datosProductosElaborados, setDatosProductosElaborados] = useState([]);
   const [datosProveedores, setDatosProveedores] = useState([]);
-  const [fechaActual, setFechaActual] = useState('');
+  const [fechaActual, setFechaActual] = useState("");
 
   useEffect(() => {
     obtenerProductosElaborados();
@@ -27,14 +27,18 @@ export const FacturaCompra = () => {
 
   const obtenerProductosElaborados = async () => {
     try {
-      const response = await axios.get('https://localhost:7089/api/productos_elaborados');
+      const response = await axios.get(
+        "https://localhost:7089/api/productos_elaborados"
+      );
       const productosElaborados = response.data;
 
-      const datosProductosElaborados = productosElaborados.map(productoElaborado => ({
-        id: productoElaborado.id_producto_elaborado,
-        nombre: productoElaborado.str_nombre_producto,
-        precioUnitario: productoElaborado.fl_precio_unitario
-      }));
+      const datosProductosElaborados = productosElaborados.map(
+        (productoElaborado) => ({
+          id: productoElaborado.id_producto_elaborado,
+          nombre: productoElaborado.str_nombre_producto,
+          precioUnitario: productoElaborado.fl_precio_unitario,
+        })
+      );
 
       setDatosProductosElaborados(datosProductosElaborados);
 
@@ -46,12 +50,14 @@ export const FacturaCompra = () => {
 
   const obtenerProveedores = async () => {
     try {
-      const response = await axios.get('https://localhost:7089/api/proveedores');
+      const response = await axios.get(
+        "https://localhost:7089/api/proveedores"
+      );
       const proveedores = response.data;
 
-      const datosProveedores = proveedores.map(proveedor => ({
+      const datosProveedores = proveedores.map((proveedor) => ({
         id: proveedor.id_proveedor,
-        nombre: proveedor.str_nombre_proveedor
+        nombre: proveedor.str_nombre_proveedor,
       }));
 
       setDatosProveedores(datosProveedores);
@@ -68,7 +74,9 @@ export const FacturaCompra = () => {
       const year = fechaActual.getFullYear();
       const month = fechaActual.getMonth() + 1;
       const day = fechaActual.getDate();
-      const fechaFormateada = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+      const fechaFormateada = `${year}-${month
+        .toString()
+        .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
       return fechaFormateada;
     };
 
@@ -83,7 +91,9 @@ export const FacturaCompra = () => {
   const guardarFactura = async () => {
     try {
       if (!idCliente) {
-        console.log('No se encontró ningún cliente con el RUC/CI proporcionado');
+        console.log(
+          "No se encontró ningún cliente con el RUC/CI proporcionado"
+        );
         return;
       }
 
@@ -98,10 +108,13 @@ export const FacturaCompra = () => {
         fk_cliente: idCliente,
       };
 
-      const facturasResponse = await axios.post('https://localhost:7089/api/facturas', factura);
+      const facturasResponse = await axios.post(
+        "https://localhost:7089/api/facturas",
+        factura
+      );
       const facturaGuardada = facturasResponse.data;
 
-      console.log('Factura guardada:', facturaGuardada);
+      console.log("Factura guardada:", facturaGuardada);
     } catch (error) {
       console.error(error);
     }
@@ -116,16 +129,20 @@ export const FacturaCompra = () => {
     const year = fechaActual.getFullYear();
     const month = fechaActual.getMonth() + 1;
     const day = fechaActual.getDate();
-    const fechaFormateada = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    const fechaFormateada = `${year}-${month.toString().padStart(2, "0")}-${day
+      .toString()
+      .padStart(2, "0")}`;
     return fechaFormateada;
   };
 
   const buscarPrecioProducto = (nombreProducto) => {
-    const productoEncontrado = datosProductosElaborados.find(producto => producto.nombre === nombreProducto);
+    const productoEncontrado = datosProductosElaborados.find(
+      (producto) => producto.nombre === nombreProducto
+    );
     if (productoEncontrado) {
       setPrecioUnitario(productoEncontrado.precioUnitario.toString());
     } else {
-      setPrecioUnitario('');
+      setPrecioUnitario("");
     }
   };
 
@@ -141,11 +158,11 @@ export const FacturaCompra = () => {
     setItems([...items, nuevoItem]);
 
     // Restablecer los valores de entrada a su estado inicial
-    setProveedorSeleccionado('');
-    setProductoSeleccionado('');
-    setCantidad('');
-    setPrecioUnitario('');
-    setImpuesto('');
+    setProveedorSeleccionado("");
+    setProductoSeleccionado("");
+    setCantidad("");
+    setPrecioUnitario("");
+    setImpuesto("");
   };
 
   return (
@@ -154,56 +171,64 @@ export const FacturaCompra = () => {
         <h1>Nueva Compra</h1>
         <div className="fecha-actual">{fechaActual}</div>
         <div>
-  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-    <div className="row">
-      <div className="col-md-6">
-        <div className="form-group row">
-          <label className="col-sm-3 proveedor-label" htmlFor="proveedorSelect">Proveedor:</label>
-          <div className="col-sm-9">
-            <select
-              className="form-control proveedor-input"
-              id="proveedorSelect"
-              value={proveedorSeleccionado}
-              onChange={e => {
-                setProveedorSeleccionado(e.target.value);
-              }}
-            >
-              <option value="">Seleccionar proveedor</option>
-              {datosProveedores.map(proveedor => (
-                <option
-                  key={proveedor.id}
-                  value={proveedor.nombre}
-                >
-                  {proveedor.nombre}
-                </option>
-              ))}
-            </select>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label
+                    className="col-sm-3 proveedor-label"
+                    htmlFor="proveedorSelect"
+                  >
+                    Proveedor:
+                  </label>
+                  <div className="col-sm-9">
+                    <select
+                      className="form-control proveedor-input"
+                      id="proveedorSelect"
+                      value={proveedorSeleccionado}
+                      onChange={(e) => {
+                        setProveedorSeleccionado(e.target.value);
+                      }}
+                    >
+                      <option value="">Seleccionar proveedor</option>
+                      {datosProveedores.map((proveedor) => (
+                        <option key={proveedor.id} value={proveedor.nombre}>
+                          {proveedor.nombre}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
         <br></br>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group row">
-                  <label className="col-sm-3 col-form-label" htmlFor="productoSelect" style={{ textAlign: 'right' }}>Producto:</label>
+                  <label
+                    className="col-sm-3 col-form-label"
+                    htmlFor="productoSelect"
+                    style={{ textAlign: "right" }}
+                  >
+                    Producto:
+                  </label>
                   <div className="col-sm-9">
                     <select
                       className="form-control"
                       id="productoSelect"
                       value={productoSeleccionado}
-                      onChange={e => {
+                      onChange={(e) => {
                         setProductoSeleccionado(e.target.value);
                         buscarPrecioProducto(e.target.value);
                       }}
                     >
                       <option value="">Seleccionar producto</option>
-                      {datosProductosElaborados.map(productoElaborado => (
+                      {datosProductosElaborados.map((productoElaborado) => (
                         <option
                           key={productoElaborado.id}
                           value={productoElaborado.nombre}
@@ -221,14 +246,26 @@ export const FacturaCompra = () => {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className='cantidadP-label'>Cantidad:</label>
-                  <input type="text" style={{ width: '300px' }} className="form-control cantidadP" value={cantidad} onChange={e => setCantidad(e.target.value)} />
+                  <label className="cantidadP-label">Cantidad:</label>
+                  <input
+                    type="text"
+                    style={{ width: "300px" }}
+                    className="form-control cantidadP"
+                    value={cantidad}
+                    onChange={(e) => setCantidad(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <button type="button" className="btn btn-outline-success facturaAgg" onClick={handleAgregarItem}>Agregar</button>
+        <button
+          type="button"
+          className="btn btn-outline-success facturaAgg"
+          onClick={handleAgregarItem}
+        >
+          Agregar
+        </button>
         <br></br>
         <table id="customers">
           <thead>
@@ -250,12 +287,24 @@ export const FacturaCompra = () => {
         </table>
         <br></br>
         <div>
-          <label className='totalP-label'>Total:</label>
-          <input type="text" style={{ width: '150px' }} className="form-control totalP" value={total} readOnly />
+          <label className="totalP-label">Total:</label>
+          <input
+            type="text"
+            style={{ width: "150px" }}
+            className="form-control totalP"
+            value={total}
+            readOnly
+          />
         </div>
         <div className="col-sm-12 col-md-4">
-          <Link to='' className="custom-link">
-            <button type="button" className="btn btn-outline-success facturaAgg" onClick={guardarFactura}>Guardar</button>
+          <Link to="" className="custom-link">
+            <button
+              type="button"
+              className="btn btn-outline-success facturaAgg"
+              onClick={guardarFactura}
+            >
+              Guardar
+            </button>
           </Link>
         </div>
       </div>

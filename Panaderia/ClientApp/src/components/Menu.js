@@ -39,11 +39,11 @@ export const Menu = () => {
         <BsClipboard2HeartFill /> Recetas
       </Link>
       <Link
-        to="/Ingredientes"
+        to="/StockIngrediente"
         className="btn btn-outline-danger"
         style={{ color: "black", border: "none", fontWeight: "bold" }}
       >
-        <BsUiChecks /> Stock de Materias Primas
+        <BsUiChecks /> Stock de Ingredientes
       </Link>
       <Link
         to="/Compras"
