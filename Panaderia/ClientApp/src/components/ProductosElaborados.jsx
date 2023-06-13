@@ -260,8 +260,8 @@ export class ProductosElaborados extends Component {
           <Table>
             <thead>
               <tr>
-                <th>Nombre</th>
                 <th>Precio Unitario</th>
+                <th>Nombre</th>
                 <th>Ver Receta</th>
                 <th>Acciones</th>
               </tr>
@@ -269,8 +269,8 @@ export class ProductosElaborados extends Component {
             <tbody>
               {productosElaborados.map((producto) => (
                 <tr key={producto.id_producto_elaborado}>
-                  <td>{producto.str_nombre_producto}</td>
                   <td>{producto.fl_precio_unitario}</td>
+                  <td>{producto.str_nombre_producto}</td>
                   <td>
                     <button
                       type="button"
