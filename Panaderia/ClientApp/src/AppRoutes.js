@@ -5,6 +5,7 @@ import { OrdenesProduccion } from "./components/OrdenesProduccion";
 import { Cajeros } from "./components/Cajeros";
 import { Recetas } from "./components/Recetas";
 import { Clientes } from "./components/Clientes";
+import { Compras } from "./components/Compras";
 
 const AppRoutes = [
   //{
@@ -34,6 +35,10 @@ const AppRoutes = [
   {
     path: "/Clientes",
     element: <Clientes />,
+  },
+  {
+    path: "/Compras",
+    element: <Compras />,
   },
 ];
 

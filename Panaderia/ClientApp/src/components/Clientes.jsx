@@ -63,6 +63,15 @@ export class Clientes extends Component {
     this.setState({ modalInsertar: false });
   };
 
+  handleChange = (e) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
+
   editar = (dato) => {
     const clienteActualizado = { ...this.state.form };
     axios
@@ -125,15 +134,6 @@ export class Clientes extends Component {
       });
 
     console.log(nuevoCliente);
-  };
-
-  handleChange = (e) => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [e.target.name]: e.target.value,
-      },
-    });
   };
 
   filtrarPorNombre = (valorBusqueda) => {
@@ -368,7 +368,7 @@ export class Clientes extends Component {
               <label>RUC:</label>
               <input
                 className="form-control"
-                name="str_ruc_client"
+                name="str_ruc_cliente"
                 type="text"
                 onChange={this.handleChange}
               />

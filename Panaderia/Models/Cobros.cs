@@ -17,6 +17,8 @@ namespace Panaderia.Models
         [Required]
         public int int_num_cuenta_corriente { get; set; }
         [Required]
+        public Boolean bool_estado_cobro { get; set; }
+        [Required]
         public int fk_movimiento { get; set; }
         [Required]
         public int fk_factura { get; set; }

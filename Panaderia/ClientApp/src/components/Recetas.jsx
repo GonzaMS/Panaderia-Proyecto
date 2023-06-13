@@ -143,6 +143,7 @@ export class Recetas extends Component {
                 console.error('Error al guardar al gurdar la recta', error);
             });
     }
+
     handleChange = (e) => {
         this.setState({
             form: {
@@ -161,7 +162,6 @@ export class Recetas extends Component {
         this.setState({ data: datosFiltrados });
       }
       
-
     render() {
         return (
             <>
