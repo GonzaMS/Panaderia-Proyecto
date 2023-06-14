@@ -24,6 +24,7 @@ export const Menu = () => {
       <div className="log-image">
         <img src={logImage} alt="logimage" />
       </div>
+
       <Link
         to="/ProductosElaborados"
         className="btn btn-outline-danger"
@@ -31,6 +32,7 @@ export const Menu = () => {
       >
         <BsFillFolderFill /> Productos Elaborados
       </Link>
+
       <Link
         to="/Recetas"
         className="btn btn-outline-danger"
@@ -38,6 +40,7 @@ export const Menu = () => {
       >
         <BsClipboard2HeartFill /> Recetas
       </Link>
+
       <Link
         to="/StockIngrediente"
         className="btn btn-outline-danger"
@@ -45,6 +48,15 @@ export const Menu = () => {
       >
         <BsUiChecks /> Stock de Ingredientes
       </Link>
+
+      <Link
+        to="/StockProductos"
+        className="btn btn-outline-danger"
+        style={{ color: "black", border: "none", fontWeight: "bold" }}
+      >
+        <BsUiChecks /> Stock de Productos
+      </Link>
+
       <Link
         to="/Compras"
         className="btn btn-outline-danger"
@@ -53,6 +65,7 @@ export const Menu = () => {
         <BsFillCartFill />
         Compras
       </Link>
+
       <Link
         to="/Ventas"
         className="btn btn-outline-danger"
@@ -60,6 +73,7 @@ export const Menu = () => {
       >
         <BsGraphUpArrow /> Ventas
       </Link>
+
       <Link
         to="/Clientes"
         className="btn btn-outline-danger"
@@ -67,6 +81,7 @@ export const Menu = () => {
       >
         <BsPersonBoundingBox /> Clientes
       </Link>
+
       <Link
         to="/Proveedores"
         className="btn btn-outline-danger"
@@ -74,6 +89,7 @@ export const Menu = () => {
       >
         <BsBuildingFillGear /> Proveedores
       </Link>
+
       <Link
         to="/Caja"
         className="btn btn-outline-danger"
@@ -82,6 +98,7 @@ export const Menu = () => {
         <BsInboxesFill />
         Caja
       </Link>
+
       <Link
         to="/OrdenesProduccion"
         className="btn btn-outline-danger"

@@ -56,6 +56,18 @@ public class Triggers
     ", commandType: CommandType.Text);
     }
 
+    public void DateOnFinishOrder()
+    {
+        _connection.Execute(@"
+        CREATE TRIGGER TR_Date_Detalles_Productos
+        BEFORE INSERT ON Compras
+        FOR EACH ROW
+        BEGIN
+            SET NEW.date_compra = DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+        END;
+    ", commandType: CommandType.Text);
+    }
+
 
     public Boolean TriggerExists(string triggerName)
     {

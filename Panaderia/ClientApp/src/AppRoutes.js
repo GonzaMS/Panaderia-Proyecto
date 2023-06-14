@@ -8,6 +8,7 @@ import { Compras } from "./components/Compras";
 import { Ventas } from "./components/Ventas";
 import { FacturaCompra } from "./components/FacturaCompra";
 import { StockIngrediente } from "./components/StockIngrediente";
+import { StockProductos } from "./components/StockProductos";
 //import { Home } from "./components/Home";
 
 const AppRoutes = [
@@ -54,6 +55,10 @@ const AppRoutes = [
   {
     path: "/StockIngrediente",
     element: <StockIngrediente />,
+  },
+  {
+    path: "/StockProductos",
+    element: <StockProductos />,
   },
 ];
 
