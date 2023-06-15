@@ -20,13 +20,16 @@ export class ProductosElaborados extends Component {
     productoPrecio: "", // Estado para almacenar el precio del producto
   };
 
+  // Componente que se ejecuta cuando el componente ha sido montado
   componentDidMount() {
     this.fetchData();
   }
 
+  // Función para obtener los datos de la API
   fetchData() {
     try{
 
+      // Se obtienen los productos elaborados
     axios
       .get("https://localhost:7089/api/productos_elaborados")
       .then((response) => {
@@ -38,6 +41,7 @@ export class ProductosElaborados extends Component {
         console.error("Error al obtener los productos elaborados:", error);
       });
 
+      // Se obtienen las recetas
     axios
       .get("https://localhost:7089/api/recetas")
       .then((response) => {
@@ -49,6 +53,7 @@ export class ProductosElaborados extends Component {
         console.error("Error al obtener las recetas:", error);
       });
 
+      // Se obtienen los detalles de las recetas
     axios
       .get("https://localhost:7089/api/detalles_recetas")
       .then((response) => {
@@ -60,6 +65,7 @@ export class ProductosElaborados extends Component {
         console.error("Error al obtener los detalles de las recetas:", error);
       });
 
+      // Se obtienen los ingredientes
     axios
       .get("https://localhost:7089/api/ingredientes")
       .then((response) => {
@@ -77,12 +83,14 @@ export class ProductosElaborados extends Component {
 
   }
 
+  // Función para abrir el modal
   toggleModal = () => {
     this.setState((prevState) => ({
       modalOpen: !prevState.modalOpen,
     }));
   };
 
+  // Función para cerrar el modal de agregar
   toggleAddModal = () => {
     this.setState((prevState) => ({
       modalAddOpen: !prevState.modalAddOpen,
@@ -90,18 +98,22 @@ export class ProductosElaborados extends Component {
     }));
   };
 
+  // Handler para el cambio de nombre del producto
   handleProductNameChange = (event) => {
     this.setState({ newProductName: event.target.value });
   };
 
+  // Handler para el cambio de precio del producto
   handleProductPrice =(event) => {
     this.setState({productoPrecio: event.target.value})
   }
 
+  // Handler para el cambio de receta seleccionada
   handleRecetaChange = (event) => {
     this.setState({ selectedRecetaId: event.target.value });
   };
 
+  // Función para ver la receta y sus ingredientes
   verReceta = (recetaId) => {
     axios
       .get(`https://localhost:7089/api/recetas/${recetaId}`)
@@ -182,20 +194,16 @@ export class ProductosElaborados extends Component {
     const { detallesRecetas, ingredientes } = this.state;
     const detalles = [];
     detallesRecetas.forEach((detalle) => {
-      console.log("detalle.fk_receta:", detalle.fk_receta);
-      console.log("recetaId:", recetaId);
       if (detalle.fk_receta === recetaId) {
         const ingrediente = ingredientes.find(
           (ingrediente) => ingrediente.id_ingrediente === detalle.fk_ingrediente
         );
-        console.log("ingrediente:", ingrediente);
         detalles.push({
           ingrediente: ingrediente.str_nombre_ingrediente,
           cantidad: detalle.fl_cantidad,
         });
       }
     });
-    console.log("detalles:", detalles);
     return detalles;
   };
 
