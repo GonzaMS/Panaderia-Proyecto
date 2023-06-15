@@ -42,8 +42,7 @@ jobs:
 
       - name: dotnet publish
         run: |
-          cd Panaderia/ClientApp
-          dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+          run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
