@@ -20,16 +20,6 @@ export const FacturaCompra = () => {
     obtenerProveedores();
   }, []);
 
-  //Cambiar
-  const calcularTotal = () => {
-    let sum = 0;
-    items.forEach((item) => {
-      const subtotal = item.cantidad * item.precioUnitario;
-      sum += subtotal;
-    });
-    setTotal(sum);
-  };
-  
   const obtenerIngredientes = async () => {
     try {
       const response = await axios.get(
@@ -118,17 +108,17 @@ export const FacturaCompra = () => {
     };
 
     setItems([...items, nuevoItem]);
-
+    const Total = parseFloat(precioUnitario) * parseFloat(cantidad);
+    setTotal(prevTotal => prevTotal + Total);
     // Restablecer los valores de entrada a su estado inicial
     setProveedorSeleccionado("");
     setIngredienteSeleccionado("");
     setCantidad("");
     setPrecioUnitario("");
     setImpuesto("");
-
-    calcularTotal();
   };
 
+  
   return (
     <div>
       <div>
