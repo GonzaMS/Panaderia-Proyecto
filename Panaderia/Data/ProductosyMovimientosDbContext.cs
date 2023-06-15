@@ -145,10 +145,14 @@ namespace Panaderia.Data
 
             //Tipos de movimientos
             modelBuilder.Entity<Tipos_movimientos>()
-                        .HasData(
-                            new Tipos_movimientos { id_tipo_movimiento = 1, int_movimiento = 1, str_tipo = "Entrada" },
-                            new Tipos_movimientos { id_tipo_movimiento = 2, int_movimiento = 2, str_tipo = "Salida" }
-                        );
+                        .HasKey(t => t.id_tipo_movimiento);
+            modelBuilder.Entity<Tipos_movimientos>()
+                        .Property(t => t.int_movimiento)
+                        .HasColumnName("int_movimiento");
+            modelBuilder.Entity<Tipos_movimientos>()
+                        .Property(t => t.str_tipo)
+                        .HasColumnName("str_tipo");
+
             //Un tipos_movimientos puede tener muchos movimientos_stock
             modelBuilder.Entity<Tipos_movimientos>()
                         .HasMany(t => t.Movimiento_stock)
