@@ -37,7 +37,7 @@ jobs:
       
       - name: Build client app
         run: |
-          cd ClientApp
+          cd Panaderia/ClientApp
           npm run build
 
       - name: dotnet publish
