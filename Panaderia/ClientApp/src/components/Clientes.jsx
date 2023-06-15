@@ -26,10 +26,12 @@ export class Clientes extends Component {
     },
   };
 
+  // Comprobamos que el componente se haya montado
   componentDidMount() {
     this.fetchClientes();
   }
 
+  //Obtenemos los clientes
   fetchClientes = () => {
     axios
       .get("https://localhost:7089/api/clientes")
@@ -42,6 +44,7 @@ export class Clientes extends Component {
       });
   };
 
+  // Mostrar modal para actualizar
   mostrarModalActualizar = (dato) => {
     this.setState({
       form: dato,
@@ -49,20 +52,24 @@ export class Clientes extends Component {
     });
   };
 
+  // Cerrar modal para actualizar
   cerrarModalActualizar = () => {
     this.setState({ modalActualizar: false });
   };
 
+  // Mostrar modal para insertar
   mostrarModalInsertar = () => {
     this.setState({
       modalInsertar: true,
     });
   };
 
+  // Cerrar modal para insertar
   cerrarModalInsertar = () => {
     this.setState({ modalInsertar: false });
   };
 
+  // Actualizar los datos del cliente
   handleChange = (e) => {
     this.setState({
       form: {
@@ -72,6 +79,7 @@ export class Clientes extends Component {
     });
   };
 
+  // Insertar un nuevo cliente
   editar = (dato) => {
     const clienteActualizado = { ...this.state.form };
     axios
@@ -88,12 +96,16 @@ export class Clientes extends Component {
           return cliente;
         });
         this.setState({ clientes: lista, modalActualizar: false });
+        //Refrescar la tabla
+        this.fetchClientes();
       })
       .catch((error) => {
         console.error("Error al editar el cliente:", error);
       });
   };
 
+
+  // Eliminar un cliente
   eliminar = (dato) => {
     var opcion = window.confirm(
       "Estás seguro que deseas ELIMINAR al cliente " + dato.str_nombre_cliente
@@ -113,6 +125,7 @@ export class Clientes extends Component {
     }
   };
 
+  // Insertar un nuevo cliente
   insertar = () => {
     const nuevoCliente = {
       str_nombre_cliente: this.state.form.str_nombre_cliente,
@@ -136,6 +149,7 @@ export class Clientes extends Component {
     console.log(nuevoCliente);
   };
 
+  // Filtrar por nombre
   filtrarPorNombre = (valorBusqueda) => {
     if (valorBusqueda.trim() === "") {
       this.fetchClientes();
@@ -153,7 +167,7 @@ export class Clientes extends Component {
   };
 
   render() {
-    const { form, clientes } = this.state;
+    const {clientes } = this.state;
 
     return (
       <>
