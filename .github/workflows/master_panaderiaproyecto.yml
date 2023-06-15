@@ -26,6 +26,8 @@ jobs:
         with:
           dotnet-version: '7.x'
           include-prerelease: true
+      - name: List files in working directory
+        run: ls -la
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
