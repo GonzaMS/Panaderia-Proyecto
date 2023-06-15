@@ -14,11 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
       - uses: actions/checkout@v2
 
       - name: Set up .NET Core
@@ -27,18 +22,10 @@ jobs:
           dotnet-version: '7.x'
           include-prerelease: true
 
-      - name: List files in working directory
-        run: ls -la
-
       - name: Build with dotnet
         run: |
           cd Panaderia
           dotnet build --configuration Release
-      
-      - name: Build client app
-        run: |
-          cd Panaderia/ClientApp
-          npm run build
 
       - name: dotnet publish
         run: |
@@ -59,11 +46,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
@@ -75,5 +57,5 @@ jobs:
         with:
           app-name: 'panaderiaproyecto'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4BDDBB684469406BA280B4C469437C34 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6226882A26A84C7EBC55BB27F33B56E4 }}
           package: .
