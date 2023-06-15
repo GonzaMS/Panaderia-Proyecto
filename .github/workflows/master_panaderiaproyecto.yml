@@ -32,8 +32,8 @@ jobs:
 
       - name: Build with dotnet
         run: |
-         cd Panaderia-Proyecto/Panaderia
-         dotnet build --configuration Release
+          cd Panaderia
+          dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
