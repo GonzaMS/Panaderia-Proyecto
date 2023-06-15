@@ -21,14 +21,16 @@ jobs:
         with:
           dotnet-version: '7.x'
           include-prerelease: true
-        
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
           node-version: '16'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: |
+          npx -p npm@7.x npm install
+          dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
@@ -51,6 +53,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: .net-app
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
