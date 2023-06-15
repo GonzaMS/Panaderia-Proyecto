@@ -14,7 +14,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository_dispatch: repo-sync
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -23,9 +28,7 @@ jobs:
           include-prerelease: true
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+        run: echo 'Node.js version 16.x'  # Manually specify Node.js version here
 
       - name: Build with dotnet
         run: |
@@ -55,9 +58,7 @@ jobs:
           name: .net-app
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+        run: echo 'Node.js version 16.x'  # Manually specify Node.js version here
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
