@@ -26,11 +26,14 @@ jobs:
         with:
           dotnet-version: '7.x'
           include-prerelease: true
+
       - name: List files in working directory
         run: ls -la
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: |
+         cd Panaderia-Proyecto/Panaderia
+         dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
