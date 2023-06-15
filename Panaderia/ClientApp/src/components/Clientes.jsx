@@ -286,7 +286,7 @@ export class Clientes extends Component {
               <label>RUC:</label>
               <input
                 className="form-control"
-                name="atr_ruc_cliente"
+                name="str_ruc_cliente"
                 type="text"
                 onChange={this.handleChange}
                 value={this.state.form.str_ruc_cliente}

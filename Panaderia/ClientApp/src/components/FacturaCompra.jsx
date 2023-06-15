@@ -4,45 +4,48 @@ import "../css/custom.css";
 import axios from "axios";
 
 export const FacturaCompra = () => {
-  const [cliente, setCliente] = useState("");
-  const [ruc, setRuc] = useState("");
-  const [ci, setCI] = useState("");
-  const [idCliente, setIdCliente] = useState("");
   const [proveedorSeleccionado, setProveedorSeleccionado] = useState("");
-  const [productoSeleccionado, setProductoSeleccionado] = useState("");
+  const [ingredienteSeleccionado, setIngredienteSeleccionado] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [precioUnitario, setPrecioUnitario] = useState("");
   const [impuesto, setImpuesto] = useState("");
-
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
-  const [datosProductosElaborados, setDatosProductosElaborados] = useState([]);
+  const [datosIngredientes, setDatosIngredientes] = useState([]);
   const [datosProveedores, setDatosProveedores] = useState([]);
   const [fechaActual, setFechaActual] = useState("");
 
   useEffect(() => {
-    obtenerProductosElaborados();
+    obtenerIngredientes();
     obtenerProveedores();
   }, []);
 
-  const obtenerProductosElaborados = async () => {
+  //Cambiar
+  const calcularTotal = () => {
+    let sum = 0;
+    items.forEach((item) => {
+      const subtotal = item.cantidad * item.precioUnitario;
+      sum += subtotal;
+    });
+    setTotal(sum);
+  };
+  
+  const obtenerIngredientes = async () => {
     try {
       const response = await axios.get(
-        "https://localhost:7089/api/productos_elaborados"
+        "https://localhost:7089/api/ingredientes"
       );
-      const productosElaborados = response.data;
+      const ingredientes = response.data;
 
-      const datosProductosElaborados = productosElaborados.map(
-        (productoElaborado) => ({
-          id: productoElaborado.id_producto_elaborado,
-          nombre: productoElaborado.str_nombre_producto,
-          precioUnitario: productoElaborado.fl_precio_unitario,
-        })
-      );
+      const datosIngredientes = ingredientes.map((ingrediente) => ({
+        id: ingrediente.id_ingrediente,
+        nombre: ingrediente.str_nombre_ingrediente,
+        precioUnitario: ingrediente.fl_precio_unitario,
+      }));
 
-      setDatosProductosElaborados(datosProductosElaborados);
+      setDatosIngredientes(datosIngredientes);
 
-      console.log(datosProductosElaborados);
+      console.log(datosIngredientes);
     } catch (error) {
       console.error(error);
     }
@@ -90,27 +93,12 @@ export const FacturaCompra = () => {
 
   const guardarFactura = async () => {
     try {
-      if (!idCliente) {
-        console.log(
-          "No se encontró ningún cliente con el RUC/CI proporcionado"
-        );
-        return;
-      }
-
       const factura = {
-        int_timbrado: generarNumeroAzar(),
-        str_ruc_cliente: ruc,
-        str_nombre_cliente: cliente,
-        date_fecha_emision: obtenerFechaActual(),
-        fl_total_pagar: total,
-        fl_iva_5: 0,
-        fl_iva_10: 0,
-        fk_cliente: idCliente,
+        
       };
 
       const facturasResponse = await axios.post(
-        "https://localhost:7089/api/facturas",
-        factura
+        
       );
       const facturaGuardada = facturasResponse.data;
 
@@ -120,36 +108,10 @@ export const FacturaCompra = () => {
     }
   };
 
-  const generarNumeroAzar = () => {
-    return Math.floor(Math.random() * 1000000).toString();
-  };
-
-  const obtenerFechaActual = () => {
-    const fechaActual = new Date();
-    const year = fechaActual.getFullYear();
-    const month = fechaActual.getMonth() + 1;
-    const day = fechaActual.getDate();
-    const fechaFormateada = `${year}-${month.toString().padStart(2, "0")}-${day
-      .toString()
-      .padStart(2, "0")}`;
-    return fechaFormateada;
-  };
-
-  const buscarPrecioProducto = (nombreProducto) => {
-    const productoEncontrado = datosProductosElaborados.find(
-      (producto) => producto.nombre === nombreProducto
-    );
-    if (productoEncontrado) {
-      setPrecioUnitario(productoEncontrado.precioUnitario.toString());
-    } else {
-      setPrecioUnitario("");
-    }
-  };
-
   const handleAgregarItem = () => {
     const nuevoItem = {
-      proveedor: proveedorSeleccionado, // Nombre del proveedor seleccionado
-      producto: productoSeleccionado,
+      proveedor: proveedorSeleccionado,
+      ingrediente: ingredienteSeleccionado,
       cantidad: parseFloat(cantidad),
       precioUnitario: parseFloat(precioUnitario),
       impuesto: parseFloat(impuesto),
@@ -159,10 +121,12 @@ export const FacturaCompra = () => {
 
     // Restablecer los valores de entrada a su estado inicial
     setProveedorSeleccionado("");
-    setProductoSeleccionado("");
+    setIngredienteSeleccionado("");
     setCantidad("");
     setPrecioUnitario("");
     setImpuesto("");
+
+    calcularTotal();
   };
 
   return (
@@ -212,28 +176,27 @@ export const FacturaCompra = () => {
                 <div className="form-group row">
                   <label
                     className="col-sm-3 col-form-label"
-                    htmlFor="productoSelect"
+                    htmlFor="ingredienteSelect"
                     style={{ textAlign: "right" }}
                   >
-                    Producto:
+                    Ingrediente:
                   </label>
                   <div className="col-sm-9">
                     <select
                       className="form-control"
-                      id="productoSelect"
-                      value={productoSeleccionado}
+                      id="ingredienteSelect"
+                      value={ingredienteSeleccionado}
                       onChange={(e) => {
-                        setProductoSeleccionado(e.target.value);
-                        buscarPrecioProducto(e.target.value);
+                        setIngredienteSeleccionado(e.target.value);
                       }}
                     >
-                      <option value="">Seleccionar producto</option>
-                      {datosProductosElaborados.map((productoElaborado) => (
+                      <option value="">Seleccionar ingrediente</option>
+                      {datosIngredientes.map((ingrediente) => (
                         <option
-                          key={productoElaborado.id}
-                          value={productoElaborado.nombre}
+                          key={ingrediente.id}
+                          value={ingrediente.nombre}
                         >
-                          {productoElaborado.nombre}
+                          {ingrediente.nombre}
                         </option>
                       ))}
                     </select>
@@ -256,7 +219,18 @@ export const FacturaCompra = () => {
                   />
                 </div>
               </div>
+               
             </div>
+             <div className="form-group">
+                  <label className="precioP-label">Precio Unitario:</label>
+                  <input
+                    type="text"
+                    style={{ width: "300px" }}
+                    className="form-control cantidadP"
+                    value={precioUnitario}
+                    onChange={(e) => setPrecioUnitario(e.target.value)}
+                  />
+              </div>
           </div>
         </div>
         <button
@@ -270,7 +244,7 @@ export const FacturaCompra = () => {
         <table id="customers">
           <thead>
             <tr>
-              <th>Producto</th>
+              <th>Ingrediente</th>
               <th>Cantidad</th>
               <th>Precio Unitario</th>
             </tr>
@@ -278,7 +252,7 @@ export const FacturaCompra = () => {
           <tbody>
             {items.map((item, index) => (
               <tr key={index}>
-                <td>{item.producto}</td>
+                <td>{item.ingrediente}</td>
                 <td>{item.cantidad}</td>
                 <td>{item.precioUnitario}</td>
               </tr>
@@ -294,7 +268,8 @@ export const FacturaCompra = () => {
             className="form-control totalP"
             value={total}
             readOnly
-          />
+         />
+
         </div>
         <div className="col-sm-12 col-md-4">
           <Link to="" className="custom-link">

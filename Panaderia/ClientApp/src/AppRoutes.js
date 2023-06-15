@@ -4,9 +4,13 @@ import { OrdenesProduccion } from "./components/OrdenesProduccion";
 import { Cajeros } from "./components/Cajeros";
 import { Recetas } from "./components/Recetas";
 import { Clientes } from "./components/Clientes";
+
 import { Compras } from "./components/Compras";
-import { Ventas } from "./components/Ventas";
 import { FacturaCompra } from "./components/FacturaCompra";
+
+import { Ventas } from "./components/Ventas";
+import { FacturaVentas } from "./components/FacturaVentas";
+
 import { StockIngrediente } from "./components/StockIngrediente";
 import { StockProductos } from "./components/StockProductos";
 //import { Home } from "./components/Home";
@@ -51,6 +55,10 @@ const AppRoutes = [
   {
     path: "/Ventas",
     element: <Ventas />,
+  },
+  {
+    path: "/FacturaVentas",
+    element: <FacturaVentas />,
   },
   {
     path: "/StockIngrediente",

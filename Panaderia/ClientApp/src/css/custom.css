@@ -421,3 +421,7 @@ p2 {
 .btn-primary:hover {
     background-color: #0069d9;
 }
+
+.precioP-label {
+    margin-left: 150px;
+}
