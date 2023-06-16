@@ -2,21 +2,16 @@ import React, { Component } from "react";
 import axios from "axios";
 import "../css/custom.css";
 
-import {
-  Table,
-  Container,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-  Row,
-  Col,
-} from "reactstrap";
+import { Table, FormGroup, Label, Input, Button, Row, Col } from "reactstrap";
 
 export class OrdenesProduccion extends Component {
   state = {
     ordenes: [],
     productos_elaborados: [],
+    ingredientes_stock: [],
+    ingredientes: [],
+    detalles_recetas: [],
+    recetas: [],
     cantidad: "",
     producto_elaborado: "",
     filtroEstado: "",
@@ -45,6 +40,50 @@ export class OrdenesProduccion extends Component {
         .then((response) => {
           const data = response.data;
           this.setState({ productos_elaborados: data });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error);
+        });
+
+      axios
+        .get("https://localhost:7089/api/ingredientes_stock")
+        .then((response) => {
+          const data = response.data;
+          this.setState({ ingredientes_stock: data });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error);
+        });
+
+      axios
+        .get("https://localhost:7089/api/ingredientes")
+        .then((response) => {
+          const data = response.data;
+          this.setState({ ingredientes: data });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error);
+        });
+
+      axios
+        .get("https://localhost:7089/api/recetas")
+        .then((response) => {
+          const data = response.data;
+          this.setState({ recetas: data });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error);
+        });
+
+      axios
+        .get("https://localhost:7089/api/detalles_recetas")
+        .then((response) => {
+          const data = response.data;
+          this.setState({ detalles_recetas: data });
         })
         .catch((error) => {
           console.log(error);
@@ -84,6 +123,14 @@ export class OrdenesProduccion extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const { cantidad, producto_elaborado } = this.state;
+    if (!producto_elaborado) {
+      alert("Debe seleccionar un producto elaborado");
+      return;
+    } else if (cantidad <= 0) {
+      alert("La cantidad debe ser mayor a 0");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://localhost:7089/api/ordenes_produccion",
@@ -109,12 +156,6 @@ export class OrdenesProduccion extends Component {
   //Controlar los cambios en los inputs
   handleInputChange(event) {
     const { name, value } = event.target;
-
-    if (name === "cantidad" && value < 0) {
-      alert("La cantidad debe ser mayor a 0");
-      return;
-    }
-
     this.setState({ [name]: value });
   }
 
@@ -140,6 +181,32 @@ export class OrdenesProduccion extends Component {
       return ordenes.filter((orden) => !orden.bool_estado_orden);
     } else if (filtroEstado === "Finalizado") {
       return ordenes.filter((orden) => orden.bool_estado_orden);
+    }
+  }
+
+  //Obtener el producto elaborado
+  getProductoElaborado(fk_producto_elaborado) {
+    const { producto_elaborado } = this.state;
+
+    const producto = producto_elaborado.find(
+      (producto) => producto.id_producto_elaborado === fk_producto_elaborado
+    );
+
+    console.log(producto);
+
+    if (producto) {
+      const { recetas,detalles_recetas } = this.state;
+      //Buscamos todos los detalles_recetas de ese receta y obtenemos los ingredientes que se usan
+      const detalles_recetas_filtradas = detalles_recetas.filter(
+        (detalle_receta) => detalle_receta.fk_receta === producto.fk_receta
+      );
+
+      console.log(detalles_recetas_filtradas);
+      const ingredientes = detalles_recetas_filtradas.map(
+        (detalle_receta) => detalle_receta.fk_ingrediente
+      );
+
+      console.log(ingredientes);
     }
   }
 
